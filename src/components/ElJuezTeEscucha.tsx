@@ -51,7 +51,6 @@ export const ElJuezTeEscucha: React.FC<ElJuezTeEscuchaProps> = ({
   const [identificado, setIdentificado] = useState(Boolean(dniInicial && dniInicial.length >= 8 && nombreInicial.trim()));
 
   // Step 2: Judge search & validation
-  const [nombreJuezInput, setNombreJuezInput] = useState(juezPreseleccionado);
   const [juezSeleccionado, setJuezSeleccionado] = useState<string | null>(
     JUECES_PERMITIDOS.some(j => j.toLowerCase() === juezPreseleccionado.toLowerCase()) 
       ? juezPreseleccionado 
@@ -76,27 +75,7 @@ export const ElJuezTeEscucha: React.FC<ElJuezTeEscuchaProps> = ({
     setIdentificado(true);
   };
 
-  // Validate Judge against exact allowed list
-  const handleBuscarJuez = (e: React.FormEvent) => {
-    e.preventDefault();
-    setErrorJuez('');
-
-    const inputLimpio = nombreJuezInput.trim().toLowerCase();
-    const juezEncontrado = JUECES_PERMITIDOS.find(
-      (j) => j.toLowerCase() === inputLimpio
-    );
-
-    if (juezEncontrado) {
-      setJuezSeleccionado(juezEncontrado);
-      setErrorJuez('');
-    } else {
-      setJuezSeleccionado(null);
-      setErrorJuez('EL JUEZ NO EXISTE. Solo se permiten magistrados habilitados: Sebastian Alberto Tapia Tito, Leydi Karen Quispe Rojas o Marco Antonio Ticona Miranda.');
-    }
-  };
-
   const handleSeleccionarSugerencia = (juez: string) => {
-    setNombreJuezInput(juez);
     setJuezSeleccionado(juez);
     setErrorJuez('');
   };
