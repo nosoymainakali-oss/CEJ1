@@ -748,8 +748,8 @@ export default function App() {
         {vistaActual === 'juez_te_escucha' && (
           <ElJuezTeEscucha
             onVolver={() => setVistaActual(expedienteSeleccionado ? 'expediente' : 'busqueda')}
-            dniInicial={dniUsuario}
-            nombreInicial={nombreUsuario}
+            dniInicial=""
+            nombreInicial=""
             agendaMagistrados={agendaMagistrados}
             onAgendarCita={(nuevaCita) => setAgendaMagistrados((prev) => [nuevaCita, ...prev])}
             juezPreseleccionado={expActual.juez}
