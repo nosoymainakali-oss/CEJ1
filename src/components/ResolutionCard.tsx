@@ -99,7 +99,7 @@ export const ResolutionCard: React.FC<ResolutionCardProps> = ({
           </span>
 
           <span className="text-xs text-slate-600 font-medium">
-            Fojas: <strong>{resolucion.fojas}</strong>
+            Fojas: <strong>{resolucion.fojas || '—'}</strong>
           </span>
         </div>
 
@@ -129,10 +129,10 @@ export const ResolutionCard: React.FC<ResolutionCardProps> = ({
 
         {/* Automatic Barcode and QR Code generated for this Actuado */}
         <BarcodeAndQr
-          codigoTexto={resolucion.codigoBarras || `PJ-2111-2026-00140-${String(resolucion.numero).padStart(3, '0')}-75412933`}
+          codigoTexto={resolucion.codigoBarras || `PJ-${expedienteNumero}-${String(resolucion.numero).padStart(3, '0')}`}
           qrData={
             resolucion.codigoQRData ||
-            `PJ-PERU|EXP:00140-2026-0-2111-JR-LA-02|ACTUADO:${resolucion.numero}|${resolucion.titulo}|DTE:EDUARDO LUISMARIO MEDINA HUMPIRI|75412933`
+            `PJ-PERU|EXP:${expedienteNumero}|ACTUADO:${resolucion.numero}|${resolucion.titulo}`
           }
           tituloActuado={resolucion.titulo}
         />
