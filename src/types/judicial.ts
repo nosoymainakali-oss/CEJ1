@@ -119,4 +119,4 @@ export interface Expediente {
 }
 
 export type RolUsuario = 'editor' | 'consultor';
-export type Idioma = 'es' | 'qu' | 'ay' | 'sh' | 'en' | 'de' | 'fr';
+export type Idioma = 'es' | 'qu' | 'ay' | 'shp' | 'en' | 'de' | 'fr';
