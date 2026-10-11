@@ -38,6 +38,7 @@ export const EditResolucionModal: React.FC<EditResolucionModalProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!/^\d+(-\d+)?$/.test(fojas.trim())) { alert('Ingrese una foja o un rango válido, por ejemplo 77 o 2-46.'); return; }
 
     const actualizada: Resolucion = {
       ...resolucion,
