@@ -650,7 +650,7 @@ export default function App() {
         <div className="min-h-screen bg-slate-50 flex flex-col font-arial" style={{ fontFamily: 'Arial, sans-serif' }}>
           <div className="bg-[#0c4a6e] text-white py-2.5 px-4 border-b border-sky-400/40">
             <div className="max-w-6xl mx-auto flex items-center justify-between text-xs">
-              <span className="font-bold">PODER JUDICIAL DEL PERÚ &bull; PLATAFORMA NACIONAL</span>
+              <span className="font-bold">Poder Judicial del Perú &bull; Plataforma Oficial de Consulta Judicial &bull; Perú</span>
               <button
                 onClick={() => setVistaActual('busqueda')}
                 className="underline text-sky-200 hover:text-white"
@@ -667,7 +667,6 @@ export default function App() {
               agendaMagistrados={agendaMagistrados}
               onAgendarCita={(nuevaCita) => setAgendaMagistrados((prev) => [nuevaCita, ...prev])}
               juezPreseleccionado="Leydi Karen Quispe Rojas"
-              expedienteNomenclatura="00140-2026-0-2111-JR-LA-02"
             />
           </main>
           <Footer idioma={idioma} />
