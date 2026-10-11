@@ -182,6 +182,7 @@ export default function App() {
   const [viewDocModal, setViewDocModal] = useState<ArchivoAdjunto | null>(null);
   const [editResolucionModal, setEditResolucionModal] = useState<Resolucion | null>(null);
   const [modalNuevoActuado, setModalNuevoActuado] = useState(false);
+  const [seccionDocumentos, setSeccionDocumentos] = useState<'actuaciones' | 'escritos'>('actuaciones');
 
   // Live Case Editor Modal (For Servidor Judicial to create or edit cases with live preview)
   const [modalLiveEditor, setModalLiveEditor] = useState<{
@@ -887,10 +888,10 @@ export default function App() {
               <div>
                 <h3 className="font-bold text-lg sm:text-xl text-slate-900 flex items-center gap-2">
                   <FolderOpen className="w-5 h-5 text-[#0284c7]" />
-                  <span>{t.actuadosJudicialesTitulo}</span>
+                  <span>{seccionDocumentos === 'actuaciones' ? 'ACTUACIONES PROCESALES' : 'ESCRITOS PRESENTADOS'}</span>
                 </h3>
                 <p className="text-xs text-slate-500">
-                  Total de {expActual.resoluciones.length} actuados emitidos con validación digital única.
+                  {(seccionDocumentos === 'actuaciones' ? expActual.resoluciones.filter(r => r.tipo !== 'ESCRITO') : expActual.resoluciones.filter(r => r.tipo === 'ESCRITO')).length} documentos registrados.
                 </p>
               </div>
 
@@ -918,9 +919,14 @@ export default function App() {
               )}
             </div>
 
-            {/* Resolutions list without deadline clutter and with clean tabs */}
+            <div className="flex gap-2 border-b border-slate-200 pb-2">
+              <button type="button" onClick={() => setSeccionDocumentos('actuaciones')} className={`px-4 py-2 rounded-lg text-xs font-bold ${seccionDocumentos === 'actuaciones' ? 'bg-[#0284c7] text-white' : 'bg-white text-slate-700 border border-slate-200'}`}>Actuaciones procesales</button>
+              <button type="button" onClick={() => setSeccionDocumentos('escritos')} className={`px-4 py-2 rounded-lg text-xs font-bold ${seccionDocumentos === 'escritos' ? 'bg-[#0284c7] text-white' : 'bg-white text-slate-700 border border-slate-200'}`}>Escritos presentados</button>
+            </div>
+
+            {/* Separate lists for procedural actions and submitted briefs */}
             <div className="space-y-4">
-              {[...expActual.resoluciones].reverse().map((res) => (
+              {[...expActual.resoluciones].filter(res => seccionDocumentos === 'escritos' ? res.tipo === 'ESCRITO' : res.tipo !== 'ESCRITO').reverse().map((res) => (
                 <ResolutionCard
                   key={res.id}
                   resolucion={res}
