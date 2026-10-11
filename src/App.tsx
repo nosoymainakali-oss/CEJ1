@@ -922,9 +922,9 @@ export default function App() {
             {rol === 'editor' && (
               <section className="rounded-xl border border-rose-200 bg-white p-4 space-y-3">
                 <h4 className="text-sm font-bold text-slate-900">Administrar agenda de magistrados</h4>
-                {agendaMagistrados.length === 0 ? (
+                {agendaMagistrados.filter(d => { const f = new Date(); const hoy = `${f.getFullYear()}-${String(f.getMonth()+1).padStart(2,'0')}-${String(f.getDate()).padStart(2,'0')}`; return d.fecha >= hoy; }).length === 0 ? (
                   <p className="text-xs text-slate-500">No hay diligencias registradas.</p>
-                ) : agendaMagistrados.map((diligencia) => (
+                ) : agendaMagistrados.filter(diligencia => { const f = new Date(); const hoy = `${f.getFullYear()}-${String(f.getMonth()+1).padStart(2,'0')}-${String(f.getDate()).padStart(2,'0')}`; return diligencia.fecha >= hoy; }).map((diligencia) => (
                   <div key={diligencia.id} className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-slate-200 p-3">
                     <div className="text-xs">
                       <strong className="block text-slate-900">{diligencia.magistrado} · {diligencia.tipo}</strong>
