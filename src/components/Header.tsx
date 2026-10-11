@@ -52,7 +52,7 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-2 font-bold tracking-wide">
             <span className="w-2.5 h-2.5 rounded-full bg-sky-400 animate-pulse"></span>
-            <span>{t.institucion} &bull; {t.subtitulo}</span>
+            <span>Poder Judicial del Perú &bull; Plataforma Oficial de Consulta Judicial &bull; Perú</span>
           </div>
 
           <div className="flex items-center flex-wrap gap-2 sm:gap-3">
