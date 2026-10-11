@@ -43,7 +43,7 @@ export const ElJuezTeEscucha: React.FC<ElJuezTeEscuchaProps> = ({
   agendaMagistrados,
   onAgendarCita,
   juezPreseleccionado = '',
-  expedienteNomenclatura = '00140-2026-0-2111-JR-LA-02',
+  expedienteNomenclatura = '',
 }) => {
   // Step 1: Identification
   const [dniUsuario, setDniUsuario] = useState(dniInicial);
@@ -119,7 +119,7 @@ export const ElJuezTeEscucha: React.FC<ElJuezTeEscuchaProps> = ({
     const nuevaCita: DiligenciaAgenda = {
       id: `cita-${Date.now()}`,
       magistrado: juezSeleccionado,
-      expedienteNomenclatura: expedienteNomenclatura || '00140-2026-0-2111-JR-LA-02',
+      expedienteNomenclatura: expedienteNomenclatura || '',
       fecha: fechaCita,
       hora: horaCita,
       tipo: 'CITA_CIUDADANA',
