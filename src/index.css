@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+:root {
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 16px; /* 12pt */
+}
+
+body, button, input, select, textarea {
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+
+/* High Contrast Mode Styles (WCAG AAA Compliance) */
+.high-contrast {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+.high-contrast body {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+.high-contrast .bg-white,
+.high-contrast .bg-slate-50,
+.high-contrast .bg-slate-100,
+.high-contrast .bg-sky-50,
+.high-contrast .bg-sky-100,
+.high-contrast .bg-blue-50,
+.high-contrast .bg-blue-100,
+.high-contrast .bg-amber-50 {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-color: #facc15 !important;
+}
+
+.high-contrast header,
+.high-contrast footer,
+.high-contrast nav,
+.high-contrast .bg-\[\#0c4a6e\],
+.high-contrast .bg-\[\#07334e\],
+.high-contrast .bg-\[\#0369a1\],
+.high-contrast .bg-\[\#0284c7\] {
+  background-color: #000000 !important;
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+}
+
+.high-contrast h1,
+.high-contrast h2,
+.high-contrast h3,
+.high-contrast h4,
+.high-contrast h5,
+.high-contrast h6 {
+  color: #ffffff !important;
+}
+
+.high-contrast p,
+.high-contrast span,
+.high-contrast td,
+.high-contrast th,
+.high-contrast label,
+.high-contrast div {
+  color: #ffffff !important;
+}
+
+.high-contrast strong,
+.high-contrast b {
+  color: #fef08a !important; /* High contrast bright yellow */
+  font-weight: 900 !important;
+}
+
+.high-contrast .text-sky-100,
+.high-contrast .text-sky-200,
+.high-contrast .text-sky-300,
+.high-contrast .text-slate-500,
+.high-contrast .text-slate-600,
+.high-contrast .text-slate-700 {
+  color: #fef08a !important;
+}
+
+.high-contrast .text-\[\#0369a1\],
+.high-contrast .text-\[\#0284c7\],
+.high-contrast .text-\[\#0c4a6e\] {
+  color: #38bdf8 !important; /* Vivid Cyan */
+}
+
+.high-contrast input,
+.high-contrast select,
+.high-contrast textarea {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #facc15 !important;
+}
+
+.high-contrast input::placeholder,
+.high-contrast textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+.high-contrast button {
+  border: 2px solid #ffffff !important;
+}
+
+.high-contrast button.bg-\[\#0284c7\],
+.high-contrast button.bg-\[\#0369a1\],
+.high-contrast button.bg-\[\#0c4a6e\] {
+  background-color: #000000 !important;
+  color: #facc15 !important;
+  border-color: #facc15 !important;
+}
+
+.high-contrast .border-sky-200,
+.high-contrast .border-sky-300,
+.high-contrast .border-sky-400,
+.high-contrast .border-slate-200,
+.high-contrast .border-slate-300 {
+  border-color: #facc15 !important;
+}
+
+.high-contrast .shadow-lg,
+.high-contrast .shadow-md,
+.high-contrast .shadow-xl {
+  box-shadow: 0 0 0 2px #ffffff !important;
+}

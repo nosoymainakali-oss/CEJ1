@@ -1,0 +1,6 @@
+{
+  "name": "CEJ Poder Judicial - Consulta Inteligente y Accesible de Expedientes",
+  "description": "Sistema de Consulta de Expedientes Judiciales con resúmenes con IA en lenguaje sencillo, calculadora de plazos hábiles, línea de tiempo procesal, panel multiexpediente y accesibilidad en Quechua y Aimara. Autor: Eduardo Luismario Medina Humpiri.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
