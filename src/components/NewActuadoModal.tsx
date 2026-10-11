@@ -45,8 +45,8 @@ export const NewActuadoModal: React.FC<NewActuadoModalProps> = ({
   const [plazoAbiertoTexto, setPlazoAbiertoTexto] = useState('');
 
   // Automatic code generated
-  const codigoBarrasGenerado = `PJ-2111-2026-00140-${String(numeroSiguiente).padStart(3, '0')}-${dniDemandante}`;
-  const codigoQRGenerado = `PJ-PERU|EXP:${expedienteNomenclatura}|ACTUADO:${numeroSiguiente}|${tipo}|${titulo}|FECHA:${fechaNotificacion}|DTE:${nombreEditor}|DNI:${dniDemandante}`;
+  const codigoBarrasGenerado = `PJ-${expedienteNomenclatura}-${String(numeroSiguiente).padStart(3, '0')}`;
+  const codigoQRGenerado = `PJ-PERU|EXP:${expedienteNomenclatura}|ACTUADO:${numeroSiguiente}|${tipo}|${titulo}|FECHA:${fechaNotificacion}`;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
