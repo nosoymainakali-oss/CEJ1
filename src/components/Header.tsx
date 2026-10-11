@@ -215,7 +215,6 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
 
             {rol !== 'editor' && (
-              {rol !== 'editor' && (
               {/* Pestaña Granate: EL JUEZ TE ESCUCHA */}
                 <button
                   onClick={() => onChangeVista('juez_te_escucha')}
