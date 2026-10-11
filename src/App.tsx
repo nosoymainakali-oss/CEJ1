@@ -919,6 +919,45 @@ export default function App() {
               )}
             </div>
 
+            {rol === 'editor' && (
+              <section className="rounded-xl border border-rose-200 bg-white p-4 space-y-3">
+                <h4 className="text-sm font-bold text-slate-900">Administrar agenda de magistrados</h4>
+                {agendaMagistrados.length === 0 ? (
+                  <p className="text-xs text-slate-500">No hay diligencias registradas.</p>
+                ) : agendaMagistrados.map((diligencia) => (
+                  <div key={diligencia.id} className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-slate-200 p-3">
+                    <div className="text-xs">
+                      <strong className="block text-slate-900">{diligencia.magistrado} · {diligencia.tipo}</strong>
+                      <span className="text-slate-600">{diligencia.fecha} · {diligencia.hora} · {diligencia.descripcion}</span>
+                      <span className="block text-slate-500">Expediente: {diligencia.expedienteNomenclatura}</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <button type="button" onClick={() => {
+                        const fecha = window.prompt('Fecha (AAAA-MM-DD):', diligencia.fecha);
+                        if (fecha === null) return;
+                        const hora = window.prompt('Hora (HH:MM):', diligencia.hora);
+                        if (hora === null) return;
+                        const descripcion = window.prompt('Descripción:', diligencia.descripcion);
+                        if (descripcion === null) return;
+                        const magistrado = window.prompt('Nombre del magistrado:', diligencia.magistrado);
+                        if (magistrado === null) return;
+                        const hoy = new Date();
+                        const minFecha = hoy.getFullYear() + '-' + String(hoy.getMonth()+1).padStart(2,'0') + '-' + String(hoy.getDate()).padStart(2,'0');
+                        if (!/^\d{4}-\d{2}-\d{2}$/.test(fecha) || fecha < minFecha || !/^\d{2}:\d{2}$/.test(hora) || !descripcion.trim() || !magistrado.trim()) {
+                          alert('Verifique la fecha, hora, descripción y magistrado. No se permiten fechas pasadas.');
+                          return;
+                        }
+                        setAgendaMagistrados(actual => actual.map(item => item.id === diligencia.id ? { ...item, fecha, hora, descripcion: descripcion.trim(), magistrado: magistrado.trim() } : item));
+                      }} className="rounded-md border border-sky-300 bg-sky-50 px-3 py-1.5 text-xs font-bold text-sky-800">Editar</button>
+                      <button type="button" onClick={() => {
+                        if (window.confirm('¿Eliminar esta diligencia de la agenda?')) setAgendaMagistrados(actual => actual.filter(item => item.id !== diligencia.id));
+                      }} className="rounded-md border border-red-300 bg-red-50 px-3 py-1.5 text-xs font-bold text-red-700">Eliminar</button>
+                    </div>
+                  </div>
+                ))}
+              </section>
+            )}
+
             <div className="flex gap-2 border-b border-slate-200 pb-2">
               <button type="button" onClick={() => setSeccionDocumentos('actuaciones')} className={`px-4 py-2 rounded-lg text-xs font-bold ${seccionDocumentos === 'actuaciones' ? 'bg-[#0284c7] text-white' : 'bg-white text-slate-700 border border-slate-200'}`}>Actuaciones procesales</button>
               <button type="button" onClick={() => setSeccionDocumentos('escritos')} className={`px-4 py-2 rounded-lg text-xs font-bold ${seccionDocumentos === 'escritos' ? 'bg-[#0284c7] text-white' : 'bg-white text-slate-700 border border-slate-200'}`}>Escritos presentados</button>
