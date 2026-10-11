@@ -8,6 +8,8 @@ interface UploadDocumentModalProps {
   onGuardar: (nuevoArchivo: ArchivoAdjunto) => void;
   resolucionTitulo?: string;
   nombreEditor: string;
+  expedienteId: string;
+  resolucionId: string;
 }
 
 export const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
@@ -16,6 +18,8 @@ export const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
   onGuardar,
   resolucionTitulo = 'Resolución Judicial',
   nombreEditor,
+  expedienteId,
+  resolucionId,
 }) => {
   const [nombreArchivo, setNombreArchivo] = useState('');
   const [archivoSeleccionado, setArchivoSeleccionado] = useState<File | null>(null);
@@ -62,30 +66,90 @@ export const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
     reader.readAsDataURL(file);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!nombreArchivo.trim()) return;
 
-    setCargando(true);
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  if (!nombreArchivo.trim()) {
+    alert('Escribe un nombre para el documento.');
+    return;
+  }
+
+  if (!archivoSeleccionado) {
+    alert('Selecciona un archivo PDF.');
+    return;
+  }
+
+  if (archivoSeleccionado.type !== 'application/pdf') {
+    alert('Por ahora, el sistema solo admite archivos PDF.');
+    return;
+  }
+
+  if (!expedienteId || !resolucionId) {
+    alert('No se pudo identificar el expediente o la resolución.');
+    return;
+  }
+
+  setCargando(true);
+
+  try {
+    const formulario = new FormData();
+
+    formulario.append('archivo', archivoSeleccionado);
+    formulario.append('expedienteId', expedienteId);
+    formulario.append('resolucionId', resolucionId);
+    formulario.append('nombre', nombreArchivo.trim());
+    formulario.append('subidoPor', nombreEditor);
+
+    const respuesta = await fetch('/api/documentos', {
+      method: 'POST',
+      body: formulario,
+    });
+
+    const resultado = await respuesta.json();
+
+    if (!respuesta.ok) {
+      throw new Error(
+        resultado.error || 'No se pudo subir el documento.'
+      );
+    }
 
     const nuevo: ArchivoAdjunto = {
-      id: `arch-${Date.now()}`,
-      nombre: nombreArchivo.trim(),
-      tamano: tamanoTexto || '1.2 MB',
-      tipo: tipoArchivo,
-      dataUrl: dataUrl || undefined,
-      fechaSubida: new Date().toISOString().split('T')[0],
-      subidoPor: nombreEditor,
+      id: resultado.id,
+      nombre: resultado.nombre,
+      tamano: resultado.tamano,
+      tipo: 'pdf',
+      dataUrl: resultado.dataUrl,
+      fechaSubida: resultado.fechaSubida,
+      subidoPor: resultado.subidoPor,
     };
 
-    setTimeout(() => {
-      onGuardar(nuevo);
-      setCargando(false);
-      onClose();
-    }, 400);
-  };
+    onGuardar(nuevo);
+    setNombreArchivo('');
+    setArchivoSeleccionado(null);
+    setDataUrl('');
+    setTamanoTexto('0 KB');
 
-  return (
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+
+    onClose();
+  } catch (error) {
+    console.error('Error al subir el documento:', error);
+
+    alert(
+      error instanceof Error
+        ? error.message
+        : 'Ocurrió un error al subir el documento.'
+    );
+  } finally {
+    setCargando(false);
+  }
+};
+if (!isOpen) return null;
+
+return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-200">
       <div className="bg-white rounded-xl shadow-2xl max-w-lg w-full border border-slate-300 overflow-hidden">
         {/* Modal Header */}
@@ -131,7 +195,7 @@ export const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
               <input
                 ref={fileInputRef}
                 type="file"
-                accept=".pdf,image/*,.doc,.docx"
+                accept=".pdf,application/pdf"
                 onChange={handleFileChange}
                 className="hidden"
               />

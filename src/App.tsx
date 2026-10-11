@@ -84,6 +84,7 @@ export default function App() {
     return '75412933';
   });
 
+  
   // Global Language State: Español ('es'), Quechua ('qu'), Aimara ('ay')
   const [idioma, setIdioma] = useState<Idioma>(() => {
     if (typeof window !== 'undefined') {
@@ -91,6 +92,7 @@ export default function App() {
     }
     return 'es';
   });
+
 
   // Current case list
   const [expedientes, setExpedientes] = useState<Expediente[]>(() => {
@@ -195,6 +197,121 @@ export default function App() {
       console.warn('Could not save to localStorage:', e);
     }
   }, [expedientes]);
+
+  // Recuperar desde Supabase los documentos de las resoluciones seleccionadas
+  useEffect(() => {
+    const expediente = expedienteSeleccionado;
+    if (!expediente) return;
+
+    let cancelado = false;
+
+    const cargarDocumentos = async () => {
+      try {
+        const resultados = await Promise.all(
+          expediente.resoluciones.map(async (res) => {
+            const parametros = new URLSearchParams({
+              expedienteId: String(expediente.id),
+              resolucionId: String(res.id),
+            });
+
+            const respuesta = await fetch(
+              `/api/documentos?${parametros.toString()}`
+            );
+
+            if (!respuesta.ok) {
+              console.error(
+                `No se pudieron recuperar los documentos de la resolución ${res.id}.`
+              );
+
+              return {
+                resolucionId: String(res.id),
+                documentos: [] as ArchivoAdjunto[],
+              };
+            }
+
+            const remotos = (await respuesta.json()) as Array<{
+              id: string;
+              nombre: string;
+              tamano?: string | null;
+              dataUrl: string;
+              fechaSubida?: string;
+              subidoPor?: string;
+            }>;
+
+            const documentos: ArchivoAdjunto[] = remotos.map((doc) => ({
+              id: doc.id,
+              nombre: doc.nombre,
+              tamano: doc.tamano || 'PDF',
+              tipo: 'pdf',
+              dataUrl: doc.dataUrl,
+              fechaSubida:
+                doc.fechaSubida || new Date().toISOString().slice(0, 10),
+              subidoPor: doc.subidoPor || '',
+            }));
+
+            return {
+              resolucionId: String(res.id),
+              documentos,
+            };
+          })
+        );
+
+        if (cancelado) return;
+
+        const documentosPorResolucion = new Map(
+          resultados.map((resultado) => [
+            resultado.resolucionId,
+            resultado.documentos,
+          ])
+        );
+
+        const combinarDocumentos = (exp: Expediente): Expediente => ({
+          ...exp,
+          resoluciones: exp.resoluciones.map((res) => {
+            const remotos =
+              documentosPorResolucion.get(String(res.id)) || [];
+            const actuales = res.archivosAdjuntos || [];
+            const idsActuales = new Set(actuales.map((doc) => doc.id));
+
+            return {
+              ...res,
+              archivosAdjuntos: [
+                ...actuales,
+                ...remotos.filter((doc) => !idsActuales.has(doc.id)),
+              ],
+            };
+          }),
+        });
+
+        setExpedientes((anteriores) =>
+          anteriores.map((exp) =>
+            exp.id === expediente.id
+              ? combinarDocumentos(exp)
+              : exp
+          )
+        );
+
+        setExpedienteSeleccionado((actual) =>
+          actual && actual.id === expediente.id
+            ? combinarDocumentos(actual)
+            : actual
+        );
+      } catch (error) {
+        if (!cancelado) {
+          console.error(
+            'Error al recuperar documentos desde Supabase:',
+            error
+          );
+        }
+      }
+    };
+
+    void cargarDocumentos();
+
+    return () => {
+      cancelado = true;
+    };
+  }, [expedienteSeleccionado?.id]);
 
   const handleCambiarIdioma = (nuevoIdioma: Idioma) => {
     setIdioma(nuevoIdioma);
@@ -847,15 +964,21 @@ export default function App() {
 
       {/* MODAL: Subir Archivo PDF/Imagen a un Actuado (Solo Servidor Judicial) */}
       <UploadDocumentModal
-        isOpen={uploadModalAbierto}
-        onClose={() => {
-          setUploadModalAbierto(false);
-          setTargetResolucionId(null);
-        }}
-        onGuardar={handleGuardarNuevoArchivo}
-        resolucionTitulo={resolucionTarget?.titulo || 'Actuado Judicial'}
-        nombreEditor={NOMBRE_EDITOR}
-      />
+  isOpen={uploadModalAbierto}
+  onClose={() => {
+    setUploadModalAbierto(false);
+    setTargetResolucionId(null);
+  }}
+  onGuardar={handleGuardarNuevoArchivo}
+  resolucionTitulo={resolucionTarget?.titulo || 'Actuado Judicial'}
+  nombreEditor={NOMBRE_EDITOR}
+  expedienteId={
+    expedienteSeleccionado
+      ? String(expedienteSeleccionado.id)
+      : String(expedientePrincipal.id)
+  }
+  resolucionId={String(targetResolucionId || '')}
+/>
 
       {/* MODAL: Visor de Documentos */}
       <ViewDocumentModal
