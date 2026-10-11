@@ -95,7 +95,7 @@ export const Header: React.FC<HeaderProps> = ({
               >
                 AY
               </button>
-              <button type="button" onClick={() => onChangeIdioma('sh')} title="Shipibo" className={`px-2 py-0.5 rounded text-[11px] font-bold transition cursor-pointer ${idioma === 'sh' ? 'bg-white text-[#0c4a6e] shadow-2xs' : 'text-sky-200 hover:text-white'}`}>SH</button>
+              <button type="button" onClick={() => onChangeIdioma('shp')} title="Shipibo" className={`px-2 py-0.5 rounded text-[11px] font-bold transition cursor-pointer ${idioma === 'shp' ? 'bg-white text-[#0c4a6e] shadow-2xs' : 'text-sky-200 hover:text-white'}`}>SH</button>
               <button type="button" onClick={() => onChangeIdioma('en')} title="English" className={`px-2 py-0.5 rounded text-[11px] font-bold transition cursor-pointer ${idioma === 'en' ? 'bg-white text-[#0c4a6e] shadow-2xs' : 'text-sky-200 hover:text-white'}`}>EN</button>
               <button type="button" onClick={() => onChangeIdioma('de')} title="Deutsch" className={`px-2 py-0.5 rounded text-[11px] font-bold transition cursor-pointer ${idioma === 'de' ? 'bg-white text-[#0c4a6e] shadow-2xs' : 'text-sky-200 hover:text-white'}`}>DE</button>
               <button type="button" onClick={() => onChangeIdioma('fr')} title="Français" className={`px-2 py-0.5 rounded text-[11px] font-bold transition cursor-pointer ${idioma === 'fr' ? 'bg-white text-[#0c4a6e] shadow-2xs' : 'text-sky-200 hover:text-white'}`}>FR</button>
