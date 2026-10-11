@@ -109,10 +109,10 @@ export const EditResolucionModal: React.FC<EditResolucionModalProps> = ({
                 Fojas del Documento:
               </label>
               <input
-                type="number"
-                min={1}
+                type="text"
                 value={fojas}
-                onChange={(e) => setFojas(parseInt(e.target.value, 10) || 1)}
+                onChange={(e) => setFojas(e.target.value.replace(/[^0-9-]/g, ""))}
+                placeholder="Ej.: 77 o 2-46"
                 className="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-2 text-xs font-bold text-slate-900"
                 required
               />
