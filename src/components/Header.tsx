@@ -211,19 +211,22 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
 
             {rol !== 'editor' && (
+              {rol !== 'editor' && (
               {/* Pestaña Granate: EL JUEZ TE ESCUCHA */}
-              <button
-                onClick={() => onChangeVista('juez_te_escucha')}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer border ${
-                  vistaActual === 'juez_te_escucha'
-                    ? 'bg-[#881337] text-white shadow border-rose-300 font-black'
-                    : 'bg-[#881337]/80 hover:bg-[#881337] text-rose-100 border-rose-400/50'
-                }`}
-                title="Sacar cita con el Juez - Módulo El Juez Te Escucha"
-              >
-                <Scale className="w-3.5 h-3.5 text-rose-200" />
-                <span className="uppercase tracking-wider">EL JUEZ TE ESCUCHA</span>
-              </button>
+                <button
+                  onClick={() => onChangeVista('juez_te_escucha')}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer border ${
+                    vistaActual === 'juez_te_escucha'
+                      ? 'bg-[#881337] text-white shadow border-rose-300 font-black'
+                      : 'bg-[#881337]/80 hover:bg-[#881337] text-rose-100 border-rose-400/50'
+                  }`}
+                  title="Sacar cita con el Juez - Módulo El Juez Te Escucha"
+                >
+                  <Scale className="w-3.5 h-3.5 text-rose-200" />
+                  <span className="uppercase tracking-wider">EL JUEZ TE ESCUCHA</span>
+                </button>
+    
+              )}
   
             )}
           </nav>
