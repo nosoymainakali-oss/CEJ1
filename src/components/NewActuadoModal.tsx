@@ -24,13 +24,14 @@ export const NewActuadoModal: React.FC<NewActuadoModalProps> = ({
 }) => {
   if (!isOpen) return null;
 
-  const hoyStr = new Date().toISOString().split('T')[0];
+  const fechaActual = new Date();
+  const hoyStr = `${fechaActual.getFullYear()}-${String(fechaActual.getMonth()+1).padStart(2,'0')}-${String(fechaActual.getDate()).padStart(2,'0')}`;
 
   const [tipo, setTipo] = useState<TipoResolucion>('AUTO');
   const [titulo, setTitulo] = useState(`RESOLUCIÓN N° ${String(numeroSiguiente).padStart(2, '0')}`);
   const [fechaResolucion, setFechaResolucion] = useState(hoyStr);
   const [fechaNotificacion, setFechaNotificacion] = useState(hoyStr);
-  const [fojas, setFojas] = useState(15);
+  const [fojas, setFojas] = useState('');
   const [sumilla, setSumilla] = useState('');
   const [contenidoCompleto, setContenidoCompleto] = useState('');
   
@@ -58,7 +59,7 @@ export const NewActuadoModal: React.FC<NewActuadoModalProps> = ({
       fechaResolucion,
       fechaNotificacion,
       tipoNotificacion: modalidadNotif,
-      fojas,
+      fojas: fojas.trim(),
       sumilla: sumilla.trim(),
       contenidoCompleto: contenidoCompleto.trim(),
       codigoBarras: codigoBarrasGenerado,
@@ -204,9 +205,10 @@ export const NewActuadoModal: React.FC<NewActuadoModalProps> = ({
                 Fojas:
               </label>
               <input
-                type="number"
+                type="text"
                 value={fojas}
-                onChange={(e) => setFojas(parseInt(e.target.value, 10) || 1)}
+                onChange={(e) => setFojas(e.target.value.replace(/[^0-9-]/g, ""))}
+                placeholder="Ej.: 77 o 2-46"
                 className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-bold text-slate-900"
                 required
               />
