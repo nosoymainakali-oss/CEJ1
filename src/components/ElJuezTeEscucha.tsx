@@ -150,7 +150,7 @@ export const ElJuezTeEscucha: React.FC<ElJuezTeEscuchaProps> = ({
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-[11px] font-black tracking-widest text-rose-200 uppercase">
-                  PODER JUDICIAL DEL PERÚ &bull; PLATAFORMA NACIONAL
+                  PODER JUDICIAL DEL PERÚ &bull; PERÚ
                 </span>
                 <span className="bg-white/20 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
                   MÓDULO OFICIAL
@@ -218,6 +218,7 @@ export const ElJuezTeEscucha: React.FC<ElJuezTeEscuchaProps> = ({
                 onChange={(e) => setNombreUsuario(e.target.value)}
                 placeholder="Ingrese sus nombres y apellidos completos"
                 className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2 text-sm text-slate-900 focus:outline-none"
+                required
               />
             </div>
 
@@ -238,7 +239,7 @@ export const ElJuezTeEscucha: React.FC<ElJuezTeEscuchaProps> = ({
             <div className="flex items-center gap-2">
               <User className="w-4 h-4 text-[#881337]" />
               <span className="text-slate-600">
-                Ciudadano Solicitante: <strong className="text-[#881337] uppercase">{nombreUsuario || 'Usuario Ciudadano'}</strong> (DNI: {dniUsuario})
+                Ciudadano Solicitante: <strong className="text-[#881337] uppercase">{nombreUsuario}</strong> (DNI: {dniUsuario})
               </span>
             </div>
             <button
