@@ -18,6 +18,8 @@ import {
 } from 'lucide-react';
 import { DiligenciaAgenda } from '../types/judicial';
 
+const hoyLocal = () => { const f = new Date(); return `${f.getFullYear()}-${String(f.getMonth()+1).padStart(2,'0')}-${String(f.getDate()).padStart(2,'0')}`; };
+
 export const JUECES_PERMITIDOS = [
   'Sebastian Alberto Tapia Tito',
   'Leydi Karen Quispe Rojas',
@@ -46,7 +48,7 @@ export const ElJuezTeEscucha: React.FC<ElJuezTeEscuchaProps> = ({
   // Step 1: Identification
   const [dniUsuario, setDniUsuario] = useState(dniInicial);
   const [nombreUsuario, setNombreUsuario] = useState(nombreInicial);
-  const [identificado, setIdentificado] = useState(Boolean(dniInicial && dniInicial.length >= 8));
+  const [identificado, setIdentificado] = useState(Boolean(dniInicial && dniInicial.length >= 8 && nombreInicial.trim()));
 
   // Step 2: Judge search & validation
   const [nombreJuezInput, setNombreJuezInput] = useState(juezPreseleccionado);
@@ -59,14 +61,15 @@ export const ElJuezTeEscucha: React.FC<ElJuezTeEscuchaProps> = ({
 
   // Step 3: Appointment details
   const [motivoCita, setMotivoCita] = useState('');
-  const [fechaCita, setFechaCita] = useState('2026-10-15');
+  const [fechaCita, setFechaCita] = useState(hoyLocal());
   const [horaCita, setHoraCita] = useState('11:00');
   const [citaConfirmada, setCitaConfirmada] = useState<DiligenciaAgenda | null>(null);
 
   // Handle identification form
   const handleIdentificar = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!dniUsuario.trim() || dniUsuario.trim().length < 8) {
+    if (!nombreUsuario.trim()) { alert('Por favor ingrese sus nombres y apellidos completos.'); return; }
+    if (!/^\d{8}$/.test(dniUsuario.trim())) {
       alert('Por favor ingrese un número de DNI válido de 8 dígitos.');
       return;
     }
@@ -106,6 +109,8 @@ export const ElJuezTeEscucha: React.FC<ElJuezTeEscuchaProps> = ({
       return;
     }
 
+    if (fechaCita < hoyLocal()) { alert('Seleccione una fecha actual o futura.'); return; }
+
     if (!motivoCita.trim()) {
       alert('Por favor ingrese el motivo por el cual solicita la cita con el magistrado.');
       return;
@@ -129,8 +134,8 @@ export const ElJuezTeEscucha: React.FC<ElJuezTeEscuchaProps> = ({
   };
 
   // Filter agenda for the selected judge
-  const diligenciasJuez = juezSeleccionado 
-    ? agendaMagistrados.filter(d => d.magistrado.toLowerCase() === juezSeleccionado.toLowerCase())
+  const diligenciasJuez = juezSeleccionado
+    ? agendaMagistrados.filter(d => d.magistrado.toLowerCase() === juezSeleccionado.toLowerCase() && d.fecha >= hoyLocal())
     : [];
 
   return (
@@ -205,13 +210,13 @@ export const ElJuezTeEscucha: React.FC<ElJuezTeEscuchaProps> = ({
 
             <div>
               <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
-                Nombres y Apellidos Completos (Opcional):
+                Nombres y Apellidos Completos:
               </label>
               <input
                 type="text"
                 value={nombreUsuario}
                 onChange={(e) => setNombreUsuario(e.target.value)}
-                placeholder="Ej: Eduardo Luismario Medina Humpiri"
+                placeholder="Ingrese sus nombres y apellidos completos"
                 className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2 text-sm text-slate-900 focus:outline-none"
               />
             </div>
@@ -280,10 +285,10 @@ export const ElJuezTeEscucha: React.FC<ElJuezTeEscuchaProps> = ({
               <Search className="w-5 h-5 text-[#881337]" />
               <div>
                 <h2 className="text-base font-bold text-slate-900 uppercase">
-                  Paso 2: Escribir el Nombre del Magistrado
+                  Paso 2: Seleccione al Magistrado
                 </h2>
                 <p className="text-xs text-slate-500">
-                  Escriba el nombre exacto del Juez para consultar su agenda oficial disponible.
+                  Seleccione un magistrado para consultar su agenda oficial disponible.
                 </p>
               </div>
             </div>
@@ -310,27 +315,6 @@ export const ElJuezTeEscucha: React.FC<ElJuezTeEscuchaProps> = ({
                 ))}
               </div>
             </div>
-
-            {/* Search Input */}
-            <form onSubmit={handleBuscarJuez} className="mt-4 flex flex-col sm:flex-row gap-2">
-              <input
-                type="text"
-                value={nombreJuezInput}
-                onChange={(e) => {
-                  setNombreJuezInput(e.target.value);
-                  setErrorJuez('');
-                }}
-                placeholder="Escriba: Sebastian Alberto Tapia Tito, Leydi Karen Quispe Rojas o Marco Antonio Ticona Miranda"
-                className="flex-1 bg-slate-50 border-2 border-slate-300 focus:border-[#881337] rounded-xl px-4 py-2.5 text-xs sm:text-sm font-medium text-slate-900 focus:outline-none"
-              />
-              <button
-                type="submit"
-                className="px-5 py-2.5 bg-[#881337] hover:bg-[#9f1239] text-white font-bold rounded-xl text-xs sm:text-sm transition cursor-pointer flex items-center justify-center gap-1.5 shrink-0"
-              >
-                <Search className="w-4 h-4" />
-                <span>Verificar Juez</span>
-              </button>
-            </form>
 
             {/* Error message if Judge does not exist */}
             {errorJuez && (
@@ -375,7 +359,7 @@ export const ElJuezTeEscucha: React.FC<ElJuezTeEscuchaProps> = ({
                       rows={3}
                       value={motivoCita}
                       onChange={(e) => setMotivoCita(e.target.value)}
-                      placeholder="Explique con claridad el motivo por el cual solicita la cita con el magistrado (ej: Consultar el estado de elevación del expediente, retraso procesal o solicitar vista de la causa)..."
+                      placeholder="Explique con claridad el motivo por el cual solicita una entrevista con el magistrado."
                       className="w-full bg-rose-50/40 border-2 border-rose-300 focus:border-[#881337] rounded-xl p-3 text-xs sm:text-sm text-slate-900 focus:outline-none"
                       required
                     />
@@ -388,6 +372,7 @@ export const ElJuezTeEscucha: React.FC<ElJuezTeEscuchaProps> = ({
                       </label>
                       <input
                         type="date"
+                        min={hoyLocal()}
                         value={fechaCita}
                         onChange={(e) => setFechaCita(e.target.value)}
                         className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-900"
