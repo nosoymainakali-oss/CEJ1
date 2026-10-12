@@ -23,7 +23,9 @@ export const EditResolucionModal: React.FC<EditResolucionModalProps> = ({
   const [titulo, setTitulo] = useState(resolucion.titulo);
   const [sumilla, setSumilla] = useState(resolucion.sumilla);
   const [contenidoCompleto, setContenidoCompleto] = useState(resolucion.contenidoCompleto);
-  const [fojas, setFojas] = useState<number>(resolucion.fojas || 1);
+  const [fojas, setFojas] = useState<string>(String(resolucion.fojas ?? ''));
+  const [codigoBarras, setCodigoBarras] = useState(resolucion.codigoBarras || '');
+  const [codigoQRData, setCodigoQRData] = useState(resolucion.codigoQRData || '');
   const [fechaResolucion, setFechaResolucion] = useState(resolucion.fechaResolucion);
   const [fechaNotificacion, setFechaNotificacion] = useState(resolucion.fechaNotificacion);
   const [tipoNotificacion, setTipoNotificacion] = useState<'fisica' | 'electronica'>(
@@ -36,6 +38,7 @@ export const EditResolucionModal: React.FC<EditResolucionModalProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!/^\d+(-\d+)?$/.test(fojas.trim())) { alert('Ingrese una foja o un rango válido, por ejemplo 77 o 2-46.'); return; }
 
     const actualizada: Resolucion = {
       ...resolucion,
@@ -43,7 +46,9 @@ export const EditResolucionModal: React.FC<EditResolucionModalProps> = ({
       titulo: titulo.trim(),
       sumilla: sumilla.trim(),
       contenidoCompleto: contenidoCompleto.trim(),
-      fojas: Number(fojas) || 1,
+      fojas: fojas.trim(),
+      codigoBarras: codigoBarras.trim(),
+      codigoQRData: codigoQRData.trim(),
       fechaResolucion,
       fechaNotificacion,
       tipoNotificacion,
@@ -105,10 +110,10 @@ export const EditResolucionModal: React.FC<EditResolucionModalProps> = ({
                 Fojas del Documento:
               </label>
               <input
-                type="number"
-                min={1}
+                type="text"
                 value={fojas}
-                onChange={(e) => setFojas(parseInt(e.target.value, 10) || 1)}
+                onChange={(e) => setFojas(e.target.value.replace(/[^0-9-]/g, ""))}
+                placeholder="Ej.: 77 o 2-46"
                 className="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-2 text-xs font-bold text-slate-900"
                 required
               />
@@ -178,6 +183,17 @@ export const EditResolucionModal: React.FC<EditResolucionModalProps> = ({
               className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs sm:text-sm font-bold text-slate-900"
               required
             />
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Código de barras:</label>
+              <input type="text" value={codigoBarras} onChange={(e) => setCodigoBarras(e.target.value)} className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-mono text-slate-900" />
+            </div>
+            <div>
+              <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Datos del código QR:</label>
+              <textarea rows={2} value={codigoQRData} onChange={(e) => setCodigoQRData(e.target.value)} className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-mono text-slate-900" />
+            </div>
           </div>
 
           <div>

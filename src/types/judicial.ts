@@ -65,7 +65,7 @@ export interface Resolucion {
   fechaResolucion: string;
   fechaNotificacion: string;
   tipoNotificacion?: 'fisica' | 'electronica';
-  fojas: number;
+  fojas: number | string;
   sumilla: string;
   contenidoCompleto: string;
   codigoBarras: string;
@@ -119,4 +119,4 @@ export interface Expediente {
 }
 
 export type RolUsuario = 'editor' | 'consultor';
-export type Idioma = 'es' | 'qu' | 'ay';
+export type Idioma = 'es' | 'qu' | 'ay' | 'shp' | 'en' | 'de' | 'fr';

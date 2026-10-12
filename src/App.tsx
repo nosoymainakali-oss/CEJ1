@@ -94,6 +94,8 @@ export default function App() {
   });
 
 
+  const [estadoCompartidoListo, setEstadoCompartidoListo] = useState(false);
+
   // Current case list
   const [expedientes, setExpedientes] = useState<Expediente[]>(() => {
     if (typeof window !== 'undefined') {
@@ -166,12 +168,92 @@ export default function App() {
 
   // Guardar agenda de magistrados
   useEffect(() => {
+    if (!estadoCompartidoListo) return;
     try {
       localStorage.setItem('sjd_agenda_magistrados_v1', JSON.stringify(agendaMagistrados));
     } catch (e) {
       console.warn(e);
     }
   }, [agendaMagistrados]);
+
+  // Sincronizar expedientes y agenda con Supabase para compartirlos entre dispositivos.
+  // El almacenamiento local se conserva como respaldo si la API no está disponible.
+  useEffect(() => {
+    let cancelado = false;
+
+    const cargarEstadoCompartido = async () => {
+      try {
+        const respuesta = await fetch('/api/estado');
+        if (!respuesta.ok) throw new Error('No se pudo consultar el estado compartido');
+        const resultado = await respuesta.json();
+
+        if (cancelado) return;
+
+        if (resultado.contenido && Array.isArray(resultado.contenido.expedientes) &&
+            Array.isArray(resultado.contenido.agendaMagistrados)) {
+          setExpedientes(resultado.contenido.expedientes);
+          setAgendaMagistrados(resultado.contenido.agendaMagistrados);
+        } else {
+          // Primera apertura: conservar y registrar los datos locales existentes.
+          const localesExpedientes = (() => {
+            try {
+              const guardados = localStorage.getItem('sjd_expediente_00140_v3');
+              return guardados ? JSON.parse(guardados) : INITIAL_EXPEDIENTES;
+            } catch {
+              return INITIAL_EXPEDIENTES;
+            }
+          })();
+          const localesAgenda = (() => {
+            try {
+              const guardados = localStorage.getItem('sjd_agenda_magistrados_v1');
+              if (guardados) return JSON.parse(guardados);
+            } catch {}
+            return agendaMagistrados;
+          })();
+
+          setExpedientes(localesExpedientes);
+          setAgendaMagistrados(localesAgenda);
+          const inicializar = await fetch('/api/estado', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              expedientes: localesExpedientes,
+              agendaMagistrados: localesAgenda,
+            }),
+          });
+          if (!inicializar.ok) throw new Error('No se pudo inicializar el estado compartido');
+        }
+      } catch (error) {
+        console.error('No se pudo cargar la información compartida; se conserva el respaldo local.', error);
+      } finally {
+        if (!cancelado) setEstadoCompartidoListo(true);
+      }
+    };
+
+    void cargarEstadoCompartido();
+    return () => { cancelado = true; };
+  // Se ejecuta únicamente al montar la aplicación.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (!estadoCompartidoListo) return;
+    const guardarEstadoCompartido = async () => {
+      try {
+        const respuesta = await fetch('/api/estado', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ expedientes, agendaMagistrados }),
+        });
+        if (!respuesta.ok) {
+          console.error('No se pudieron guardar los cambios en Supabase.');
+        }
+      } catch (error) {
+        console.error('Error al sincronizar con Supabase:', error);
+      }
+    };
+    void guardarEstadoCompartido();
+  }, [estadoCompartidoListo, expedientes, agendaMagistrados]);
 
   // Accessibility State (High Contrast)
   const [altoContraste, setAltoContraste] = useState(false);
@@ -182,6 +264,7 @@ export default function App() {
   const [viewDocModal, setViewDocModal] = useState<ArchivoAdjunto | null>(null);
   const [editResolucionModal, setEditResolucionModal] = useState<Resolucion | null>(null);
   const [modalNuevoActuado, setModalNuevoActuado] = useState(false);
+  const [seccionDocumentos, setSeccionDocumentos] = useState<'actuaciones' | 'escritos'>('actuaciones');
 
   // Live Case Editor Modal (For Servidor Judicial to create or edit cases with live preview)
   const [modalLiveEditor, setModalLiveEditor] = useState<{
@@ -191,6 +274,7 @@ export default function App() {
 
   // Persist case updates
   useEffect(() => {
+    if (!estadoCompartidoListo) return;
     try {
       localStorage.setItem('sjd_expediente_00140_v3', JSON.stringify(expedientes));
     } catch (e) {
@@ -649,7 +733,7 @@ export default function App() {
         <div className="min-h-screen bg-slate-50 flex flex-col font-arial" style={{ fontFamily: 'Arial, sans-serif' }}>
           <div className="bg-[#0c4a6e] text-white py-2.5 px-4 border-b border-sky-400/40">
             <div className="max-w-6xl mx-auto flex items-center justify-between text-xs">
-              <span className="font-bold">PODER JUDICIAL DEL PERÚ &bull; PLATAFORMA NACIONAL</span>
+              <span className="font-bold">Poder Judicial del Perú &bull; Plataforma Oficial de Consulta Judicial &bull; Perú</span>
               <button
                 onClick={() => setVistaActual('busqueda')}
                 className="underline text-sky-200 hover:text-white"
@@ -666,7 +750,6 @@ export default function App() {
               agendaMagistrados={agendaMagistrados}
               onAgendarCita={(nuevaCita) => setAgendaMagistrados((prev) => [nuevaCita, ...prev])}
               juezPreseleccionado="Leydi Karen Quispe Rojas"
-              expedienteNomenclatura="00140-2026-0-2111-JR-LA-02"
             />
           </main>
           <Footer idioma={idioma} />
@@ -747,8 +830,8 @@ export default function App() {
         {vistaActual === 'juez_te_escucha' && (
           <ElJuezTeEscucha
             onVolver={() => setVistaActual(expedienteSeleccionado ? 'expediente' : 'busqueda')}
-            dniInicial={dniUsuario}
-            nombreInicial={nombreUsuario}
+            dniInicial=""
+            nombreInicial=""
             agendaMagistrados={agendaMagistrados}
             onAgendarCita={(nuevaCita) => setAgendaMagistrados((prev) => [nuevaCita, ...prev])}
             juezPreseleccionado={expActual.juez}
@@ -887,10 +970,10 @@ export default function App() {
               <div>
                 <h3 className="font-bold text-lg sm:text-xl text-slate-900 flex items-center gap-2">
                   <FolderOpen className="w-5 h-5 text-[#0284c7]" />
-                  <span>{t.actuadosJudicialesTitulo}</span>
+                  <span>{seccionDocumentos === 'actuaciones' ? 'ACTUACIONES PROCESALES' : 'ESCRITOS PRESENTADOS'}</span>
                 </h3>
                 <p className="text-xs text-slate-500">
-                  Total de {expActual.resoluciones.length} actuados emitidos con validación digital única.
+                  {(seccionDocumentos === 'actuaciones' ? expActual.resoluciones.filter(r => r.tipo !== 'ESCRITO') : expActual.resoluciones.filter(r => r.tipo === 'ESCRITO')).length} documentos registrados.
                 </p>
               </div>
 
@@ -918,9 +1001,53 @@ export default function App() {
               )}
             </div>
 
-            {/* Resolutions list without deadline clutter and with clean tabs */}
+            {rol === 'editor' && (
+              <section className="rounded-xl border border-rose-200 bg-white p-4 space-y-3">
+                <h4 className="text-sm font-bold text-slate-900">Administrar agenda de magistrados</h4>
+                {agendaMagistrados.filter(d => { const f = new Date(); const hoy = `${f.getFullYear()}-${String(f.getMonth()+1).padStart(2,'0')}-${String(f.getDate()).padStart(2,'0')}`; return d.fecha >= hoy; }).length === 0 ? (
+                  <p className="text-xs text-slate-500">No hay diligencias registradas.</p>
+                ) : agendaMagistrados.filter(diligencia => { const f = new Date(); const hoy = `${f.getFullYear()}-${String(f.getMonth()+1).padStart(2,'0')}-${String(f.getDate()).padStart(2,'0')}`; return diligencia.fecha >= hoy; }).map((diligencia) => (
+                  <div key={diligencia.id} className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-slate-200 p-3">
+                    <div className="text-xs">
+                      <strong className="block text-slate-900">{diligencia.magistrado} · {diligencia.tipo}</strong>
+                      <span className="text-slate-600">{diligencia.fecha} · {diligencia.hora} · {diligencia.descripcion}</span>
+                      <span className="block text-slate-500">Expediente: {diligencia.expedienteNomenclatura}</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <button type="button" onClick={() => {
+                        const fecha = window.prompt('Fecha (AAAA-MM-DD):', diligencia.fecha);
+                        if (fecha === null) return;
+                        const hora = window.prompt('Hora (HH:MM):', diligencia.hora);
+                        if (hora === null) return;
+                        const descripcion = window.prompt('Descripción:', diligencia.descripcion);
+                        if (descripcion === null) return;
+                        const magistrado = window.prompt('Nombre del magistrado:', diligencia.magistrado);
+                        if (magistrado === null) return;
+                        const hoy = new Date();
+                        const minFecha = hoy.getFullYear() + '-' + String(hoy.getMonth()+1).padStart(2,'0') + '-' + String(hoy.getDate()).padStart(2,'0');
+                        if (!/^\d{4}-\d{2}-\d{2}$/.test(fecha) || fecha < minFecha || !/^\d{2}:\d{2}$/.test(hora) || !descripcion.trim() || !magistrado.trim()) {
+                          alert('Verifique la fecha, hora, descripción y magistrado. No se permiten fechas pasadas.');
+                          return;
+                        }
+                        setAgendaMagistrados(actual => actual.map(item => item.id === diligencia.id ? { ...item, fecha, hora, descripcion: descripcion.trim(), magistrado: magistrado.trim() } : item));
+                      }} className="rounded-md border border-sky-300 bg-sky-50 px-3 py-1.5 text-xs font-bold text-sky-800">Editar</button>
+                      <button type="button" onClick={() => {
+                        if (window.confirm('¿Eliminar esta diligencia de la agenda?')) setAgendaMagistrados(actual => actual.filter(item => item.id !== diligencia.id));
+                      }} className="rounded-md border border-red-300 bg-red-50 px-3 py-1.5 text-xs font-bold text-red-700">Eliminar</button>
+                    </div>
+                  </div>
+                ))}
+              </section>
+            )}
+
+            <div className="flex gap-2 border-b border-slate-200 pb-2">
+              <button type="button" onClick={() => setSeccionDocumentos('actuaciones')} className={`px-4 py-2 rounded-lg text-xs font-bold ${seccionDocumentos === 'actuaciones' ? 'bg-[#0284c7] text-white' : 'bg-white text-slate-700 border border-slate-200'}`}>Actuaciones procesales</button>
+              <button type="button" onClick={() => setSeccionDocumentos('escritos')} className={`px-4 py-2 rounded-lg text-xs font-bold ${seccionDocumentos === 'escritos' ? 'bg-[#0284c7] text-white' : 'bg-white text-slate-700 border border-slate-200'}`}>Escritos presentados</button>
+            </div>
+
+            {/* Separate lists for procedural actions and submitted briefs */}
             <div className="space-y-4">
-              {[...expActual.resoluciones].reverse().map((res) => (
+              {[...expActual.resoluciones].filter(res => seccionDocumentos === 'escritos' ? res.tipo === 'ESCRITO' : res.tipo !== 'ESCRITO').reverse().map((res) => (
                 <ResolutionCard
                   key={res.id}
                   resolucion={res}

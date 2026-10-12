@@ -1,4 +1,4 @@
-export type Idioma = 'es' | 'qu' | 'ay';
+export type Idioma = 'es' | 'qu' | 'ay' | 'shp' | 'en' | 'de' | 'fr';
 
 export interface Traducciones {
   institucion: string;
@@ -69,7 +69,7 @@ export interface Traducciones {
   btnEditarExpediente: string;
 }
 
-export const DICCIONARIO: Record<Idioma, Traducciones> = {
+const DICCIONARIO_BASE = {
   es: {
     institucion: 'PODER JUDICIAL DEL PERÚ',
     subtitulo: 'SISTEMA JUDICIAL DIGITAL',
@@ -117,7 +117,7 @@ export const DICCIONARIO: Record<Idioma, Traducciones> = {
     fechaInicio: 'Fecha Inicio',
     partesProcesales: 'Partes Procesales',
     lineaTiempoTitulo: 'LÍNEA DE TIEMPO DEL PROCESO',
-    actuadosJudicialesTitulo: 'ACTUADOS JUDICIALES (CON CÓDIGO DE BARRAS Y QR)',
+    actuadosJudicialesTitulo: 'ACTUACIONES PROCESALES',
     actuadosDesc: 'Actuados emitidos con validación digital única y texto íntegro.',
     btnAnadirActuado: 'Añadir Actuado',
     tabResumen: 'Resumen:',
@@ -185,7 +185,7 @@ export const DICCIONARIO: Record<Idioma, Traducciones> = {
     fechaInicio: 'Qallarisqan P’unchaw',
     partesProcesales: 'Juiciopi Kaqkuna',
     lineaTiempoTitulo: 'TARIPAY RURAYPA PURIRIYNIN',
-    actuadosJudicialesTitulo: 'ACTUADOS JUDICIALES (BARCODE WAN QR WAN)',
+    actuadosJudicialesTitulo: 'ACTUACIONES PROCESALES',
     actuadosDesc: 'Qillqasqakuna digital qhawayniyuq lliw taripay nisqawan.',
     btnAnadirActuado: 'Actuadota Yapay',
     tabResumen: 'Resumen:',
@@ -253,7 +253,7 @@ export const DICCIONARIO: Record<Idioma, Traducciones> = {
     fechaInicio: 'Qalltawi Uru',
     partesProcesales: 'Taripawin Kaqirinaka',
     lineaTiempoTitulo: 'TARIPAWIN SARAWI PACHAPA',
-    actuadosJudicialesTitulo: 'ACTUADOS JUDICIALES (BARCODE UKHAMARAK QR UKAMPI)',
+    actuadosJudicialesTitulo: 'ACTUACIONES PROCESALES',
     actuadosDesc: 'Digital uñstayatanaka taqpach qillqatampi.',
     btnAnadirActuado: 'Mä Actuado Yapaña',
     tabResumen: 'Resumen:',
@@ -274,4 +274,12 @@ export const DICCIONARIO: Record<Idioma, Traducciones> = {
     btnCrearExpediente: 'Machaq Expediente Luraña',
     btnEditarExpediente: 'Expediente Askichaña',
   },
+};
+
+export const DICCIONARIO: Record<Idioma, Traducciones> = {
+  ...DICCIONARIO_BASE,
+  shp: { ...DICCIONARIO_BASE.es, institucion: 'PODER JUDICIAL DEL PERÚ', subtitulo: 'SHIPIBO-KONIBO' },
+  en: { ...DICCIONARIO_BASE.es, institucion: 'JUDICIAL POWER OF PERU', subtitulo: 'DIGITAL JUDICIAL SYSTEM', altoContraste: 'High contrast', usuarioLabel: 'User: ', servidorJudicialLabel: 'Judicial staff: ', salir: 'Sign out', pestanaBusqueda: 'Case search', pestanaExpediente: 'Case file', pestanaCalculadora: 'Deadline calculator', idiomaLabel: 'Language', bienvenido: 'Welcome', tituloBusqueda: 'Search judicial cases', btnConsultar: 'Search', resultados: 'Results', sinResultados: 'No results found', demandante: 'Claimant', demandado: 'Defendant', materia: 'Subject', magistrados: 'Judges', juez: 'Judge', especialista: 'Clerk', fechaInicio: 'Start date', partesProcesales: 'Parties', lineaTiempoTitulo: 'PROCEDURAL TIMELINE', actuadosJudicialesTitulo: 'PROCEDURAL ACTIONS', btnAnadirActuado: 'Add action', resumenTitulo: 'Summary', fojas: 'Pages', resolucionFecha: 'Decision date', notificadoFecha: 'Notification date', verDoc: 'View document', descargarDoc: 'Download document' },
+  de: { ...DICCIONARIO_BASE.es, institucion: 'JUSTIZ DER REPUBLIK PERU', subtitulo: 'DIGITALES JUSTIZSYSTEM', altoContraste: 'Hoher Kontrast', usuarioLabel: 'Benutzer: ', servidorJudicialLabel: 'Justizpersonal: ', salir: 'Abmelden', pestanaBusqueda: 'Akten suchen', pestanaExpediente: 'Akte', pestanaCalculadora: 'Fristenrechner', idiomaLabel: 'Sprache', bienvenido: 'Willkommen', tituloBusqueda: 'Gerichtsakten suchen', btnConsultar: 'Suchen', resultados: 'Ergebnisse', sinResultados: 'Keine Ergebnisse gefunden', demandante: 'Kläger', demandado: 'Beklagter', materia: 'Gegenstand', magistrados: 'Richter', juez: 'Richter/in', especialista: 'Sachbearbeiter/in', fechaInicio: 'Beginn', partesProcesales: 'Verfahrensparteien', lineaTiempoTitulo: 'VERFAHRENSCHRONOLOGIE', actuadosJudicialesTitulo: 'VERFAHRENSHANDLUNGEN', btnAnadirActuado: 'Handlung hinzufügen', resumenTitulo: 'Zusammenfassung', fojas: 'Seiten', resolucionFecha: 'Entscheidungsdatum', notificadoFecha: 'Zustellungsdatum', verDoc: 'Dokument ansehen', descargarDoc: 'Dokument herunterladen' },
+  fr: { ...DICCIONARIO_BASE.es, institucion: 'POUVOIR JUDICIAIRE DU PÉROU', subtitulo: 'SYSTÈME JUDICIAIRE NUMÉRIQUE', altoContraste: 'Contraste élevé', usuarioLabel: 'Utilisateur : ', servidorJudicialLabel: 'Personnel judiciaire : ', salir: 'Déconnexion', pestanaBusqueda: 'Recherche de dossier', pestanaExpediente: 'Dossier judiciaire', pestanaCalculadora: 'Calcul des délais', idiomaLabel: 'Langue', bienvenido: 'Bienvenue', tituloBusqueda: 'Rechercher des dossiers judiciaires', btnConsultar: 'Rechercher', resultados: 'Résultats', sinResultados: 'Aucun résultat trouvé', demandante: 'Demandeur', demandado: 'Défendeur', materia: 'Objet', magistrados: 'Magistrats', juez: 'Juge', especialista: 'Greffier', fechaInicio: 'Date de début', partesProcesales: 'Parties à la procédure', lineaTiempoTitulo: 'CHRONOLOGIE DE LA PROCÉDURE', actuadosJudicialesTitulo: 'ACTES DE PROCÉDURE', btnAnadirActuado: 'Ajouter un acte', resumenTitulo: 'Résumé', fojas: 'Pages', resolucionFecha: 'Date de décision', notificadoFecha: 'Date de notification', verDoc: 'Voir le document', descargarDoc: 'Télécharger le document' }
 };

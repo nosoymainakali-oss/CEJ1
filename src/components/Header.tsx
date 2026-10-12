@@ -52,7 +52,7 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-2 font-bold tracking-wide">
             <span className="w-2.5 h-2.5 rounded-full bg-sky-400 animate-pulse"></span>
-            <span>{t.institucion} &bull; {t.subtitulo}</span>
+            <span>Poder Judicial del Perú &bull; Plataforma Oficial de Consulta Judicial &bull; Perú</span>
           </div>
 
           <div className="flex items-center flex-wrap gap-2 sm:gap-3">
@@ -95,6 +95,10 @@ export const Header: React.FC<HeaderProps> = ({
               >
                 AY
               </button>
+              <button type="button" onClick={() => onChangeIdioma('shp')} title="Shipibo" className={`px-2 py-0.5 rounded text-[11px] font-bold transition cursor-pointer ${idioma === 'shp' ? 'bg-white text-[#0c4a6e] shadow-2xs' : 'text-sky-200 hover:text-white'}`}>SH</button>
+              <button type="button" onClick={() => onChangeIdioma('en')} title="English" className={`px-2 py-0.5 rounded text-[11px] font-bold transition cursor-pointer ${idioma === 'en' ? 'bg-white text-[#0c4a6e] shadow-2xs' : 'text-sky-200 hover:text-white'}`}>EN</button>
+              <button type="button" onClick={() => onChangeIdioma('de')} title="Deutsch" className={`px-2 py-0.5 rounded text-[11px] font-bold transition cursor-pointer ${idioma === 'de' ? 'bg-white text-[#0c4a6e] shadow-2xs' : 'text-sky-200 hover:text-white'}`}>DE</button>
+              <button type="button" onClick={() => onChangeIdioma('fr')} title="Français" className={`px-2 py-0.5 rounded text-[11px] font-bold transition cursor-pointer ${idioma === 'fr' ? 'bg-white text-[#0c4a6e] shadow-2xs' : 'text-sky-200 hover:text-white'}`}>FR</button>
             </div>
 
             {/* High Contrast */}
@@ -210,19 +214,22 @@ export const Header: React.FC<HeaderProps> = ({
               <span>{t.pestanaCalculadora}</span>
             </button>
 
-            {/* Pestaña Granate: EL JUEZ TE ESCUCHA */}
-            <button
-              onClick={() => onChangeVista('juez_te_escucha')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer border ${
-                vistaActual === 'juez_te_escucha'
-                  ? 'bg-[#881337] text-white shadow border-rose-300 font-black'
-                  : 'bg-[#881337]/80 hover:bg-[#881337] text-rose-100 border-rose-400/50'
-              }`}
-              title="Sacar cita con el Juez - Módulo El Juez Te Escucha"
-            >
-              <Scale className="w-3.5 h-3.5 text-rose-200" />
-              <span className="uppercase tracking-wider">EL JUEZ TE ESCUCHA</span>
-            </button>
+            {/* Pestaña ciudadana: EL JUEZ TE ESCUCHA */}
+            {rol !== 'editor' && (
+              <button
+                onClick={() => onChangeVista('juez_te_escucha')}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer border ${
+                  vistaActual === 'juez_te_escucha'
+                    ? 'bg-[#881337] text-white shadow border-rose-300 font-black'
+                    : 'bg-[#881337]/80 hover:bg-[#881337] text-rose-100 border-rose-400/50'
+                }`}
+                title="Sacar cita con el Juez - Módulo El Juez Te Escucha"
+              >
+                <Scale className="w-3.5 h-3.5 text-rose-200" />
+                <span className="uppercase tracking-wider">EL JUEZ TE ESCUCHA</span>
+              </button>
+            )}
+
           </nav>
         </div>
       </div>

@@ -28,15 +28,18 @@ export const AgendarAudienciaModal: React.FC<AgendarAudienciaModalProps> = ({
   ) || JUECES_PERMITIDOS[1]; // Default Leydi Karen Quispe Rojas
 
   const [magistrado, setMagistrado] = useState(juezInicial);
-  const [fecha, setFecha] = useState('2026-11-05');
+  const fechaActual = new Date();
+  const hoy = `${fechaActual.getFullYear()}-${String(fechaActual.getMonth()+1).padStart(2,'0')}-${String(fechaActual.getDate()).padStart(2,'0')}`;
+  const [fecha, setFecha] = useState(hoy);
   const [hora, setHora] = useState('10:00');
   const [tipo, setTipo] = useState<'AUDIENCIA' | 'VISTA_DE_LA_CAUSA' | 'INFORME_ORAL' | 'DILIGENCIA_EXTERNA'>('AUDIENCIA');
   const [descripcion, setDescripcion] = useState(
-    'Audiencia Única de Juzgamiento - Declaración de Partes y Alegatos Finales'
+    ''
   );
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (fecha < hoy) { alert('Seleccione una fecha actual o futura.'); return; }
 
     const nueva: DiligenciaAgenda = {
       id: `aud-${Date.now()}`,
@@ -99,6 +102,7 @@ export const AgendarAudienciaModal: React.FC<AgendarAudienciaModalProps> = ({
               </label>
               <input
                 type="date"
+                min={hoy}
                 value={fecha}
                 onChange={(e) => setFecha(e.target.value)}
                 className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs font-bold text-slate-900"

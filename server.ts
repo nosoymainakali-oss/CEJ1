@@ -26,6 +26,59 @@ const supabase =
     ? createClient(supabaseUrl, supabaseKey)
     : null;
 
+// Estado compartido de la aplicación (expedientes y agenda).
+// Estas rutas usan la clave de servicio exclusivamente en el servidor.
+app.get('/api/estado', async (_req: Request, res: Response) => {
+  try {
+    if (!supabase) {
+      return res.status(503).json({ error: 'Supabase no está configurado en el servidor.' });
+    }
+    const { data, error } = await supabase
+      .from('cej1_datos_compartidos')
+      .select('contenido')
+      .eq('clave', 'principal')
+      .maybeSingle();
+
+    if (error) {
+      console.error('Error al consultar estado compartido:', error.message);
+      return res.status(500).json({ error: 'No se pudo consultar el estado compartido.' });
+    }
+    return res.json({ contenido: data?.contenido ?? null });
+  } catch (error) {
+    console.error('Error al consultar estado compartido:', error);
+    return res.status(500).json({ error: 'Ocurrió un error al consultar el estado compartido.' });
+  }
+});
+
+app.put('/api/estado', async (req: Request, res: Response) => {
+  try {
+    if (!supabase) {
+      return res.status(503).json({ error: 'Supabase no está configurado en el servidor.' });
+    }
+    const { expedientes, agendaMagistrados } = req.body ?? {};
+    if (!Array.isArray(expedientes) || !Array.isArray(agendaMagistrados)) {
+      return res.status(400).json({ error: 'El estado debe incluir expedientes y agendaMagistrados como listas.' });
+    }
+
+    const { error } = await supabase
+      .from('cej1_datos_compartidos')
+      .upsert({
+        clave: 'principal',
+        contenido: { expedientes, agendaMagistrados },
+        actualizado_en: new Date().toISOString(),
+      }, { onConflict: 'clave' });
+
+    if (error) {
+      console.error('Error al guardar estado compartido:', error.message);
+      return res.status(500).json({ error: 'No se pudo guardar el estado compartido.' });
+    }
+    return res.json({ guardado: true });
+  } catch (error) {
+    console.error('Error al guardar estado compartido:', error);
+    return res.status(500).json({ error: 'Ocurrió un error al guardar el estado compartido.' });
+  }
+});
+
 const upload = multer({
   storage: multer.memoryStorage(),
   limits: { fileSize: 20 * 1024 * 1024 },
