@@ -128,6 +128,12 @@ export const ResolutionCard: React.FC<ResolutionCardProps> = ({
         </p>
 
         {/* Automatic Barcode and QR Code generated for this Actuado */}
+        {resolucion.ccv && (
+          <div className="mb-3 flex flex-wrap items-center gap-2 rounded-lg border border-sky-200 bg-white px-3 py-2 text-xs">
+            <span className="font-bold uppercase tracking-wide text-slate-600">CCV:</span>
+            <span className="font-mono font-bold text-[#0c4a6e]">{resolucion.ccv}</span>
+          </div>
+        )}
         <BarcodeAndQr
           codigoTexto={resolucion.codigoBarras || `PJ-${expedienteNumero}-${String(resolucion.numero).padStart(3, '0')}`}
           qrData={
