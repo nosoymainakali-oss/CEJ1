@@ -108,6 +108,7 @@ export const AgendaJudicialCalendario: React.FC<Props> = ({ agenda, idioma, esEd
             <p className="text-xs font-bold uppercase tracking-widest text-rose-800">Poder Judicial del Perú</p>
             <h2 className="text-lg font-black uppercase text-slate-900 sm:text-xl">Agenda Judicial</h2>
             <p className="text-xs font-semibold text-slate-600">Distrito Judicial de Puno · Código 2101</p>
+            <p className="mt-1 inline-flex rounded-md border border-amber-300 bg-amber-50 px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-amber-900">Agenda demostrativa · expedientes y diligencias ficticios</p>
           </div>
         </div>
         <img src="/logo-una-puno.png" alt="Logotipo de la Universidad Nacional del Altiplano de Puno" className="h-14 w-14 rounded-full border border-rose-200 bg-white object-contain p-0.5" />
