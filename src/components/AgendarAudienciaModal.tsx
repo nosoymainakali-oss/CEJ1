@@ -32,7 +32,7 @@ export const AgendarAudienciaModal: React.FC<AgendarAudienciaModalProps> = ({
   const hoy = `${fechaActual.getFullYear()}-${String(fechaActual.getMonth()+1).padStart(2,'0')}-${String(fechaActual.getDate()).padStart(2,'0')}`;
   const [fecha, setFecha] = useState(hoy);
   const [hora, setHora] = useState('10:00');
-  const [tipo, setTipo] = useState<'AUDIENCIA' | 'VISTA_DE_LA_CAUSA' | 'INFORME_ORAL' | 'DILIGENCIA_EXTERNA'>('AUDIENCIA');
+  const [tipo, setTipo] = useState('AUDIENCIA ÚNICA DE JUZGAMIENTO');
   const [descripcion, setDescripcion] = useState(
     ''
   );
@@ -128,16 +128,14 @@ export const AgendarAudienciaModal: React.FC<AgendarAudienciaModalProps> = ({
             <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
               Tipo de Diligencia:
             </label>
-            <select
+            <input
+              type="text"
               value={tipo}
-              onChange={(e) => setTipo(e.target.value as any)}
+              onChange={(e) => setTipo(e.target.value)}
+              placeholder="Ej.: AUDIENCIA ÚNICA, VISTA DE LA CAUSA, INSPECCIÓN JUDICIAL..."
               className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs font-bold text-slate-900"
-            >
-              <option value="AUDIENCIA">AUDIENCIA ÚNICA DE JUZGAMIENTO</option>
-              <option value="VISTA_DE_LA_CAUSA">VISTA DE LA CAUSA</option>
-              <option value="INFORME_ORAL">INFORME ORAL</option>
-              <option value="DILIGENCIA_EXTERNA">INSPECCIÓN JUDICIAL / DILIGENCIA EXTERNA</option>
-            </select>
+              required
+            />
           </div>
 
           <div>
