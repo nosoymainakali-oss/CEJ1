@@ -145,8 +145,11 @@ export const Header: React.FC<HeaderProps> = ({
       {/* Main Bar */}
       <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-3">
         <div className="flex items-center gap-3">
-          <div className="w-11 h-11 bg-white text-[#0284c7] rounded-xl flex items-center justify-center shadow-md border-2 border-sky-300 shrink-0">
-            <Scale className="w-6 h-6" />
+          <div className="w-14 h-14 bg-white rounded-xl flex items-center justify-center shadow-md border-2 border-slate-200 shrink-0 p-1.5" aria-label="Logotipo del Poder Judicial del Perú">
+            <div className="w-full h-full border-2 border-[#8f1838] rounded-md flex flex-col items-center justify-center text-[#8f1838] leading-none">
+              <span className="text-xl font-black tracking-tight">PJ</span>
+              <span className="text-[5px] font-bold tracking-tight text-center mt-0.5">PODER JUDICIAL</span>
+            </div>
           </div>
 
           <div>
