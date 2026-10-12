@@ -264,15 +264,15 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
             </p>
           </div>
 
-          {/* Access Tabs: Ciudadano, Servidor Judicial, y Pestaña Granate EL JUEZ TE ESCUCHA */}
-          <div className="flex flex-wrap border-b border-sky-200 bg-sky-50/70 p-1.5 gap-1.5">
+          {/* Accesos de autenticación: solo ciudadano y servidor judicial */}
+          <div className="grid grid-cols-2 border-b border-sky-200 bg-sky-50/70 p-1.5 gap-1.5">
             <button
               type="button"
               onClick={() => {
                 setTipoAcceso('ciudadano');
                 setErrorCiudadano('');
               }}
-              className={`flex-1 py-2.5 px-2 rounded-lg text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition cursor-pointer min-w-[110px] ${
+              className={`py-2.5 px-2 rounded-lg text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition cursor-pointer min-w-0 ${
                 tipoAcceso === 'ciudadano'
                   ? 'bg-white text-[#0369a1] shadow-sm border border-sky-200'
                   : 'text-slate-600 hover:text-[#0369a1] hover:bg-white/50'
@@ -288,7 +288,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
                 setTipoAcceso('servidor');
                 setErrorServidor('');
               }}
-              className={`flex-1 py-2.5 px-2 rounded-lg text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition cursor-pointer min-w-[110px] ${
+              className={`py-2.5 px-2 rounded-lg text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition cursor-pointer min-w-0 ${
                 tipoAcceso === 'servidor'
                   ? 'bg-white text-[#0369a1] shadow-sm border border-sky-200'
                   : 'text-slate-600 hover:text-[#0369a1] hover:bg-white/50'
@@ -297,8 +297,21 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
               <Lock className="w-4 h-4 text-sky-700" />
               <span>Servidor Judicial</span>
             </button>
+          </div>
 
-            {/* BOTÓN MORADO: AGENDA JUDICIAL */}
+          {/* Accesos directos: ambos botones van juntos en una fila independiente */}
+          <div className="flex flex-wrap items-center justify-center gap-2 border-b border-sky-200 bg-white px-3 py-3">
+            {onAbrirJuezTeEscucha && (
+              <button
+                type="button"
+                onClick={onAbrirJuezTeEscucha}
+                className="flex-1 min-w-[180px] py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition cursor-pointer bg-[#881337] hover:bg-[#9f1239] text-white shadow-sm border border-rose-300"
+                title="Sacar cita con el Juez - Módulo El Juez Te Escucha"
+              >
+                <Scale className="w-4 h-4 text-rose-200" />
+                <span className="uppercase tracking-wider font-black">EL JUEZ TE ESCUCHA</span>
+              </button>
+            )}
             {onAbrirAgendaJudicial && (
               <button
                 type="button"
@@ -307,24 +320,11 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
                   setTipoAcceso('servidor');
                   setErrorServidor('');
                 }}
-                className="py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition cursor-pointer bg-rose-800 hover:bg-rose-900 text-white shadow-sm border border-rose-300 shrink-0"
+                className="flex-1 min-w-[180px] py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition cursor-pointer bg-rose-800 hover:bg-rose-900 text-white shadow-sm border border-rose-300"
                 title="Consultar la agenda de audiencias y diligencias de cada magistrado"
               >
                 <CalendarDays className="w-4 h-4 text-rose-200" />
                 <span className="uppercase tracking-wider font-black">{accesoAgendaPendiente ? 'VALIDAR ACCESO A AGENDA' : 'AGENDA JUDICIAL'}</span>
-              </button>
-            )}
-
-            {/* PESTAÑA GRANATE: EL JUEZ TE ESCUCHA */}
-            {onAbrirJuezTeEscucha && (
-              <button
-                type="button"
-                onClick={onAbrirJuezTeEscucha}
-                className="py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition cursor-pointer bg-[#881337] hover:bg-[#9f1239] text-white shadow-sm border border-rose-300 shrink-0"
-                title="Sacar cita con el Juez - Módulo El Juez Te Escucha"
-              >
-                <Scale className="w-4 h-4 text-rose-200" />
-                <span className="uppercase tracking-wider font-black">EL JUEZ TE ESCUCHA</span>
               </button>
             )}
           </div>
