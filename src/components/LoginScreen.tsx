@@ -85,6 +85,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
   const [usuarioServidor, setUsuarioServidor] = useState('');
   const [passwordServidor, setPasswordServidor] = useState('');
   const [errorServidor, setErrorServidor] = useState('');
+  const [accesoAgendaPendiente, setAccesoAgendaPendiente] = useState(false);
 
   // Random 5-char judicial captcha
   const regenerarCaptcha = () => {
@@ -215,6 +216,10 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
         nombreUsuario: 'EDUARDO LUISMARIO MEDINA HUMPIRI',
         dniUsuario: '75412933',
       });
+      if (accesoAgendaPendiente) {
+        onAbrirAgendaJudicial?.();
+        setAccesoAgendaPendiente(false);
+      }
     } else {
       setErrorServidor('Credenciales incorrectas. Verifique el usuario y la contraseña del servidor judicial.');
     }
@@ -297,12 +302,16 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
             {onAbrirAgendaJudicial && (
               <button
                 type="button"
-                onClick={onAbrirAgendaJudicial}
-                className="py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition cursor-pointer bg-purple-700 hover:bg-purple-800 text-white shadow-sm border border-purple-300 shrink-0"
+                onClick={() => {
+                  setAccesoAgendaPendiente(true);
+                  setTipoAcceso('servidor');
+                  setErrorServidor('');
+                }}
+                className="py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition cursor-pointer bg-rose-800 hover:bg-rose-900 text-white shadow-sm border border-rose-300 shrink-0"
                 title="Consultar la agenda de audiencias y diligencias de cada magistrado"
               >
-                <CalendarDays className="w-4 h-4 text-purple-200" />
-                <span className="uppercase tracking-wider font-black">AGENDA JUDICIAL</span>
+                <CalendarDays className="w-4 h-4 text-rose-200" />
+                <span className="uppercase tracking-wider font-black">{accesoAgendaPendiente ? 'VALIDAR ACCESO A AGENDA' : 'AGENDA JUDICIAL'}</span>
               </button>
             )}
 
@@ -547,7 +556,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
                   className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-[#0c4a6e] hover:bg-[#0369a1] text-white font-bold text-sm rounded-lg shadow-md hover:shadow-lg transition cursor-pointer"
                 >
                   <Lock className="w-4 h-4 text-sky-300" />
-                  <span>Iniciar Sesión como Servidor Judicial</span>
+                  <span>{accesoAgendaPendiente ? 'Ingresar a Agenda Judicial' : 'Iniciar Sesión como Servidor Judicial'}</span>
                 </button>
               </form>
             </div>
