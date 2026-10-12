@@ -8,13 +8,15 @@ import {
   Scale, 
   ArrowRight,
   RefreshCw,
-  FileCheck
+  FileCheck,
+  CalendarDays
 } from 'lucide-react';
 import { RolUsuario } from '../types/judicial';
 
 interface LoginScreenProps {
   onLoginExitoso: (datos: { rol: RolUsuario; nombreUsuario: string; dniUsuario: string }) => void;
   onAbrirJuezTeEscucha?: () => void;
+  onAbrirAgendaJudicial?: () => void;
 }
 
 type TipoDocumento = 'DNI' | 'PASAPORTE' | 'CARNET_EXTRANJERIA';
@@ -63,7 +65,8 @@ function generarNombreCiudadano(doc: string, tipo: TipoDocumento): string {
 
 export const LoginScreen: React.FC<LoginScreenProps> = ({ 
   onLoginExitoso,
-  onAbrirJuezTeEscucha
+  onAbrirJuezTeEscucha,
+  onAbrirAgendaJudicial
 }) => {
   const [tipoAcceso, setTipoAcceso] = useState<'ciudadano' | 'servidor'>('ciudadano');
 
@@ -289,6 +292,19 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
               <Lock className="w-4 h-4 text-sky-700" />
               <span>Servidor Judicial</span>
             </button>
+
+            {/* BOTÓN MORADO: AGENDA JUDICIAL */}
+            {onAbrirAgendaJudicial && (
+              <button
+                type="button"
+                onClick={onAbrirAgendaJudicial}
+                className="py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition cursor-pointer bg-purple-700 hover:bg-purple-800 text-white shadow-sm border border-purple-300 shrink-0"
+                title="Consultar la agenda de audiencias y diligencias de cada magistrado"
+              >
+                <CalendarDays className="w-4 h-4 text-purple-200" />
+                <span className="uppercase tracking-wider font-black">AGENDA JUDICIAL</span>
+              </button>
+            )}
 
             {/* PESTAÑA GRANATE: EL JUEZ TE ESCUCHA */}
             {onAbrirJuezTeEscucha && (
