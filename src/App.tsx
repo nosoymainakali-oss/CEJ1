@@ -39,6 +39,7 @@ import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { LoginScreen } from './components/LoginScreen';
 import { SearchPortalView } from './components/SearchPortalView';
+import { AgendaMagistradosAdmin } from './components/AgendaMagistradosAdmin';
 import { TimelineProcess } from './components/TimelineProcess';
 import { ResolutionCard } from './components/ResolutionCard';
 import { DeadlineCalculatorModal } from './components/DeadlineCalculatorModal';
@@ -88,7 +89,8 @@ export default function App() {
   // Global Language State: Español ('es'), Quechua ('qu'), Aimara ('ay')
   const [idioma, setIdioma] = useState<Idioma>(() => {
     if (typeof window !== 'undefined') {
-      return (localStorage.getItem('sjd_idioma') as Idioma) || 'es';
+      const guardado = localStorage.getItem('sjd_idioma');
+      return ['es', 'qu', 'ay', 'en', 'de', 'fr'].includes(guardado || '') ? guardado as Idioma : 'es';
     }
     return 'es';
   });
@@ -165,6 +167,7 @@ export default function App() {
 
   // Modal para que el Servidor Judicial anote diligencias en la agenda del Juez
   const [modalAgendarAudiencia, setModalAgendarAudiencia] = useState(false);
+  const [administracionAgendaAbierta, setAdministracionAgendaAbierta] = useState(false);
 
   // Guardar agenda de magistrados
   useEffect(() => {
@@ -799,15 +802,26 @@ export default function App() {
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-6">
         {/* VISTA 1: BÚSQUEDA EXCLUSIVA (Displayed directly after login) */}
         {vistaActual === 'busqueda' && (
-          <SearchPortalView
-            expedientes={expedientes}
-            expedientePrincipal={expedientePrincipal}
-            onSeleccionarExpediente={handleSeleccionarExpedienteDesdeBusqueda}
-            rol={rol}
-            nombreUsuario={nombreUsuario}
-            idioma={idioma}
-            agendaMagistrados={agendaMagistrados}
-          />
+          administracionAgendaAbierta ? (
+            <AgendaMagistradosAdmin
+              agenda={agendaMagistrados}
+              idioma={idioma}
+              onVolver={() => setAdministracionAgendaAbierta(false)}
+              onGuardar={setAgendaMagistrados}
+            />
+          ) : (
+            <SearchPortalView
+              expedientes={expedientes}
+              expedientePrincipal={expedientePrincipal}
+              onSeleccionarExpediente={handleSeleccionarExpedienteDesdeBusqueda}
+              rol={rol}
+              nombreUsuario={nombreUsuario}
+              idioma={idioma}
+              agendaMagistrados={agendaMagistrados}
+              onAbrirAdministracionAgenda={() => setAdministracionAgendaAbierta(true)}
+              onAbrirJuezTeEscucha={() => { setAdministracionAgendaAbierta(false); setVistaActual('juez_te_escucha'); }}
+            />
+          )
         )}
 
         {/* VISTA 2: CALCULADORA DE PLAZOS STANDALONE */}
