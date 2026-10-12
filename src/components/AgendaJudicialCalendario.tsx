@@ -21,11 +21,11 @@ const LOCALES: Record<Idioma, string> = { es: 'es-PE', qu: 'es-PE', ay: 'es-PE',
 
 // Un color por magistrado, para distinguir su agenda dentro del calendario.
 const COLORES = [
-  { chip: 'bg-purple-100 text-purple-900 border-purple-300', punto: 'bg-purple-600' },
+  { chip: 'bg-red-100 text-red-900 border-red-300', punto: 'bg-red-600' },
   { chip: 'bg-sky-100 text-sky-900 border-sky-300', punto: 'bg-sky-600' },
   { chip: 'bg-emerald-100 text-emerald-900 border-emerald-300', punto: 'bg-emerald-600' },
   { chip: 'bg-amber-100 text-amber-900 border-amber-300', punto: 'bg-amber-600' },
-  { chip: 'bg-rose-100 text-rose-900 border-rose-300', punto: 'bg-rose-600' },
+  { chip: 'bg-violet-100 text-violet-900 border-violet-300', punto: 'bg-violet-600' },
   { chip: 'bg-teal-100 text-teal-900 border-teal-300', punto: 'bg-teal-600' },
 ] as const;
 
@@ -101,20 +101,20 @@ export const AgendaJudicialCalendario: React.FC<Props> = ({ agenda, idioma, esEd
 
   return (
     <div className="mx-auto max-w-6xl space-y-5">
-      <section className="overflow-hidden rounded-2xl border-2 border-purple-300 bg-white shadow-md">
+      <section className="overflow-hidden rounded-2xl border-2 border-red-300 bg-white shadow-md">
         {/* Encabezado */}
-        <header className="flex flex-wrap items-center justify-between gap-3 bg-gradient-to-r from-purple-800 to-purple-600 px-5 py-4 text-white">
+        <header className="flex flex-wrap items-center justify-between gap-3 bg-gradient-to-r from-red-800 to-red-600 px-5 py-4 text-white">
           <div className="flex items-center gap-3">
             <span className="rounded-lg bg-white/15 p-2"><CalendarDays className="h-6 w-6" /></span>
             <div>
               <h1 className="text-lg font-black uppercase tracking-wide sm:text-xl">{t.agendaJudicial}</h1>
-              <p className="text-xs text-purple-100">{t.agendaProgramadas}</p>
+              <p className="text-xs text-red-100">{t.agendaProgramadas}</p>
             </div>
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <span className="rounded-lg bg-white/15 px-3 py-1 text-xs font-bold">{visibles.length} {t.registros}</span>
             {esEditor && onAdministrar && (
-              <button type="button" onClick={onAdministrar} className="flex items-center gap-2 rounded-lg bg-white px-3 py-2 text-xs font-bold text-purple-800 hover:bg-purple-50">
+              <button type="button" onClick={onAdministrar} className="flex items-center gap-2 rounded-lg bg-white px-3 py-2 text-xs font-bold text-red-800 hover:bg-red-50">
                 <Settings2 className="h-4 w-4" />{t.administrarAgenda}
               </button>
             )}
@@ -122,16 +122,16 @@ export const AgendaJudicialCalendario: React.FC<Props> = ({ agenda, idioma, esEd
         </header>
 
         {/* Controles: mes y filtro por magistrado */}
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-purple-100 bg-purple-50/60 px-4 py-3">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-red-100 bg-red-50/60 px-4 py-3">
           <div className="flex items-center gap-2">
-            <button type="button" onClick={() => cambiarMes(-1)} aria-label={x.anterior} title={x.anterior} className="rounded-lg border border-purple-200 bg-white p-2 text-purple-800 hover:bg-purple-100"><ChevronLeft className="h-4 w-4" /></button>
+            <button type="button" onClick={() => cambiarMes(-1)} aria-label={x.anterior} title={x.anterior} className="rounded-lg border border-red-200 bg-white p-2 text-red-800 hover:bg-red-100"><ChevronLeft className="h-4 w-4" /></button>
             <h2 className="min-w-[10rem] text-center text-base font-black text-slate-900 sm:text-lg">{nombreMes}</h2>
-            <button type="button" onClick={() => cambiarMes(1)} aria-label={x.siguiente} title={x.siguiente} className="rounded-lg border border-purple-200 bg-white p-2 text-purple-800 hover:bg-purple-100"><ChevronRight className="h-4 w-4" /></button>
-            <button type="button" onClick={irAHoy} className="ml-1 rounded-lg border border-purple-200 bg-white px-3 py-2 text-xs font-bold text-purple-800 hover:bg-purple-100">{x.hoy}</button>
+            <button type="button" onClick={() => cambiarMes(1)} aria-label={x.siguiente} title={x.siguiente} className="rounded-lg border border-red-200 bg-white p-2 text-red-800 hover:bg-red-100"><ChevronRight className="h-4 w-4" /></button>
+            <button type="button" onClick={irAHoy} className="ml-1 rounded-lg border border-red-200 bg-white px-3 py-2 text-xs font-bold text-red-800 hover:bg-red-100">{x.hoy}</button>
           </div>
           <label className="flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-slate-700">
             <span>{x.magistrado}:</span>
-            <select value={filtro} onChange={(e) => { setFiltro(e.target.value); setDiaSel(null); }} className="max-w-[16rem] rounded-lg border border-purple-200 bg-white px-3 py-2 text-sm font-semibold normal-case text-slate-900 focus:border-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-100">
+            <select value={filtro} onChange={(e) => { setFiltro(e.target.value); setDiaSel(null); }} className="max-w-[16rem] rounded-lg border border-red-200 bg-white px-3 py-2 text-sm font-semibold normal-case text-slate-900 focus:border-red-600 focus:outline-none focus:ring-2 focus:ring-red-100">
               <option value="">{x.todos}</option>
               {magistrados.map((m) => <option key={m} value={m}>{m}</option>)}
             </select>
@@ -140,12 +140,12 @@ export const AgendaJudicialCalendario: React.FC<Props> = ({ agenda, idioma, esEd
 
         {/* Calendario */}
         <div className="p-2 sm:p-4">
-          <div className="grid grid-cols-7 gap-px overflow-hidden rounded-xl border border-purple-200 bg-purple-200">
+          <div className="grid grid-cols-7 gap-px overflow-hidden rounded-xl border border-red-200 bg-red-200">
             {diasSemana.map((d, i) => (
-              <div key={i} className="bg-purple-700 py-2 text-center text-[11px] font-black uppercase tracking-wide text-white sm:text-xs">{d}</div>
+              <div key={i} className="bg-red-700 py-2 text-center text-[11px] font-black uppercase tracking-wide text-white sm:text-xs">{d}</div>
             ))}
             {celdas.map((dia, i) => {
-              if (dia === null) return <div key={i} className="min-h-[3.5rem] bg-slate-50 sm:min-h-[6.5rem]" />;
+              if (dia === null) return <div key={i} className="min-h-[3.5rem] bg-slate-50 sm:min-h-[9.5rem]" />;
               const k = clave(mes.y, mes.m, dia);
               const eventos = porDia[k] || [];
               const esHoy = k === hoy;
@@ -155,20 +155,21 @@ export const AgendaJudicialCalendario: React.FC<Props> = ({ agenda, idioma, esEd
                   type="button"
                   key={i}
                   onClick={() => setDiaSel(seleccionado ? null : k)}
-                  className={`flex min-h-[3.5rem] flex-col items-stretch gap-1 bg-white p-1 text-left transition hover:bg-purple-50 sm:min-h-[6.5rem] sm:p-1.5 ${seleccionado ? 'ring-2 ring-inset ring-purple-600' : ''}`}
+                  className={`flex min-h-[3.5rem] flex-col items-stretch gap-1 bg-white p-1 text-left transition hover:bg-red-50 sm:min-h-[9.5rem] sm:p-1.5 ${seleccionado ? 'ring-2 ring-inset ring-red-600' : ''}`}
                 >
-                  <span className={`flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold sm:text-sm ${esHoy ? 'bg-purple-700 text-white' : 'text-slate-800'}`}>{dia}</span>
+                  <span className={`flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold sm:text-sm ${esHoy ? 'bg-red-700 text-white' : 'text-slate-800'}`}>{dia}</span>
                   {/* Móvil: puntos de color; escritorio: etiquetas con hora */}
                   <span className="flex flex-wrap gap-0.5 sm:hidden">
                     {eventos.slice(0, 4).map((e) => <span key={e.id} className={`h-2 w-2 rounded-full ${colorDe(e.magistrado).punto}`} />)}
                   </span>
-                  <span className="hidden flex-col gap-0.5 sm:flex">
+                  <span className="hidden flex-col gap-1 sm:flex">
                     {eventos.slice(0, 2).map((e) => (
-                      <span key={e.id} className={`truncate rounded border px-1 py-0.5 text-[10px] font-bold leading-tight ${colorDe(e.magistrado).chip}`} title={`${e.hora} · ${e.magistrado}`}>
-                        {e.hora} {e.magistrado.split(' ').slice(-2).join(' ')}
+                      <span key={e.id} className={`rounded border px-1.5 py-1 leading-tight ${colorDe(e.magistrado).chip}`} title={`${e.hora} · ${e.magistrado}`}>
+                        <span className="block text-[11px] font-semibold">{e.hora}</span>
+                        <span className="block break-words text-xs font-black">{e.magistrado}</span>
                       </span>
                     ))}
-                    {eventos.length > 2 && <span className="text-[10px] font-bold text-purple-800">+{eventos.length - 2} {x.mas}</span>}
+                    {eventos.length > 2 && <span className="text-xs font-black text-red-800">+{eventos.length - 2} {x.mas}</span>}
                   </span>
                 </button>
               );
@@ -176,29 +177,29 @@ export const AgendaJudicialCalendario: React.FC<Props> = ({ agenda, idioma, esEd
           </div>
 
           {magistrados.length > 0 && (
-            <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-700">
-              <span className="font-bold uppercase tracking-wide">{x.leyenda}:</span>
+            <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-slate-800">
+              <span className="font-black uppercase tracking-wide">{x.leyenda}:</span>
               {magistrados.map((m) => (
-                <span key={m} className="flex items-center gap-1.5"><span className={`h-2.5 w-2.5 rounded-full ${colorDe(m).punto}`} />{m}</span>
+                <span key={m} className="flex items-center gap-2 font-bold"><span className={`h-3.5 w-3.5 rounded-full ${colorDe(m).punto}`} />{m}</span>
               ))}
             </div>
           )}
         </div>
 
         {/* Detalle del día seleccionado o del mes */}
-        <div className="border-t border-purple-100 bg-purple-50/40 p-4 sm:p-5">
-          <h3 className="mb-3 text-sm font-black uppercase tracking-wide text-purple-900">{tituloDetalle}</h3>
+        <div className="border-t border-red-100 bg-red-50/40 p-4 sm:p-5">
+          <h3 className="mb-3 text-sm font-black uppercase tracking-wide text-red-900">{tituloDetalle}</h3>
           {!diaSel && delMes.length > 0 && <p className="mb-3 text-xs text-slate-600">{x.elegirDia}</p>}
           {detalle.length === 0 ? (
             <p className="text-sm text-slate-500">{t.sinDiligencias}</p>
           ) : (
             <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
               {detalle.map((d) => (
-                <article key={d.id} className="rounded-xl border border-purple-200 bg-white p-4">
+                <article key={d.id} className="rounded-xl border border-red-200 bg-white p-4">
                   <div className="flex flex-wrap items-start justify-between gap-2">
                     <div>
-                      <p className="text-[10px] font-bold uppercase tracking-wider text-purple-700">{d.tipo.replace(/_/g, ' ')}</p>
-                      <h4 className="mt-1 text-sm font-bold text-slate-900">{d.magistrado}</h4>
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-red-700">{d.tipo.replace(/_/g, ' ')}</p>
+                      <h4 className="mt-1 text-base font-black text-slate-900 sm:text-lg">{d.magistrado}</h4>
                     </div>
                     <span className={`rounded-lg border px-2.5 py-1 text-xs font-bold ${colorDe(d.magistrado).chip}`}>
                       {d.fecha.split('-').reverse().join('/')} · {d.hora}

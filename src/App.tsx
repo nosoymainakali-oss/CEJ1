@@ -41,6 +41,7 @@ import { LoginScreen } from './components/LoginScreen';
 import { SearchPortalView } from './components/SearchPortalView';
 import { AgendaMagistradosAdmin } from './components/AgendaMagistradosAdmin';
 import { AgendaJudicialCalendario } from './components/AgendaJudicialCalendario';
+import { DILIGENCIAS_CIVILES_PUNO, PREFIJO_SEMILLA_CIVIL } from './data/agendaCivilPuno';
 import { TimelineProcess } from './components/TimelineProcess';
 import { ResolutionCard } from './components/ResolutionCard';
 import { DeadlineCalculatorModal } from './components/DeadlineCalculatorModal';
@@ -255,6 +256,22 @@ export default function App() {
     };
     void guardarEstadoCompartido();
   }, [estadoCompartidoListo, expedientes, agendaMagistrados]);
+
+  // Incorpora una sola vez las diligencias civiles de ejemplo de Puno (2101) a la agenda existente,
+  // sin reemplazar lo ya guardado. Si el editor las elimina, no se vuelven a agregar en este equipo.
+  useEffect(() => {
+    if (!estadoCompartidoListo) return;
+    const clave = 'sjd_agenda_semilla_civil_v1';
+    try {
+      if (localStorage.getItem(clave) === 'true') return;
+      localStorage.setItem(clave, 'true');
+    } catch {
+      // Sin almacenamiento local: se continúa y se evita duplicar por identificador.
+    }
+    setAgendaMagistrados((prev) =>
+      prev.some((d) => d.id.startsWith(PREFIJO_SEMILLA_CIVIL)) ? prev : [...prev, ...DILIGENCIAS_CIVILES_PUNO]
+    );
+  }, [estadoCompartidoListo]);
 
   // Accessibility State (High Contrast)
   const [altoContraste, setAltoContraste] = useState(false);
@@ -762,12 +779,12 @@ export default function App() {
     if (vistaActual === 'agenda_judicial') {
       return (
         <div className="min-h-screen bg-slate-50 flex flex-col font-arial" style={{ fontFamily: 'Arial, sans-serif' }}>
-          <div className="bg-purple-800 text-white py-2.5 px-4 border-b border-purple-400/40">
+          <div className="bg-red-800 text-white py-2.5 px-4 border-b border-red-400/40">
             <div className="max-w-6xl mx-auto flex items-center justify-between text-xs">
               <span className="font-bold uppercase tracking-wide">{DICCIONARIO[idioma].agendaJudicial}</span>
               <button
                 onClick={() => setVistaActual('busqueda')}
-                className="underline text-purple-200 hover:text-white"
+                className="underline text-red-200 hover:text-white"
               >
                 Volver al Acceso Ciudadano
               </button>

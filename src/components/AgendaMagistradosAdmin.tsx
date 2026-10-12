@@ -50,17 +50,17 @@ export const AgendaMagistradosAdmin: React.FC<Props> = ({ agenda, idioma, onVolv
   const eliminar = (id: string) => {
     if (window.confirm(t.confirm)) onGuardar(agenda.filter(d => d.id !== id));
   };
-  const campo = 'w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 focus:border-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-100';
+  const campo = 'w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 focus:border-red-600 focus:outline-none focus:ring-2 focus:ring-red-100';
   const etiqueta = 'mb-1 block text-xs font-bold uppercase tracking-wide text-slate-700';
 
   return <div className="mx-auto max-w-6xl space-y-5">
-    <button type="button" onClick={onVolver} className="flex items-center gap-2 text-sm font-bold text-sky-800 hover:text-sky-600"><ArrowLeft className="h-4 w-4" />{t.back}</button>
-    <section className="overflow-hidden rounded-2xl border border-sky-200 bg-white shadow-md">
-      <header className="flex flex-wrap items-center justify-between gap-3 bg-[#0c4a6e] px-5 py-4 text-white">
-        <div className="flex items-center gap-3"><CalendarDays className="h-7 w-7 text-sky-200" /><div><h1 className="text-lg font-black">{t.title}</h1><p className="mt-1 text-xs text-sky-100">{t.desc}</p></div></div>
-        <div className="flex items-center gap-3"><span className="text-xs">{agenda.length} {t.count}</span><button type="button" onClick={iniciarNuevo} className="flex items-center gap-2 rounded-lg bg-white px-3 py-2 text-xs font-bold text-[#0c4a6e] hover:bg-sky-50"><Plus className="h-4 w-4" />{t.add}</button></div>
+    <button type="button" onClick={onVolver} className="flex items-center gap-2 text-sm font-bold text-red-800 hover:text-red-600"><ArrowLeft className="h-4 w-4" />{t.back}</button>
+    <section className="overflow-hidden rounded-2xl border border-red-200 bg-white shadow-md">
+      <header className="flex flex-wrap items-center justify-between gap-3 bg-red-800 px-5 py-4 text-white">
+        <div className="flex items-center gap-3"><CalendarDays className="h-7 w-7 text-red-200" /><div><h1 className="text-lg font-black">{t.title}</h1><p className="mt-1 text-xs text-red-100">{t.desc}</p></div></div>
+        <div className="flex items-center gap-3"><span className="text-xs">{agenda.length} {t.count}</span><button type="button" onClick={iniciarNuevo} className="flex items-center gap-2 rounded-lg bg-white px-3 py-2 text-xs font-bold text-red-800 hover:bg-red-50"><Plus className="h-4 w-4" />{t.add}</button></div>
       </header>
-      {formAbierto && <form onSubmit={guardar} className="space-y-4 border-b border-slate-200 bg-sky-50/60 p-5">
+      {formAbierto && <form onSubmit={guardar} className="space-y-4 border-b border-slate-200 bg-red-50/60 p-5">
         <h2 className="font-bold text-slate-900">{editando ? t.edit : t.add}</h2>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           <label><span className={etiqueta}>{t.judge}</span><input className={campo} value={form.magistrado} onChange={e => setForm({...form, magistrado:e.target.value})} required /></label>
@@ -70,12 +70,12 @@ export const AgendaMagistradosAdmin: React.FC<Props> = ({ agenda, idioma, onVolv
           <label className="sm:col-span-2"><span className={etiqueta}>{t.type}</span><input className={campo} value={form.tipo} onChange={e => setForm({...form, tipo:e.target.value})} required /></label>
           <label className="sm:col-span-2"><span className={etiqueta}>{t.description}</span><textarea rows={3} className={campo} value={form.descripcion} onChange={e => setForm({...form, descripcion:e.target.value})} required /></label>
         </div>
-        <div className="flex justify-end gap-2"><button type="button" onClick={() => setFormAbierto(false)} className="flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-bold text-slate-700"><X className="h-4 w-4" />{t.cancel}</button><button type="submit" className="flex items-center gap-1 rounded-lg bg-[#0284c7] px-4 py-2 text-sm font-bold text-white hover:bg-[#0369a1]"><Save className="h-4 w-4" />{t.save}</button></div>
+        <div className="flex justify-end gap-2"><button type="button" onClick={() => setFormAbierto(false)} className="flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-bold text-slate-700"><X className="h-4 w-4" />{t.cancel}</button><button type="submit" className="flex items-center gap-1 rounded-lg bg-red-700 px-4 py-2 text-sm font-bold text-white hover:bg-red-800"><Save className="h-4 w-4" />{t.save}</button></div>
       </form>}
       {ordenada.length === 0 ? <p className="p-8 text-center text-sm text-slate-500">{t.empty}</p> : <div className="divide-y divide-slate-200">
         {ordenada.map(d => <article key={d.id} className="flex flex-col justify-between gap-3 p-5 sm:flex-row sm:items-start">
-          <div className="min-w-0 flex-1"><p className="text-xs font-bold text-sky-800">{d.fecha} · {d.hora}</p><h3 className="mt-1 font-bold text-slate-900">{d.tipo}</h3><p className="mt-1 text-sm text-slate-700">{d.descripcion}</p><p className="mt-2 text-xs text-slate-500">{t.judge}: <strong>{d.magistrado}</strong>{d.expedienteNomenclatura ? <> · {t.caseNo}: <strong>{d.expedienteNomenclatura}</strong></> : null}</p></div>
-          <div className="flex shrink-0 gap-2"><button type="button" onClick={() => iniciarEdicion(d)} className="flex items-center gap-1 rounded-lg border border-sky-200 px-3 py-2 text-xs font-bold text-sky-800 hover:bg-sky-50"><Pencil className="h-3.5 w-3.5" />{t.change}</button><button type="button" onClick={() => eliminar(d.id)} className="flex items-center gap-1 rounded-lg border border-red-200 px-3 py-2 text-xs font-bold text-red-700 hover:bg-red-50"><Trash2 className="h-3.5 w-3.5" />{t.remove}</button></div>
+          <div className="min-w-0 flex-1"><p className="text-xs font-bold text-red-800">{d.fecha} · {d.hora}</p><h3 className="mt-1 font-bold text-slate-900">{d.tipo}</h3><p className="mt-1 text-sm text-slate-700">{d.descripcion}</p><p className="mt-2 text-sm text-slate-600">{t.judge}: <strong className="text-base font-black text-slate-900">{d.magistrado}</strong>{d.expedienteNomenclatura ? <> · {t.caseNo}: <strong>{d.expedienteNomenclatura}</strong></> : null}</p></div>
+          <div className="flex shrink-0 gap-2"><button type="button" onClick={() => iniciarEdicion(d)} className="flex items-center gap-1 rounded-lg border border-red-200 px-3 py-2 text-xs font-bold text-red-800 hover:bg-red-50"><Pencil className="h-3.5 w-3.5" />{t.change}</button><button type="button" onClick={() => eliminar(d.id)} className="flex items-center gap-1 rounded-lg border border-red-200 px-3 py-2 text-xs font-bold text-red-700 hover:bg-red-50"><Trash2 className="h-3.5 w-3.5" />{t.remove}</button></div>
         </article>)}
       </div>}
     </section>

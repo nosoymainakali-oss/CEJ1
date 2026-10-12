@@ -298,10 +298,10 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
               <button
                 type="button"
                 onClick={onAbrirAgendaJudicial}
-                className="py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition cursor-pointer bg-purple-700 hover:bg-purple-800 text-white shadow-sm border border-purple-300 shrink-0"
+                className="py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition cursor-pointer bg-red-700 hover:bg-red-800 text-white shadow-sm border border-red-300 shrink-0"
                 title="Consultar la agenda de audiencias y diligencias de cada magistrado"
               >
-                <CalendarDays className="w-4 h-4 text-purple-200" />
+                <CalendarDays className="w-4 h-4 text-red-200" />
                 <span className="uppercase tracking-wider font-black">AGENDA JUDICIAL</span>
               </button>
             )}

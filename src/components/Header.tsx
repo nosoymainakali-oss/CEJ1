@@ -224,12 +224,12 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={() => onChangeVista('agenda_judicial')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer border ${
                 vistaActual === 'agenda_judicial'
-                  ? 'bg-purple-700 text-white shadow border-purple-300 font-black'
-                  : 'bg-purple-700/80 hover:bg-purple-700 text-purple-100 border-purple-400/50'
+                  ? 'bg-red-700 text-white shadow border-red-300 font-black'
+                  : 'bg-red-700/80 hover:bg-red-700 text-red-100 border-red-400/50'
               }`}
               title="Agenda de audiencias y diligencias por magistrado"
             >
-              <CalendarDays className="w-3.5 h-3.5 text-purple-200" />
+              <CalendarDays className="w-3.5 h-3.5 text-red-200" />
               <span className="uppercase tracking-wider">{t.agendaJudicial}</span>
             </button>
 
