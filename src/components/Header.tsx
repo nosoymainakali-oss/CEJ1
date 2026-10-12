@@ -181,7 +181,7 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
           )}
 
-          <nav className="flex items-center flex-wrap gap-1.5 bg-[#07334e] p-1 rounded-xl border border-sky-500/40 shadow-inner">
+          <div className="flex flex-col items-center gap-1.5"><nav className="flex items-center justify-center flex-wrap gap-1.5 bg-[#07334e] p-1 rounded-xl border border-sky-500/40 shadow-inner">
             <button
               onClick={() => onChangeVista('busqueda')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer ${
@@ -219,6 +219,8 @@ export const Header: React.FC<HeaderProps> = ({
               <span>{t.pestanaCalculadora}</span>
             </button>
 
+          </nav>
+          <nav className="flex items-center justify-center flex-wrap gap-1.5 rounded-xl border border-rose-300/40 bg-[#07334e] p-1 shadow-inner">
             {/* Pestaña ciudadana: EL JUEZ TE ESCUCHA */}
             {rol !== 'editor' && (
               <button
@@ -241,16 +243,16 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={() => onChangeVista('agenda_judicial')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer border ${
                 vistaActual === 'agenda_judicial'
-                  ? 'bg-purple-700 text-white shadow border-purple-300 font-black'
-                  : 'bg-purple-700/80 hover:bg-purple-700 text-purple-100 border-purple-400/50'
+                  ? 'bg-rose-800 text-white shadow border-rose-300 font-black'
+                  : 'bg-rose-800/80 hover:bg-rose-800 text-rose-100 border-rose-400/50'
               }`}
               title="Agenda de audiencias y diligencias por magistrado"
             >
-              <CalendarDays className="w-3.5 h-3.5 text-purple-200" />
-              <span className="uppercase tracking-wider">{t.agendaJudicial}</span>
+              <CalendarDays className="w-3.5 h-3.5 text-rose-200" />
+              <span className="uppercase tracking-wider text-[10px] sm:text-xs">{t.agendaJudicial}</span>
             </button>
 
-          </nav>
+          </nav></div>
 
           {/* Logo de la Facultad (esquina superior derecha) */}
           <img

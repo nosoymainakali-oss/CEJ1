@@ -123,47 +123,34 @@ export default function App() {
 
   // Agenda de Magistrados sincronizada con los expedientes
   const [agendaMagistrados, setAgendaMagistrados] = useState<DiligenciaAgenda[]>(() => {
+    const diligenciasDemo: DiligenciaAgenda[] = [
+      { id: 'puno-civ-001', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00085-2026-0-2101-JR-CI-01', fecha: '2026-10-14', hora: '09:00', tipo: 'AUDIENCIA', descripcion: 'Audiencia de conciliación y saneamiento procesal en obligación de dar suma de dinero' },
+      { id: 'puno-civ-002', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00126-2026-0-2101-JR-CI-01', fecha: '2026-10-20', hora: '10:30', tipo: 'AUDIENCIA', descripcion: 'Actuación de medios probatorios en proceso de indemnización por daños y perjuicios' },
+      { id: 'puno-civ-003', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00204-2026-0-2101-JR-CI-01', fecha: '2026-10-27', hora: '11:00', tipo: 'DILIGENCIA', descripcion: 'Inspección judicial en proceso de reivindicación de inmueble ubicado en Puno' },
+      { id: 'puno-civ-004', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00140-2026-0-2101-JR-CI-02', fecha: '2026-10-15', hora: '09:30', tipo: 'AUDIENCIA', descripcion: 'Audiencia preliminar para saneamiento procesal y fijación de puntos controvertidos' },
+      { id: 'puno-civ-005', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00318-2026-0-2101-JR-CI-02', fecha: '2026-10-21', hora: '10:00', tipo: 'AUDIENCIA', descripcion: 'Actuación probatoria en proceso de otorgamiento de escritura pública' },
+      { id: 'puno-civ-006', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00407-2026-0-2101-JR-CI-02', fecha: '2026-10-29', hora: '15:00', tipo: 'DILIGENCIA', descripcion: 'Lectura de resolución y comunicación de actuaciones procesales en proceso civil' },
+      { id: 'puno-civ-007', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00221-2026-0-2101-JR-CI-03', fecha: '2026-10-16', hora: '11:00', tipo: 'AUDIENCIA', descripcion: 'Audiencia de conciliación en proceso de desalojo por ocupación precaria' },
+      { id: 'puno-civ-008', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00320-2026-0-2101-JR-CI-03', fecha: '2026-10-23', hora: '09:30', tipo: 'AUDIENCIA', descripcion: 'Actuación probatoria en proceso de prescripción adquisitiva de dominio' },
+      { id: 'puno-civ-009', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00412-2026-0-2101-JR-CI-03', fecha: '2026-10-30', hora: '10:30', tipo: 'DILIGENCIA', descripcion: 'Inspección judicial para verificar linderos y posesión de predio en controversia civil' },
+    ];
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('sjd_agenda_magistrados_v1');
       if (saved) {
         try {
-          return JSON.parse(saved);
+          const guardadas = (JSON.parse(saved) as DiligenciaAgenda[]).map((d) => ({
+            ...d,
+            expedienteNomenclatura: d.expedienteNomenclatura?.replace(/-2111-/g, '-2101-') || '',
+          }));
+          const idsGuardados = new Set(guardadas.map((d) => d.id));
+          return [...diligenciasDemo.filter((d) => !idsGuardados.has(d.id)), ...guardadas.filter((d) => !['aud-001', 'aud-002', 'aud-003'].includes(d.id))];
         } catch (e) {
           console.error(e);
         }
       }
     }
-    return [
-      {
-        id: 'aud-001',
-        magistrado: 'Leydi Karen Quispe Rojas',
-        expedienteNomenclatura: '00140-2026-0-2111-JR-LA-02',
-        fecha: '2026-05-28',
-        hora: '10:30',
-        tipo: 'AUDIENCIA',
-        descripcion: 'Audiencia Única de Juzgamiento - Proceso Laboral CAS a 728',
-      },
-      {
-        id: 'aud-002',
-        magistrado: 'Sebastian Alberto Tapia Tito',
-        expedienteNomenclatura: '00085-2026-0-2111-JR-CI-01',
-        fecha: '2026-10-20',
-        hora: '09:30',
-        tipo: 'AUDIENCIA',
-        descripcion: 'Audiencia Preliminar de Conciliación y Fijación de Puntos Controvertidos',
-      },
-      {
-        id: 'aud-003',
-        magistrado: 'Marco Antonio Ticona Miranda',
-        expedienteNomenclatura: '00320-2026-0-2111-JR-PE-02',
-        fecha: '2026-10-22',
-        hora: '11:00',
-        tipo: 'AUDIENCIA',
-        descripcion: 'Audiencia de Control de Acusación',
-      },
-    ];
+    return diligenciasDemo;
   });
-
   // Modal para que el Servidor Judicial anote diligencias en la agenda del Juez
   const [administracionAgendaAbierta, setAdministracionAgendaAbierta] = useState(false);
 
