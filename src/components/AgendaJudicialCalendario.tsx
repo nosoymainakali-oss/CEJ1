@@ -8,6 +8,7 @@ interface Props {
   idioma: Idioma;
   esEditor?: boolean;
   onAdministrar?: () => void;
+  onVolverInicio?: () => void;
 }
 
 const textos = {
@@ -35,7 +36,7 @@ const hoyClave = () => new Date().toLocaleDateString('en-CA');
 const ordenar = (a: DiligenciaAgenda, b: DiligenciaAgenda) => a.fecha.localeCompare(b.fecha) || a.hora.localeCompare(b.hora);
 const capitalizar = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
-export const AgendaJudicialCalendario: React.FC<Props> = ({ agenda, idioma, esEditor = false, onAdministrar }) => {
+export const AgendaJudicialCalendario: React.FC<Props> = ({ agenda, idioma, esEditor = false, onAdministrar, onVolverInicio }) => {
   const t = DICCIONARIO[idioma];
   const x = textos[idioma as keyof typeof textos] || textos.es;
   const locale = LOCALES[idioma] || 'es-PE';
@@ -109,6 +110,16 @@ export const AgendaJudicialCalendario: React.FC<Props> = ({ agenda, idioma, esEd
             <h2 className="text-lg font-black uppercase text-slate-900 sm:text-xl">Agenda Judicial</h2>
             <p className="text-xs font-semibold text-slate-600">Distrito Judicial de Puno · Código 2101</p>
             <p className="mt-1 inline-flex rounded-md border border-amber-300 bg-amber-50 px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-amber-900">Agenda demostrativa · expedientes y diligencias ficticios</p>
+            {onVolverInicio && (
+              <button
+                type="button"
+                onClick={onVolverInicio}
+                className="mt-3 inline-flex items-center gap-2 rounded-lg border border-rose-700 bg-rose-700 px-4 py-2 text-sm font-bold text-white shadow-sm transition hover:bg-rose-800 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2"
+              >
+                <ChevronLeft className="h-4 w-4" />
+                Volver al inicio
+              </button>
+            )}
           </div>
         </div>
         <img src="/logo-una-puno.png" alt="Logotipo de la Universidad Nacional del Altiplano de Puno" className="h-14 w-14 rounded-full border border-rose-200 bg-white object-contain p-0.5" />
