@@ -26,6 +26,7 @@ export const EditResolucionModal: React.FC<EditResolucionModalProps> = ({
   const [fojas, setFojas] = useState<string>(String(resolucion.fojas ?? ''));
   const [codigoBarras, setCodigoBarras] = useState(resolucion.codigoBarras || '');
   const [codigoQRData, setCodigoQRData] = useState(resolucion.codigoQRData || '');
+  const [ccv, setCcv] = useState(resolucion.ccv || '');
   const [fechaResolucion, setFechaResolucion] = useState(resolucion.fechaResolucion);
   const [fechaNotificacion, setFechaNotificacion] = useState(resolucion.fechaNotificacion);
   const [tipoNotificacion, setTipoNotificacion] = useState<'fisica' | 'electronica'>(
@@ -49,6 +50,7 @@ export const EditResolucionModal: React.FC<EditResolucionModalProps> = ({
       fojas: fojas.trim(),
       codigoBarras: codigoBarras.trim(),
       codigoQRData: codigoQRData.trim(),
+      ccv: ccv.trim(),
       fechaResolucion,
       fechaNotificacion,
       tipoNotificacion,
@@ -185,7 +187,7 @@ export const EditResolucionModal: React.FC<EditResolucionModalProps> = ({
             />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
               <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Código de barras:</label>
               <input type="text" value={codigoBarras} onChange={(e) => setCodigoBarras(e.target.value)} className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-mono text-slate-900" />
@@ -193,6 +195,10 @@ export const EditResolucionModal: React.FC<EditResolucionModalProps> = ({
             <div>
               <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Datos del código QR:</label>
               <textarea rows={2} value={codigoQRData} onChange={(e) => setCodigoQRData(e.target.value)} className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-mono text-slate-900" />
+            </div>
+            <div>
+              <label className="block text-xs font-bold text-slate-700 uppercase mb-1">CCV:</label>
+              <input type="text" value={ccv} onChange={(e) => setCcv(e.target.value)} placeholder="CCV del documento" className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-mono text-slate-900" />
             </div>
           </div>
 
