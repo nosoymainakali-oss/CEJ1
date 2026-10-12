@@ -69,6 +69,7 @@ export interface Resolucion {
   sumilla: string;
   contenidoCompleto: string;
   codigoBarras: string;
+  codigoBarrasImagen?: string;
   codigoQRData?: string;
   ccv?: string;
   archivosAdjuntos: ArchivoAdjunto[];
