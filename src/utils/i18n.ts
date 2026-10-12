@@ -1,4 +1,4 @@
-export type Idioma = 'es' | 'qu' | 'ay';
+export type Idioma = 'es' | 'qu' | 'ay' | 'shp' | 'en' | 'de' | 'fr';
 
 export interface Traducciones {
   institucion: string;
