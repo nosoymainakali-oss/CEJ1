@@ -925,6 +925,7 @@ export default function App() {
               idioma={idioma}
               esEditor={rol === 'editor'}
               onAdministrar={() => setAdministracionAgendaAbierta(true)}
+              onVolverInicio={() => { setAdministracionAgendaAbierta(false); setVistaActual('busqueda'); }}
             />
           )
         )}
