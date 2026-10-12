@@ -130,6 +130,7 @@ export const ResolutionCard: React.FC<ResolutionCardProps> = ({
         {/* Automatic Barcode and QR Code generated for this Actuado */}
         <BarcodeAndQr
           codigoTexto={resolucion.codigoBarras || `PJ-${expedienteNumero}-${String(resolucion.numero).padStart(3, '0')}`}
+          codigoBarrasImagen={resolucion.codigoBarrasImagen}
           qrData={
             resolucion.codigoQRData ||
             `PJ-PERU|EXP:${expedienteNumero}|ACTUADO:${resolucion.numero}|${resolucion.titulo}`
