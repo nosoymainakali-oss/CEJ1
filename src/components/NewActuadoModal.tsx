@@ -34,6 +34,7 @@ export const NewActuadoModal: React.FC<NewActuadoModalProps> = ({
   const [fojas, setFojas] = useState('');
   const [sumilla, setSumilla] = useState('');
   const [contenidoCompleto, setContenidoCompleto] = useState('');
+  const [ccv, setCcv] = useState('');
   
   // Deadlines
   const [abrePlazo, setAbrePlazo] = useState(true);
@@ -65,6 +66,7 @@ export const NewActuadoModal: React.FC<NewActuadoModalProps> = ({
       contenidoCompleto: contenidoCompleto.trim(),
       codigoBarras: codigoBarrasGenerado,
       codigoQRData: codigoQRGenerado,
+      ccv: ccv.trim(),
       archivosAdjuntos: [
         {
           id: `arch-${Date.now()}`,
@@ -214,6 +216,17 @@ export const NewActuadoModal: React.FC<NewActuadoModalProps> = ({
                 required
               />
             </div>
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-slate-700 uppercase mb-1">CCV:</label>
+            <input
+              type="text"
+              value={ccv}
+              onChange={(e) => setCcv(e.target.value)}
+              placeholder="Ingrese el CCV del documento, si corresponde"
+              className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-mono text-slate-900"
+            />
           </div>
 
           <div>
