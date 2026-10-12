@@ -136,6 +136,7 @@ export const ResolutionCard: React.FC<ResolutionCardProps> = ({
           }
           tituloActuado={resolucion.titulo}
         />
+        {resolucion.ccv && <p className="mt-2 text-xs text-slate-700"><strong>CCV:</strong> <span className="font-mono">{resolucion.ccv}</span></p>}
       </div>
 
       {/* Navigation Tabs */}
