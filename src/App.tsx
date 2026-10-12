@@ -40,6 +40,7 @@ import { Footer } from './components/Footer';
 import { LoginScreen } from './components/LoginScreen';
 import { SearchPortalView } from './components/SearchPortalView';
 import { AgendaMagistradosAdmin } from './components/AgendaMagistradosAdmin';
+import { AgendaJudicialCalendario } from './components/AgendaJudicialCalendario';
 import { TimelineProcess } from './components/TimelineProcess';
 import { ResolutionCard } from './components/ResolutionCard';
 import { DeadlineCalculatorModal } from './components/DeadlineCalculatorModal';
@@ -118,7 +119,7 @@ export default function App() {
   const [expedienteSeleccionado, setExpedienteSeleccionado] = useState<Expediente | null>(null);
 
   // Active view: 'busqueda' | 'expediente' | 'calculadora' | 'juez_te_escucha'
-  const [vistaActual, setVistaActual] = useState<'busqueda' | 'expediente' | 'calculadora' | 'juez_te_escucha'>('busqueda');
+  const [vistaActual, setVistaActual] = useState<'busqueda' | 'expediente' | 'calculadora' | 'juez_te_escucha' | 'agenda_judicial'>('busqueda');
 
   // Agenda de Magistrados sincronizada con los expedientes
   const [agendaMagistrados, setAgendaMagistrados] = useState<DiligenciaAgenda[]>(() => {
@@ -427,6 +428,7 @@ export default function App() {
 
   // Logout
   const handleCerrarSesion = () => {
+    setAdministracionAgendaAbierta(false);
     setSesionIniciada(false);
     setExpedienteSeleccionado(null);
     setVistaActual('busqueda');
@@ -757,10 +759,33 @@ export default function App() {
       );
     }
 
+    if (vistaActual === 'agenda_judicial') {
+      return (
+        <div className="min-h-screen bg-slate-50 flex flex-col font-arial" style={{ fontFamily: 'Arial, sans-serif' }}>
+          <div className="bg-purple-800 text-white py-2.5 px-4 border-b border-purple-400/40">
+            <div className="max-w-6xl mx-auto flex items-center justify-between text-xs">
+              <span className="font-bold uppercase tracking-wide">{DICCIONARIO[idioma].agendaJudicial}</span>
+              <button
+                onClick={() => setVistaActual('busqueda')}
+                className="underline text-purple-200 hover:text-white"
+              >
+                Volver al Acceso Ciudadano
+              </button>
+            </div>
+          </div>
+          <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-6">
+            <AgendaJudicialCalendario agenda={agendaMagistrados} idioma={idioma} />
+          </main>
+          <Footer idioma={idioma} />
+        </div>
+      );
+    }
+
     return (
       <LoginScreen
         onLoginExitoso={handleLoginExitoso}
         onAbrirJuezTeEscucha={() => setVistaActual('juez_te_escucha')}
+        onAbrirAgendaJudicial={() => setVistaActual('agenda_judicial')}
       />
     );
   }
@@ -788,7 +813,7 @@ export default function App() {
         altoContraste={altoContraste}
         onToggleAltoContraste={() => setAltoContraste(!altoContraste)}
         vistaActual={vistaActual}
-        onChangeVista={setVistaActual}
+        onChangeVista={(vista) => { setAdministracionAgendaAbierta(false); setVistaActual(vista); }}
         expedienteSeleccionado={!!expedienteSeleccionado}
         idioma={idioma}
         onChangeIdioma={handleCambiarIdioma}
@@ -799,7 +824,20 @@ export default function App() {
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-6">
         {/* VISTA 1: BÚSQUEDA EXCLUSIVA (Displayed directly after login) */}
         {vistaActual === 'busqueda' && (
-          administracionAgendaAbierta ? (
+          <SearchPortalView
+            expedientes={expedientes}
+            expedientePrincipal={expedientePrincipal}
+            onSeleccionarExpediente={handleSeleccionarExpedienteDesdeBusqueda}
+            rol={rol}
+            nombreUsuario={nombreUsuario}
+            idioma={idioma}
+            onAbrirJuezTeEscucha={() => setVistaActual('juez_te_escucha')}
+          />
+        )}
+
+        {/* VISTA: AGENDA JUDICIAL (calendario por magistrado; la administración es solo del editor) */}
+        {vistaActual === 'agenda_judicial' && (
+          administracionAgendaAbierta && rol === 'editor' ? (
             <AgendaMagistradosAdmin
               agenda={agendaMagistrados}
               idioma={idioma}
@@ -807,16 +845,11 @@ export default function App() {
               onGuardar={setAgendaMagistrados}
             />
           ) : (
-            <SearchPortalView
-              expedientes={expedientes}
-              expedientePrincipal={expedientePrincipal}
-              onSeleccionarExpediente={handleSeleccionarExpedienteDesdeBusqueda}
-              rol={rol}
-              nombreUsuario={nombreUsuario}
+            <AgendaJudicialCalendario
+              agenda={agendaMagistrados}
               idioma={idioma}
-              agendaMagistrados={agendaMagistrados}
-              onAbrirAdministracionAgenda={() => setAdministracionAgendaAbierta(true)}
-              onAbrirJuezTeEscucha={() => { setAdministracionAgendaAbierta(false); setVistaActual('juez_te_escucha'); }}
+              esEditor={rol === 'editor'}
+              onAdministrar={() => setAdministracionAgendaAbierta(true)}
             />
           )
         )}
