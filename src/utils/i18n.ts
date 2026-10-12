@@ -67,6 +67,10 @@ export interface Traducciones {
   estudianteDe: string;
   btnCrearExpediente: string;
   btnEditarExpediente: string;
+  agendaJudicial: string; agendaProgramadas: string; registros: string; sinDiligencias: string;
+  etiquetaMagistrado: string; etiquetaExpediente: string; accesoJuez: string; accesoJuezDesc: string;
+  administrarAgenda: string; administrarAgendaDesc: string; distintivoDigital: string; cabeceraInstitucional: string;
+  descargoTitulo: string; descripcionProyecto: string; identificacionInstitucional: string; creditosAcademicos: string;
 }
 
 const DICCIONARIO_BASE = {
@@ -135,8 +139,8 @@ const DICCIONARIO_BASE = {
     disclaimer: '«Esta página web, fue creada con fines estrictamente académicos, las partes que aparecen en el presente expediente son nombres ficticios, y cualquier parecido con la realidad es puro coincidencia.»',
     trabajoPerteneciente: 'Trabajo académico perteneciente a: ',
     estudianteDe: ', estudiante de la Facultad de Ciencias Jurídicas y Políticas de la Universidad Nacional del Altiplano de Puno.',
-    btnCrearExpediente: 'Crear Nuevo Expediente',
-    btnEditarExpediente: 'Editar Expediente',
+    agendaJudicial: 'Agenda Judicial', agendaProgramadas: 'Diligencias programadas por magistrado', registros: 'registros', sinDiligencias: 'No hay diligencias programadas.', etiquetaMagistrado: 'Magistrado', etiquetaExpediente: 'Expediente', accesoJuez: 'El Juez Te Escucha', accesoJuezDesc: 'Solicitudes de atención y citas con el magistrado.', administrarAgenda: 'Administración de Agenda de Magistrados', administrarAgendaDesc: 'Registrar, editar y eliminar diligencias sin ingresar al visor de expedientes.', distintivoDigital: 'DIGITAL', cabeceraInstitucional: 'Poder Judicial del Perú • Plataforma de Consulta Judicial • Perú', descargoTitulo: 'Cláusula de descargo y naturaleza académica', descripcionProyecto: 'Proyecto académico para demostrar expedientes electrónicos, lectura accesible, cálculo de plazos y códigos de validación.', identificacionInstitucional: 'Poder Judicial del Perú • Plataforma de Consulta Judicial • Juliaca, Puno', creditosAcademicos: 'Fines estrictamente académicos • Puno, Perú',    btnCrearExpediente: 'Crear Nuevo Expediente',
+        agendaJudicial: 'Judicial calendar', agendaProgramadas: 'Hearings scheduled by judge', registros: 'records', sinDiligencias: 'No hearings are scheduled.', etiquetaMagistrado: 'Judge', etiquetaExpediente: 'Case file', accesoJuez: 'The Judge Hears You', accesoJuezDesc: 'Requests for appointments and meetings with the judge.', administrarAgenda: 'Judge Calendar Administration', administrarAgendaDesc: 'Create, edit and delete events without opening a case file.', distintivoDigital: 'DIGITAL', cabeceraInstitucional: 'Judicial Branch of Peru • Judicial Consultation Platform • Peru', descargoTitulo: 'Disclaimer and academic nature', descripcionProyecto: 'Academic project demonstrating electronic case files, accessible reading, deadline calculation and validation codes.', identificacionInstitucional: 'Judicial Branch of Peru • Juliaca, Puno', creditosAcademicos: 'For academic purposes only • Puno, Peru',     agendaJudicial: 'Justizkalender', agendaProgramadas: 'Vom Richter geplante Termine', registros: 'Einträge', sinDiligencias: 'Keine Termine geplant.', etiquetaMagistrado: 'Richter/in', etiquetaExpediente: 'Akte', accesoJuez: 'Der Richter hört Sie an', accesoJuezDesc: 'Anfragen für Termine und Gespräche mit dem Richter.', administrarAgenda: 'Verwaltung des Richterkalenders', administrarAgendaDesc: 'Termine verwalten, ohne eine Akte zu öffnen.', distintivoDigital: 'DIGITAL', cabeceraInstitucional: 'Justiz Perus • Plattform für Justizabfragen • Peru', descargoTitulo: 'Haftungsausschluss und akademischer Hinweis', descripcionProyecto: 'Akademisches Projekt zu elektronischen Akten, barrierefreiem Lesen, Fristberechnung und Prüfcodes.', identificacionInstitucional: 'Justiz Perus • Juliaca, Puno', creditosAcademicos: 'Nur zu akademischen Zwecken • Puno, Peru',     agendaJudicial: 'Agenda judiciaire', agendaProgramadas: 'Audiences programmées par magistrat', registros: 'entrées', sinDiligencias: 'Aucune audience programmée.', etiquetaMagistrado: 'Magistrat', etiquetaExpediente: 'Dossier', accesoJuez: 'Le juge vous écoute', accesoJuezDesc: 'Demandes de rendez-vous avec le magistrat.', administrarAgenda: 'Gestion de l’agenda des magistrats', administrarAgendaDesc: 'Créer, modifier et supprimer des audiences sans ouvrir un dossier.', distintivoDigital: 'NUMÉRIQUE', cabeceraInstitucional: 'Pouvoir judiciaire du Pérou • Plateforme de consultation judiciaire • Pérou', descargoTitulo: 'Avertissement et nature académique', descripcionProyecto: 'Projet académique sur les dossiers électroniques, la lecture accessible, le calcul des délais et les codes de validation.', identificacionInstitucional: 'Pouvoir judiciaire du Pérou • Juliaca, Puno', creditosAcademicos: 'À des fins strictement académiques • Puno, Pérou', btnEditarExpediente: 'Editar Expediente',
   },
   qu: {
     institucion: 'PIRUWPA SUMAQ TARIPAY WASIN',
@@ -203,7 +207,7 @@ const DICCIONARIO_BASE = {
     disclaimer: '«Kay web p’anqaqa yachay wasipi yachakunallapaq rurasqam, lliw sutikunaqa yanqa churamusqallam, chiqapwan rikch’akuyninqa kawsaypa tupanallanmi.»',
     trabajoPerteneciente: 'Yachay llamk’aypa dueñon: ',
     estudianteDe: ', Universidad Nacional del Altiplano de Puno Fac. Ciencias Jurídicas y Políticas nisqamanta yachaq.',
-    btnCrearExpediente: 'Musuq Expedienteta Ruray',
+    agendaJudicial: 'Taripay p’unchaw ruraykuna', agendaProgramadas: 'Kamachiqkunapa ruraykuna', registros: 'qillqakuna', sinDiligencias: 'Manam ruraykuna qillqasqachu.', etiquetaMagistrado: 'Kamachiq', etiquetaExpediente: 'Expediente', accesoJuez: 'Juezmi uyarisunki', accesoJuezDesc: 'Kamachiqwan rimanapaq mañakuykuna.', administrarAgenda: 'Kamachiqkunapa agendanta kamachiy', administrarAgendaDesc: 'Expedienteman mana yaykuspa ruraykunata qillqay, allichay, chinkachiy.', distintivoDigital: 'LLIKAPI', cabeceraInstitucional: 'Piruwpa Taripay Wasin • Taripay Qillqakuna • Piruw', descargoTitulo: 'Yachay llamk’ay kasqanpa willakuy', descripcionProyecto: 'Yachay llamk’ay: llikapi qillqakuna, ñawinchay yanapay, p’unchaw yupay hinaspa validación códigos.', identificacionInstitucional: 'Piruwpa Taripay Wasin • Juliaca, Punu', creditosAcademicos: 'Yachaypaqllam • Punu, Piruw',    btnCrearExpediente: 'Musuq Expedienteta Ruray',
     btnEditarExpediente: 'Expedienteta Allichay',
   },
   ay: {
@@ -271,7 +275,7 @@ const DICCIONARIO_BASE = {
     disclaimer: '«Aka web laphiqa yatiqawitakikiw lurt’ata, sutinaka uñstatanakax k’ariskikwa, cheqamp ukhamarux pantasitakiwa.»',
     trabajoPerteneciente: 'Yatiqañ irnaqatax jupankiwa: ',
     estudianteDe: ', Universidad Nacional del Altiplano de Puno Fac. Ciencias Jurídicas y Políticas ukan yatiqiri.',
-    btnCrearExpediente: 'Machaq Expediente Luraña',
+    agendaJudicial: 'Taripawin agenda', agendaProgramadas: 'Taripirinakana lurawinaka', registros: 'qillqatanaka', sinDiligencias: 'Janiw lurawinakax qillqatäkiti.', etiquetaMagistrado: 'Taripiri', etiquetaExpediente: 'Expediente', accesoJuez: 'Juezax ist’ätam', accesoJuezDesc: 'Taripirimp aruskipañatak mayitanaka.', administrarAgenda: 'Taripirinakana agenda apnaqaña', administrarAgendaDesc: 'Expediente uñjañat jan mantañasa lurawinaka qillqaña, askichaña, chhaqtayaña.', distintivoDigital: 'DIGITAL', cabeceraInstitucional: 'Perú Markan Taripawin Utapa • Taripaña Qillqatanaka • Perú', descargoTitulo: 'Yatiqañataki luratawa', descripcionProyecto: 'Yatiqañataki proyecto: digital expediente, uñjañ yanapt’awi, plazo jakhuña ukhamaraki códigos.', identificacionInstitucional: 'Perú Markan Taripawin Utapa • Juliaca, Puno', creditosAcademicos: 'Yatiqañatakiki • Puno, Perú',    btnCrearExpediente: 'Machaq Expediente Luraña',
     btnEditarExpediente: 'Expediente Askichaña',
   },
 };
