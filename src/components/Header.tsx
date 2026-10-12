@@ -219,20 +219,6 @@ export const Header: React.FC<HeaderProps> = ({
               <span>{t.pestanaCalculadora}</span>
             </button>
 
-            {/* Pestaña morada: AGENDA JUDICIAL */}
-            <button
-              onClick={() => onChangeVista('agenda_judicial')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer border ${
-                vistaActual === 'agenda_judicial'
-                  ? 'bg-purple-700 text-white shadow border-purple-300 font-black'
-                  : 'bg-purple-700/80 hover:bg-purple-700 text-purple-100 border-purple-400/50'
-              }`}
-              title="Agenda de audiencias y diligencias por magistrado"
-            >
-              <CalendarDays className="w-3.5 h-3.5 text-purple-200" />
-              <span className="uppercase tracking-wider">{t.agendaJudicial}</span>
-            </button>
-
             {/* Pestaña ciudadana: EL JUEZ TE ESCUCHA */}
             {rol !== 'editor' && (
               <button
@@ -248,6 +234,21 @@ export const Header: React.FC<HeaderProps> = ({
                 <span className="uppercase tracking-wider">EL JUEZ TE ESCUCHA</span>
               </button>
             )}
+
+
+            {/* Pestaña morada: AGENDA JUDICIAL */}
+            <button
+              onClick={() => onChangeVista('agenda_judicial')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer border ${
+                vistaActual === 'agenda_judicial'
+                  ? 'bg-purple-700 text-white shadow border-purple-300 font-black'
+                  : 'bg-purple-700/80 hover:bg-purple-700 text-purple-100 border-purple-400/50'
+              }`}
+              title="Agenda de audiencias y diligencias por magistrado"
+            >
+              <CalendarDays className="w-3.5 h-3.5 text-purple-200" />
+              <span className="uppercase tracking-wider">{t.agendaJudicial}</span>
+            </button>
 
           </nav>
 
