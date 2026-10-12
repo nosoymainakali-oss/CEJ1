@@ -133,6 +133,92 @@ export default function App() {
       { id: 'puno-civ-007', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00221-2026-0-2101-JR-CI-03', fecha: '2026-10-16', hora: '11:00', tipo: 'AUDIENCIA', descripcion: 'Audiencia de conciliación en proceso de desalojo por ocupación precaria' },
       { id: 'puno-civ-008', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00320-2026-0-2101-JR-CI-03', fecha: '2026-10-23', hora: '09:30', tipo: 'AUDIENCIA', descripcion: 'Actuación probatoria en proceso de prescripción adquisitiva de dominio' },
       { id: 'puno-civ-009', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00412-2026-0-2101-JR-CI-03', fecha: '2026-10-30', hora: '10:30', tipo: 'DILIGENCIA', descripcion: 'Inspección judicial para verificar linderos y posesión de predio en controversia civil' },
+      { id: 'puno-demo-010', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00510-2026-0-2101-JR-CA-02', fecha: '2026-10-12', hora: '10:15', tipo: 'AUDIENCIA', descripcion: 'Audiencia sobre mejor derecho de propiedad y evaluación de títulos' },
+      { id: 'puno-demo-011', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00511-2026-0-2101-JR-CI-03', fecha: '2026-10-12', hora: '14:30', tipo: 'AUDIENCIA', descripcion: 'Diligencia de inspección de bien materia de controversia' },
+      { id: 'puno-demo-012', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00512-2026-0-2101-JR-CI-01', fecha: '2026-10-13', hora: '16:00', tipo: 'AUDIENCIA', descripcion: 'Actuación de medios probatorios y declaración de parte' },
+      { id: 'puno-demo-013', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00513-2026-0-2101-JR-CA-02', fecha: '2026-10-13', hora: '09:45', tipo: 'AUDIENCIA', descripcion: 'Inspección judicial sobre posesión, linderos y características del inmueble' },
+      { id: 'puno-demo-014', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00514-2026-0-2101-JR-CI-03', fecha: '2026-10-13', hora: '11:45', tipo: 'AUDIENCIA', descripcion: 'Audiencia de pruebas en proceso de prescripción adquisitiva de dominio' },
+      { id: 'puno-demo-015', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00515-2026-0-2101-JR-LA-01', fecha: '2026-10-14', hora: '14:30', tipo: 'VISTA_DE_LA_CAUSA', descripcion: 'Diligencia de verificación de cumplimiento de mandato judicial' },
+      { id: 'puno-demo-016', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00516-2026-0-2101-JR-CO-02', fecha: '2026-10-14', hora: '08:30', tipo: 'DILIGENCIA', descripcion: 'Audiencia de actuación probatoria en materia laboral' },
+      { id: 'puno-demo-017', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00517-2026-0-2101-JR-CO-03', fecha: '2026-10-15', hora: '09:45', tipo: 'DILIGENCIA', descripcion: 'Audiencia de saneamiento procesal y delimitación de puntos controvertidos' },
+      { id: 'puno-demo-018', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00518-2026-0-2101-JR-LA-01', fecha: '2026-10-15', hora: '11:45', tipo: 'DILIGENCIA', descripcion: 'Vista de la causa para informe oral de las partes' },
+      { id: 'puno-demo-019', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00519-2026-0-2101-JR-CO-02', fecha: '2026-10-15', hora: '16:00', tipo: 'VISTA_DE_LA_CAUSA', descripcion: 'Lectura de resolución y notificación de decisión procesal' },
+      { id: 'puno-demo-020', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00520-2026-0-2101-JR-CI-03', fecha: '2026-10-16', hora: '08:30', tipo: 'AUDIENCIA', descripcion: 'Continuación de audiencia en proceso de nulidad de acto jurídico' },
+      { id: 'puno-demo-021', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00521-2026-0-2101-JR-CA-01', fecha: '2026-10-16', hora: '10:15', tipo: 'AUDIENCIA', descripcion: 'Informe oral en proceso contencioso administrativo' },
+      { id: 'puno-demo-022', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00522-2026-0-2101-JR-CA-02', fecha: '2026-10-19', hora: '08:30', tipo: 'AUDIENCIA', descripcion: 'Audiencia sobre mejor derecho de propiedad y evaluación de títulos' },
+      { id: 'puno-demo-023', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00523-2026-0-2101-JR-CI-03', fecha: '2026-10-19', hora: '10:15', tipo: 'AUDIENCIA', descripcion: 'Diligencia de inspección de bien materia de controversia' },
+      { id: 'puno-demo-024', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00524-2026-0-2101-JR-CI-01', fecha: '2026-10-20', hora: '11:45', tipo: 'AUDIENCIA', descripcion: 'Actuación de medios probatorios y declaración de parte' },
+      { id: 'puno-demo-025', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00525-2026-0-2101-JR-CA-02', fecha: '2026-10-20', hora: '16:00', tipo: 'AUDIENCIA', descripcion: 'Inspección judicial sobre posesión, linderos y características del inmueble' },
+      { id: 'puno-demo-026', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00526-2026-0-2101-JR-CI-03', fecha: '2026-10-20', hora: '09:45', tipo: 'AUDIENCIA', descripcion: 'Audiencia de pruebas en proceso de prescripción adquisitiva de dominio' },
+      { id: 'puno-demo-027', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00527-2026-0-2101-JR-LA-01', fecha: '2026-10-21', hora: '10:15', tipo: 'VISTA_DE_LA_CAUSA', descripcion: 'Diligencia de verificación de cumplimiento de mandato judicial' },
+      { id: 'puno-demo-028', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00528-2026-0-2101-JR-CO-02', fecha: '2026-10-21', hora: '14:30', tipo: 'DILIGENCIA', descripcion: 'Audiencia de actuación probatoria en materia laboral' },
+      { id: 'puno-demo-029', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00529-2026-0-2101-JR-CO-03', fecha: '2026-10-22', hora: '16:00', tipo: 'DILIGENCIA', descripcion: 'Audiencia de saneamiento procesal y delimitación de puntos controvertidos' },
+      { id: 'puno-demo-030', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00530-2026-0-2101-JR-LA-01', fecha: '2026-10-22', hora: '09:45', tipo: 'DILIGENCIA', descripcion: 'Vista de la causa para informe oral de las partes' },
+      { id: 'puno-demo-031', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00531-2026-0-2101-JR-CO-02', fecha: '2026-10-22', hora: '11:45', tipo: 'VISTA_DE_LA_CAUSA', descripcion: 'Lectura de resolución y notificación de decisión procesal' },
+      { id: 'puno-demo-032', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00532-2026-0-2101-JR-CI-03', fecha: '2026-10-23', hora: '14:30', tipo: 'AUDIENCIA', descripcion: 'Continuación de audiencia en proceso de nulidad de acto jurídico' },
+      { id: 'puno-demo-033', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00533-2026-0-2101-JR-CA-01', fecha: '2026-10-23', hora: '08:30', tipo: 'AUDIENCIA', descripcion: 'Informe oral en proceso contencioso administrativo' },
+      { id: 'puno-demo-034', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00534-2026-0-2101-JR-CA-02', fecha: '2026-10-26', hora: '14:30', tipo: 'AUDIENCIA', descripcion: 'Audiencia sobre mejor derecho de propiedad y evaluación de títulos' },
+      { id: 'puno-demo-035', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00535-2026-0-2101-JR-CI-03', fecha: '2026-10-26', hora: '08:30', tipo: 'AUDIENCIA', descripcion: 'Diligencia de inspección de bien materia de controversia' },
+      { id: 'puno-demo-036', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00536-2026-0-2101-JR-CI-01', fecha: '2026-10-27', hora: '09:45', tipo: 'AUDIENCIA', descripcion: 'Actuación de medios probatorios y declaración de parte' },
+      { id: 'puno-demo-037', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00537-2026-0-2101-JR-CA-02', fecha: '2026-10-27', hora: '11:45', tipo: 'AUDIENCIA', descripcion: 'Inspección judicial sobre posesión, linderos y características del inmueble' },
+      { id: 'puno-demo-038', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00538-2026-0-2101-JR-CI-03', fecha: '2026-10-27', hora: '16:00', tipo: 'AUDIENCIA', descripcion: 'Audiencia de pruebas en proceso de prescripción adquisitiva de dominio' },
+      { id: 'puno-demo-039', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00539-2026-0-2101-JR-LA-01', fecha: '2026-10-28', hora: '08:30', tipo: 'VISTA_DE_LA_CAUSA', descripcion: 'Diligencia de verificación de cumplimiento de mandato judicial' },
+      { id: 'puno-demo-040', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00540-2026-0-2101-JR-CO-02', fecha: '2026-10-28', hora: '10:15', tipo: 'DILIGENCIA', descripcion: 'Audiencia de actuación probatoria en materia laboral' },
+      { id: 'puno-demo-041', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00541-2026-0-2101-JR-CO-03', fecha: '2026-10-29', hora: '11:45', tipo: 'DILIGENCIA', descripcion: 'Audiencia de saneamiento procesal y delimitación de puntos controvertidos' },
+      { id: 'puno-demo-042', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00542-2026-0-2101-JR-LA-01', fecha: '2026-10-29', hora: '16:00', tipo: 'DILIGENCIA', descripcion: 'Vista de la causa para informe oral de las partes' },
+      { id: 'puno-demo-043', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00543-2026-0-2101-JR-CO-02', fecha: '2026-10-29', hora: '09:45', tipo: 'VISTA_DE_LA_CAUSA', descripcion: 'Lectura de resolución y notificación de decisión procesal' },
+      { id: 'puno-demo-044', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00544-2026-0-2101-JR-CI-03', fecha: '2026-10-30', hora: '10:15', tipo: 'AUDIENCIA', descripcion: 'Continuación de audiencia en proceso de nulidad de acto jurídico' },
+      { id: 'puno-demo-045', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00545-2026-0-2101-JR-CA-01', fecha: '2026-10-30', hora: '14:30', tipo: 'AUDIENCIA', descripcion: 'Informe oral en proceso contencioso administrativo' },
+      { id: 'puno-demo-046', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00546-2026-0-2101-JR-CA-02', fecha: '2026-11-02', hora: '10:15', tipo: 'AUDIENCIA', descripcion: 'Audiencia sobre mejor derecho de propiedad y evaluación de títulos' },
+      { id: 'puno-demo-047', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00547-2026-0-2101-JR-CI-03', fecha: '2026-11-02', hora: '14:30', tipo: 'AUDIENCIA', descripcion: 'Diligencia de inspección de bien materia de controversia' },
+      { id: 'puno-demo-048', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00548-2026-0-2101-JR-CI-01', fecha: '2026-11-03', hora: '16:00', tipo: 'AUDIENCIA', descripcion: 'Actuación de medios probatorios y declaración de parte' },
+      { id: 'puno-demo-049', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00549-2026-0-2101-JR-CA-02', fecha: '2026-11-03', hora: '09:45', tipo: 'AUDIENCIA', descripcion: 'Inspección judicial sobre posesión, linderos y características del inmueble' },
+      { id: 'puno-demo-050', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00550-2026-0-2101-JR-CI-03', fecha: '2026-11-03', hora: '11:45', tipo: 'AUDIENCIA', descripcion: 'Audiencia de pruebas en proceso de prescripción adquisitiva de dominio' },
+      { id: 'puno-demo-051', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00551-2026-0-2101-JR-LA-01', fecha: '2026-11-04', hora: '14:30', tipo: 'VISTA_DE_LA_CAUSA', descripcion: 'Diligencia de verificación de cumplimiento de mandato judicial' },
+      { id: 'puno-demo-052', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00552-2026-0-2101-JR-CO-02', fecha: '2026-11-04', hora: '08:30', tipo: 'DILIGENCIA', descripcion: 'Audiencia de actuación probatoria en materia laboral' },
+      { id: 'puno-demo-053', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00553-2026-0-2101-JR-CO-03', fecha: '2026-11-05', hora: '09:45', tipo: 'DILIGENCIA', descripcion: 'Audiencia de saneamiento procesal y delimitación de puntos controvertidos' },
+      { id: 'puno-demo-054', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00554-2026-0-2101-JR-LA-01', fecha: '2026-11-05', hora: '11:45', tipo: 'DILIGENCIA', descripcion: 'Vista de la causa para informe oral de las partes' },
+      { id: 'puno-demo-055', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00555-2026-0-2101-JR-CO-02', fecha: '2026-11-05', hora: '16:00', tipo: 'VISTA_DE_LA_CAUSA', descripcion: 'Lectura de resolución y notificación de decisión procesal' },
+      { id: 'puno-demo-056', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00556-2026-0-2101-JR-CI-03', fecha: '2026-11-06', hora: '08:30', tipo: 'AUDIENCIA', descripcion: 'Continuación de audiencia en proceso de nulidad de acto jurídico' },
+      { id: 'puno-demo-057', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00557-2026-0-2101-JR-CA-01', fecha: '2026-11-06', hora: '10:15', tipo: 'AUDIENCIA', descripcion: 'Informe oral en proceso contencioso administrativo' },
+      { id: 'puno-demo-058', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00558-2026-0-2101-JR-CA-02', fecha: '2026-11-09', hora: '08:30', tipo: 'AUDIENCIA', descripcion: 'Audiencia sobre mejor derecho de propiedad y evaluación de títulos' },
+      { id: 'puno-demo-059', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00559-2026-0-2101-JR-CI-03', fecha: '2026-11-09', hora: '10:15', tipo: 'AUDIENCIA', descripcion: 'Diligencia de inspección de bien materia de controversia' },
+      { id: 'puno-demo-060', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00560-2026-0-2101-JR-CI-01', fecha: '2026-11-10', hora: '11:45', tipo: 'AUDIENCIA', descripcion: 'Actuación de medios probatorios y declaración de parte' },
+      { id: 'puno-demo-061', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00561-2026-0-2101-JR-CA-02', fecha: '2026-11-10', hora: '16:00', tipo: 'AUDIENCIA', descripcion: 'Inspección judicial sobre posesión, linderos y características del inmueble' },
+      { id: 'puno-demo-062', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00562-2026-0-2101-JR-CI-03', fecha: '2026-11-10', hora: '09:45', tipo: 'AUDIENCIA', descripcion: 'Audiencia de pruebas en proceso de prescripción adquisitiva de dominio' },
+      { id: 'puno-demo-063', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00563-2026-0-2101-JR-LA-01', fecha: '2026-11-11', hora: '10:15', tipo: 'VISTA_DE_LA_CAUSA', descripcion: 'Diligencia de verificación de cumplimiento de mandato judicial' },
+      { id: 'puno-demo-064', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00564-2026-0-2101-JR-CO-02', fecha: '2026-11-11', hora: '14:30', tipo: 'DILIGENCIA', descripcion: 'Audiencia de actuación probatoria en materia laboral' },
+      { id: 'puno-demo-065', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00565-2026-0-2101-JR-CO-03', fecha: '2026-11-12', hora: '16:00', tipo: 'DILIGENCIA', descripcion: 'Audiencia de saneamiento procesal y delimitación de puntos controvertidos' },
+      { id: 'puno-demo-066', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00566-2026-0-2101-JR-LA-01', fecha: '2026-11-12', hora: '09:45', tipo: 'DILIGENCIA', descripcion: 'Vista de la causa para informe oral de las partes' },
+      { id: 'puno-demo-067', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00567-2026-0-2101-JR-CO-02', fecha: '2026-11-12', hora: '11:45', tipo: 'VISTA_DE_LA_CAUSA', descripcion: 'Lectura de resolución y notificación de decisión procesal' },
+      { id: 'puno-demo-068', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00568-2026-0-2101-JR-CI-03', fecha: '2026-11-13', hora: '14:30', tipo: 'AUDIENCIA', descripcion: 'Continuación de audiencia en proceso de nulidad de acto jurídico' },
+      { id: 'puno-demo-069', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00569-2026-0-2101-JR-CA-01', fecha: '2026-11-13', hora: '08:30', tipo: 'AUDIENCIA', descripcion: 'Informe oral en proceso contencioso administrativo' },
+      { id: 'puno-demo-070', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00570-2026-0-2101-JR-CA-02', fecha: '2026-11-16', hora: '14:30', tipo: 'AUDIENCIA', descripcion: 'Audiencia sobre mejor derecho de propiedad y evaluación de títulos' },
+      { id: 'puno-demo-071', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00571-2026-0-2101-JR-CI-03', fecha: '2026-11-16', hora: '08:30', tipo: 'AUDIENCIA', descripcion: 'Diligencia de inspección de bien materia de controversia' },
+      { id: 'puno-demo-072', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00572-2026-0-2101-JR-CI-01', fecha: '2026-11-17', hora: '09:45', tipo: 'AUDIENCIA', descripcion: 'Actuación de medios probatorios y declaración de parte' },
+      { id: 'puno-demo-073', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00573-2026-0-2101-JR-CA-02', fecha: '2026-11-17', hora: '11:45', tipo: 'AUDIENCIA', descripcion: 'Inspección judicial sobre posesión, linderos y características del inmueble' },
+      { id: 'puno-demo-074', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00574-2026-0-2101-JR-CI-03', fecha: '2026-11-17', hora: '16:00', tipo: 'AUDIENCIA', descripcion: 'Audiencia de pruebas en proceso de prescripción adquisitiva de dominio' },
+      { id: 'puno-demo-075', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00575-2026-0-2101-JR-LA-01', fecha: '2026-11-18', hora: '08:30', tipo: 'VISTA_DE_LA_CAUSA', descripcion: 'Diligencia de verificación de cumplimiento de mandato judicial' },
+      { id: 'puno-demo-076', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00576-2026-0-2101-JR-CO-02', fecha: '2026-11-18', hora: '10:15', tipo: 'DILIGENCIA', descripcion: 'Audiencia de actuación probatoria en materia laboral' },
+      { id: 'puno-demo-077', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00577-2026-0-2101-JR-CO-03', fecha: '2026-11-19', hora: '11:45', tipo: 'DILIGENCIA', descripcion: 'Audiencia de saneamiento procesal y delimitación de puntos controvertidos' },
+      { id: 'puno-demo-078', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00578-2026-0-2101-JR-LA-01', fecha: '2026-11-19', hora: '16:00', tipo: 'DILIGENCIA', descripcion: 'Vista de la causa para informe oral de las partes' },
+      { id: 'puno-demo-079', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00579-2026-0-2101-JR-CO-02', fecha: '2026-11-19', hora: '09:45', tipo: 'VISTA_DE_LA_CAUSA', descripcion: 'Lectura de resolución y notificación de decisión procesal' },
+      { id: 'puno-demo-080', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00580-2026-0-2101-JR-CI-03', fecha: '2026-11-20', hora: '10:15', tipo: 'AUDIENCIA', descripcion: 'Continuación de audiencia en proceso de nulidad de acto jurídico' },
+      { id: 'puno-demo-081', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00581-2026-0-2101-JR-CA-01', fecha: '2026-11-20', hora: '14:30', tipo: 'AUDIENCIA', descripcion: 'Informe oral en proceso contencioso administrativo' },
+      { id: 'puno-demo-082', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00582-2026-0-2101-JR-CA-02', fecha: '2026-11-23', hora: '10:15', tipo: 'AUDIENCIA', descripcion: 'Audiencia sobre mejor derecho de propiedad y evaluación de títulos' },
+      { id: 'puno-demo-083', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00583-2026-0-2101-JR-CI-03', fecha: '2026-11-23', hora: '14:30', tipo: 'AUDIENCIA', descripcion: 'Diligencia de inspección de bien materia de controversia' },
+      { id: 'puno-demo-084', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00584-2026-0-2101-JR-CI-01', fecha: '2026-11-24', hora: '16:00', tipo: 'AUDIENCIA', descripcion: 'Actuación de medios probatorios y declaración de parte' },
+      { id: 'puno-demo-085', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00585-2026-0-2101-JR-CA-02', fecha: '2026-11-24', hora: '09:45', tipo: 'AUDIENCIA', descripcion: 'Inspección judicial sobre posesión, linderos y características del inmueble' },
+      { id: 'puno-demo-086', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00586-2026-0-2101-JR-CI-03', fecha: '2026-11-24', hora: '11:45', tipo: 'AUDIENCIA', descripcion: 'Audiencia de pruebas en proceso de prescripción adquisitiva de dominio' },
+      { id: 'puno-demo-087', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00587-2026-0-2101-JR-LA-01', fecha: '2026-11-25', hora: '14:30', tipo: 'VISTA_DE_LA_CAUSA', descripcion: 'Diligencia de verificación de cumplimiento de mandato judicial' },
+      { id: 'puno-demo-088', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00588-2026-0-2101-JR-CO-02', fecha: '2026-11-25', hora: '08:30', tipo: 'DILIGENCIA', descripcion: 'Audiencia de actuación probatoria en materia laboral' },
+      { id: 'puno-demo-089', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00589-2026-0-2101-JR-CO-03', fecha: '2026-11-26', hora: '09:45', tipo: 'DILIGENCIA', descripcion: 'Audiencia de saneamiento procesal y delimitación de puntos controvertidos' },
+      { id: 'puno-demo-090', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00590-2026-0-2101-JR-LA-01', fecha: '2026-11-26', hora: '11:45', tipo: 'DILIGENCIA', descripcion: 'Vista de la causa para informe oral de las partes' },
+      { id: 'puno-demo-091', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00591-2026-0-2101-JR-CO-02', fecha: '2026-11-26', hora: '16:00', tipo: 'VISTA_DE_LA_CAUSA', descripcion: 'Lectura de resolución y notificación de decisión procesal' },
+      { id: 'puno-demo-092', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00592-2026-0-2101-JR-CI-03', fecha: '2026-11-27', hora: '08:30', tipo: 'AUDIENCIA', descripcion: 'Continuación de audiencia en proceso de nulidad de acto jurídico' },
+      { id: 'puno-demo-093', magistrado: 'Sebastian Alberto Tapia Tito', expedienteNomenclatura: '00593-2026-0-2101-JR-CA-01', fecha: '2026-11-27', hora: '10:15', tipo: 'AUDIENCIA', descripcion: 'Informe oral en proceso contencioso administrativo' },
+      { id: 'puno-demo-094', magistrado: 'Marco Antonio Ticona Miranda', expedienteNomenclatura: '00594-2026-0-2101-JR-CA-02', fecha: '2026-11-30', hora: '08:30', tipo: 'AUDIENCIA', descripcion: 'Audiencia sobre mejor derecho de propiedad y evaluación de títulos' },
+      { id: 'puno-demo-095', magistrado: 'Leydi Karen Quispe Rojas', expedienteNomenclatura: '00595-2026-0-2101-JR-CI-03', fecha: '2026-11-30', hora: '10:15', tipo: 'AUDIENCIA', descripcion: 'Diligencia de inspección de bien materia de controversia' },
     ];
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('sjd_agenda_magistrados_v1');
@@ -792,21 +878,23 @@ export default function App() {
       style={{ fontFamily: 'Arial, sans-serif' }}
     >
       {/* Header with Global Language Switcher (ES, QU, AY) */}
-      <Header
-        rol={rol}
-        nombreUsuario={nombreUsuario}
-        dniUsuario={dniUsuario}
-        onCerrarSesion={handleCerrarSesion}
-        altoContraste={altoContraste}
-        onToggleAltoContraste={() => setAltoContraste(!altoContraste)}
-        vistaActual={vistaActual}
-        onChangeVista={(vista) => { setAdministracionAgendaAbierta(false); setVistaActual(vista); }}
-        expedienteSeleccionado={!!expedienteSeleccionado}
-        idioma={idioma}
-        onChangeIdioma={handleCambiarIdioma}
-        onAbrirCrearExpediente={() => setModalLiveEditor({ abierto: true, modo: 'crear' })}
-      />
-
+      {vistaActual !== 'agenda_judicial' && (
+        <Header
+          rol={rol}
+          nombreUsuario={nombreUsuario}
+          dniUsuario={dniUsuario}
+          onCerrarSesion={handleCerrarSesion}
+          altoContraste={altoContraste}
+          onToggleAltoContraste={() => setAltoContraste(!altoContraste)}
+          vistaActual={vistaActual}
+          onChangeVista={(vista) => { setAdministracionAgendaAbierta(false); setVistaActual(vista); }}
+          expedienteSeleccionado={!!expedienteSeleccionado}
+          idioma={idioma}
+          onChangeIdioma={handleCambiarIdioma}
+          onAbrirCrearExpediente={() => setModalLiveEditor({ abierto: true, modo: 'crear' })}
+        />
+  
+      )}
       {/* Main Content Area */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-6">
         {/* VISTA 1: BÚSQUEDA EXCLUSIVA (Displayed directly after login) */}
