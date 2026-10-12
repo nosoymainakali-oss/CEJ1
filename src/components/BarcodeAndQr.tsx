@@ -5,12 +5,14 @@ import { QrCode, Barcode as BarcodeIcon, ShieldCheck } from 'lucide-react';
 interface BarcodeAndQrProps {
   codigoTexto: string; // Text for barcode
   qrData: string; // Content for QR code
+  codigoBarrasImagen?: string;
   tituloActuado?: string;
 }
 
 export const BarcodeAndQr: React.FC<BarcodeAndQrProps> = ({
   codigoTexto,
   qrData,
+  codigoBarrasImagen,
   tituloActuado = 'Actuado Judicial',
 }) => {
   const [qrUrl, setQrUrl] = useState<string>('');
@@ -83,10 +85,12 @@ export const BarcodeAndQr: React.FC<BarcodeAndQrProps> = ({
       <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
         <div className="flex items-center gap-1.5 text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1">
           <BarcodeIcon className="w-3.5 h-3.5 text-slate-700" />
-          <span>CÓDIGO DE BARRAS SIJ (RENIEC / PJ)</span>
+          <span>CÓDIGO DE BARRAS</span>
         </div>
         <div className="bg-white px-2 py-1 border border-slate-200 rounded shadow-inner flex flex-col items-center">
-          {renderBarcodeBars()}
+          {codigoBarrasImagen ? (
+            <img src={codigoBarrasImagen} alt={`Imagen de código de barras ${codigoTexto}`} className="max-w-[220px] max-h-[64px] object-contain" />
+          ) : renderBarcodeBars()}
           <span className="font-mono text-[10px] text-slate-800 font-bold tracking-widest mt-0.5">
             *{codigoTexto}*
           </span>
@@ -106,7 +110,7 @@ export const BarcodeAndQr: React.FC<BarcodeAndQrProps> = ({
               src={qrUrl}
               alt="Código QR de Verificación Judicial"
               className="w-20 h-20 block"
-              title="Escanea con tu celular para verificar autenticidad del actuado"
+              title="Escanea el código QR para abrir los datos configurados"
             />
           </div>
         ) : (

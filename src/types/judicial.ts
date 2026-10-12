@@ -69,6 +69,7 @@ export interface Resolucion {
   sumilla: string;
   contenidoCompleto: string;
   codigoBarras: string;
+  codigoBarrasImagen?: string;
   codigoQRData?: string;
   ccv?: string;
   archivosAdjuntos: ArchivoAdjunto[];
@@ -120,4 +121,4 @@ export interface Expediente {
 }
 
 export type RolUsuario = 'editor' | 'consultor';
-export type Idioma = 'es' | 'qu' | 'ay' | 'shp' | 'en' | 'de' | 'fr';
+export type Idioma = 'es' | 'qu' | 'ay' | 'en' | 'de' | 'fr';

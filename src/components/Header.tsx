@@ -52,11 +52,11 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-2 font-bold tracking-wide">
             <span className="w-2.5 h-2.5 rounded-full bg-sky-400 animate-pulse"></span>
-            <span>Poder Judicial del Perú &bull; Plataforma Oficial de Consulta Judicial &bull; Perú</span>
+            <span>{t.cabeceraInstitucional}</span>
           </div>
 
           <div className="flex items-center flex-wrap gap-2 sm:gap-3">
-            {/* Language Switcher: Español, Quechua, Aimara */}
+            {/* Language selector */}
             <div className="flex items-center bg-[#0c4a6e] rounded-lg p-0.5 border border-sky-600/60 shadow-2xs">
               <Globe className="w-3.5 h-3.5 text-sky-300 ml-1.5 mr-1" />
               <button
@@ -95,7 +95,6 @@ export const Header: React.FC<HeaderProps> = ({
               >
                 AY
               </button>
-              <button type="button" onClick={() => onChangeIdioma('shp')} title="Shipibo" className={`px-2 py-0.5 rounded text-[11px] font-bold transition cursor-pointer ${idioma === 'shp' ? 'bg-white text-[#0c4a6e] shadow-2xs' : 'text-sky-200 hover:text-white'}`}>SH</button>
               <button type="button" onClick={() => onChangeIdioma('en')} title="English" className={`px-2 py-0.5 rounded text-[11px] font-bold transition cursor-pointer ${idioma === 'en' ? 'bg-white text-[#0c4a6e] shadow-2xs' : 'text-sky-200 hover:text-white'}`}>EN</button>
               <button type="button" onClick={() => onChangeIdioma('de')} title="Deutsch" className={`px-2 py-0.5 rounded text-[11px] font-bold transition cursor-pointer ${idioma === 'de' ? 'bg-white text-[#0c4a6e] shadow-2xs' : 'text-sky-200 hover:text-white'}`}>DE</button>
               <button type="button" onClick={() => onChangeIdioma('fr')} title="Français" className={`px-2 py-0.5 rounded text-[11px] font-bold transition cursor-pointer ${idioma === 'fr' ? 'bg-white text-[#0c4a6e] shadow-2xs' : 'text-sky-200 hover:text-white'}`}>FR</button>
@@ -158,7 +157,7 @@ export const Header: React.FC<HeaderProps> = ({
                 {t.institucion}
               </h1>
               <span className="bg-[#38bdf8] text-slate-950 text-[10px] font-black px-1.5 py-0.5 rounded uppercase">
-                DIGITAL
+                {t.distintivoDigital}
               </span>
             </div>
             <p className="text-xs text-sky-100 font-medium">

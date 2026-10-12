@@ -47,13 +47,13 @@ export const Footer: React.FC<FooterProps> = ({ idioma = 'es' }) => {
             <ShieldAlert className="w-5 h-5 text-sky-300 shrink-0 mt-0.5" />
             <div className="space-y-1">
               <h4 className="font-bold text-xs uppercase tracking-wider text-sky-200">
-                CLÁUSULA DE DESCARGO Y NATURALEZA ACADÉMICA (DISCLAIMER OBLIGATORIO)
+                {t.descargoTitulo}
               </h4>
               <p className="text-xs sm:text-sm text-sky-50 leading-relaxed font-medium">
                 {t.disclaimer}
               </p>
               <p className="text-[11px] text-sky-200/80 leading-relaxed pt-1">
-                Proyecto desarrollado para la evaluación y demostración de expedientes electrónicos, lectura accesible de actuados, calculadora de plazos hábiles procesales y generación de códigos QR y de barras para validación ciudadana.
+                {t.descripcionProyecto}
               </p>
             </div>
           </div>
@@ -62,7 +62,7 @@ export const Footer: React.FC<FooterProps> = ({ idioma = 'es' }) => {
         {/* Identificación Institucional y Académica */}
         <div className="pt-2 border-t border-sky-800 text-center">
           <p className="text-xs text-sky-200 leading-relaxed">
-            Poder Judicial del Perú &bull; Plataforma Oficial de Consulta Judicial &bull; Juliaca, Puno
+            {t.identificacionInstitucional}
           </p>
         </div>
 
@@ -73,7 +73,7 @@ export const Footer: React.FC<FooterProps> = ({ idioma = 'es' }) => {
             <strong className="text-white">Eduardo Luismario Medina Humpiri</strong> (UNA Puno).
           </div>
           <div className="text-sky-200">
-            Fines Estrictamente Académicos &bull; Puno - Perú
+            {t.creditosAcademicos}
           </div>
         </div>
       </div>

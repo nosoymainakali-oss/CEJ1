@@ -25,6 +25,17 @@ export const EditResolucionModal: React.FC<EditResolucionModalProps> = ({
   const [contenidoCompleto, setContenidoCompleto] = useState(resolucion.contenidoCompleto);
   const [fojas, setFojas] = useState<string>(String(resolucion.fojas ?? ''));
   const [codigoBarras, setCodigoBarras] = useState(resolucion.codigoBarras || '');
+  const [codigoBarrasImagen, setCodigoBarrasImagen] = useState(resolucion.codigoBarrasImagen || '');
+
+  const cargarImagenCodigoBarras = (archivo?: File) => {
+    if (!archivo) return;
+    if (!archivo.type.startsWith('image/')) { alert('Seleccione un archivo de imagen.'); return; }
+    if (archivo.size > 1500 * 1024) { alert('La imagen debe pesar como máximo 1.5 MB para sincronizarse correctamente.'); return; }
+    const lector = new FileReader();
+    lector.onload = () => setCodigoBarrasImagen(String(lector.result || ''));
+    lector.onerror = () => alert('No se pudo leer la imagen seleccionada.');
+    lector.readAsDataURL(archivo);
+  };
   const [codigoQRData, setCodigoQRData] = useState(resolucion.codigoQRData || '');
   const [ccv, setCcv] = useState(resolucion.ccv || '');
   const [fechaResolucion, setFechaResolucion] = useState(resolucion.fechaResolucion);
@@ -49,6 +60,7 @@ export const EditResolucionModal: React.FC<EditResolucionModalProps> = ({
       contenidoCompleto: contenidoCompleto.trim(),
       fojas: fojas.trim(),
       codigoBarras: codigoBarras.trim(),
+      codigoBarrasImagen,
       codigoQRData: codigoQRData.trim(),
       ccv: ccv.trim(),
       fechaResolucion,
@@ -187,9 +199,16 @@ export const EditResolucionModal: React.FC<EditResolucionModalProps> = ({
             />
           </div>
 
+          <div className="rounded-lg border border-slate-300 bg-slate-50 p-3 space-y-2">
+            <label className="block text-xs font-bold text-slate-700 uppercase">Imagen del código de barras (opcional)</label>
+            <p className="text-[11px] text-slate-600">Sube una imagen PNG, JPG o WEBP para reemplazar visualmente el código generado. La imagen se guardará con este actuado y se sincronizará con los demás dispositivos. Máximo 1.5 MB.</p>
+            <input type="file" accept="image/*" onChange={(e) => cargarImagenCodigoBarras(e.target.files?.[0])} className="block w-full text-xs text-slate-700 file:mr-3 file:rounded-md file:border-0 file:bg-sky-100 file:px-3 file:py-2 file:text-xs file:font-bold file:text-sky-900" />
+            {codigoBarrasImagen && <div className="flex flex-wrap items-center gap-3"><div className="bg-white border border-slate-200 rounded p-2"><img src={codigoBarrasImagen} alt="Vista previa del código de barras cargado" className="max-w-[260px] max-h-20 object-contain" /></div><button type="button" onClick={() => setCodigoBarrasImagen('')} className="text-xs font-semibold text-red-700 underline">Quitar imagen y volver al código generado</button></div>}
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Código de barras:</label>
+              <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Código de barras (texto):</label>
               <input type="text" value={codigoBarras} onChange={(e) => setCodigoBarras(e.target.value)} className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-mono text-slate-900" />
             </div>
             <div>
