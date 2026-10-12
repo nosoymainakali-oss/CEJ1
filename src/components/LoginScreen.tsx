@@ -240,11 +240,12 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
         <div className="bg-white rounded-2xl shadow-xl border-2 border-sky-200 overflow-hidden">
           {/* Header */}
           <div className="bg-gradient-to-r from-[#0369a1] via-[#0284c7] to-[#0c4a6e] text-white p-6 text-center">
-            <div className="inline-flex p-1 bg-white rounded-full border-2 border-sky-200 mb-3 shadow-inner">
+            <div className="inline-flex p-1 bg-white rounded-xl border-2 border-sky-200 mb-3 shadow-inner">
               <img
-                src="/logo-una-puno.png"
-                alt="Logo de la Facultad de Ciencias Jurídicas y Políticas, UNA Puno"
-                className="w-20 h-20 rounded-full object-contain"
+                src="https://upload.wikimedia.org/wikipedia/commons/5/58/Poder_Judicial_del_Peru.png"
+                alt="Logotipo del Poder Judicial del Perú"
+                className="w-20 h-20 object-contain"
+                referrerPolicy="no-referrer"
               />
             </div>
             <h1 className="text-xl sm:text-2xl font-bold tracking-tight uppercase">
