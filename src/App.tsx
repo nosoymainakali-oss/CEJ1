@@ -806,6 +806,7 @@ export default function App() {
             rol={rol}
             nombreUsuario={nombreUsuario}
             idioma={idioma}
+            agendaMagistrados={agendaMagistrados}
           />
         )}
 

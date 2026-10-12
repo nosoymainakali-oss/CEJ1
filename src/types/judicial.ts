@@ -70,6 +70,7 @@ export interface Resolucion {
   contenidoCompleto: string;
   codigoBarras: string;
   codigoQRData?: string;
+  ccv?: string;
   archivosAdjuntos: ArchivoAdjunto[];
   resumenSencillo: ResumenSencillo;
   calculoPlazo?: CalculoPlazo;
@@ -81,7 +82,7 @@ export interface DiligenciaAgenda {
   expedienteNomenclatura: string;
   fecha: string;
   hora: string;
-  tipo: 'AUDIENCIA' | 'VISTA_DE_LA_CAUSA' | 'INFORME_ORAL' | 'DILIGENCIA_EXTERNA' | 'CITA_CIUDADANA';
+  tipo: string;
   descripcion: string;
   solicitante?: string;
   dniSolicitante?: string;

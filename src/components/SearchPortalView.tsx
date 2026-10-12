@@ -7,7 +7,7 @@ import {
   AlertCircle, 
   FolderOpen
 } from 'lucide-react';
-import { Expediente, RolUsuario, Idioma } from '../types/judicial';
+import { Expediente, RolUsuario, Idioma, DiligenciaAgenda } from '../types/judicial';
 import { DICCIONARIO } from '../utils/i18n';
 
 interface SearchPortalViewProps {
@@ -17,6 +17,7 @@ interface SearchPortalViewProps {
   rol: RolUsuario;
   nombreUsuario: string;
   idioma: Idioma;
+  agendaMagistrados: DiligenciaAgenda[];
 }
 
 export const SearchPortalView: React.FC<SearchPortalViewProps> = ({
@@ -26,6 +27,7 @@ export const SearchPortalView: React.FC<SearchPortalViewProps> = ({
   rol,
   nombreUsuario,
   idioma,
+  agendaMagistrados,
 }) => {
   const t = DICCIONARIO[idioma];
 
@@ -124,6 +126,20 @@ export const SearchPortalView: React.FC<SearchPortalViewProps> = ({
           {t.bienvenido}, <strong className="text-white uppercase">{nombreUsuario}</strong>. {t.subtituloBusqueda}
         </p>
       </div>
+
+      {/* Agenda Judicial en la página de inicio */}
+      <section className="bg-white rounded-2xl border-2 border-sky-200 shadow-md overflow-hidden">
+        <div className="bg-[#0c4a6e] text-white px-5 py-4 flex items-center justify-between gap-3">
+          <div><h2 className="text-base sm:text-lg font-black uppercase tracking-wide">Agenda Judicial</h2><p className="text-xs text-sky-100">Diligencias programadas por magistrado</p></div>
+          <span className="rounded-lg bg-white/15 px-3 py-1 text-xs font-bold">{agendaMagistrados.length} registros</span>
+        </div>
+        {agendaMagistrados.length === 0 ? <p className="p-5 text-sm text-slate-500">No hay diligencias programadas.</p> : <div className="divide-y divide-slate-200">
+          {[...agendaMagistrados].sort((a,b) => a.fecha.localeCompare(b.fecha) || a.hora.localeCompare(b.hora)).map((d) => <article key={d.id} className="grid grid-cols-1 sm:grid-cols-[150px_1fr] gap-2 px-5 py-3">
+            <div className="text-xs font-bold text-[#0369a1]">{d.fecha} · {d.hora}</div>
+            <div><p className="text-sm font-bold text-slate-900">{d.tipo}</p><p className="text-xs text-slate-700 mt-0.5">{d.descripcion}</p><p className="text-xs text-slate-500 mt-1">Magistrado: <strong>{d.magistrado}</strong>{d.expedienteNomenclatura ? <> · Expediente: <strong>{d.expedienteNomenclatura}</strong></> : null}</p></div>
+          </article>)}
+        </div>}
+      </section>
 
       {/* Main Search Panel with 3 Tab Buttons */}
       <div className="bg-white p-6 sm:p-8 rounded-2xl border-2 border-sky-200 shadow-md space-y-5">
