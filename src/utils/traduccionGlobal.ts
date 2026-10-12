@@ -185,8 +185,13 @@ function traducirAtributos(el: Element, idioma: Idioma) {
     const base = guardados.get(attr) ?? valor;
     const key = normalizar(base);
     const t = UI[idioma]?.[key];
-    if (t) el.setAttribute(attr, t);
-    else if (idioma === 'es') el.setAttribute(attr, base);
+    if (t) {
+      // Evita generar mutaciones si el atributo ya contiene la traducción.
+      if (valor !== t) el.setAttribute(attr, t);
+    } else if (idioma === 'es' && valor !== base) {
+      // Restaurar solo cuando el valor realmente haya cambiado.
+      el.setAttribute(attr, base);
+    }
   }
 }
 
