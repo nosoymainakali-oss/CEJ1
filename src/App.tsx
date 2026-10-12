@@ -168,6 +168,7 @@ export default function App() {
 
   // Guardar agenda de magistrados
   useEffect(() => {
+    if (!estadoCompartidoListo) return;
     try {
       localStorage.setItem('sjd_agenda_magistrados_v1', JSON.stringify(agendaMagistrados));
     } catch (e) {
@@ -273,6 +274,7 @@ export default function App() {
 
   // Persist case updates
   useEffect(() => {
+    if (!estadoCompartidoListo) return;
     try {
       localStorage.setItem('sjd_expediente_00140_v3', JSON.stringify(expedientes));
     } catch (e) {
