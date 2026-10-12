@@ -35,6 +35,7 @@ import {
 } from './types/judicial';
 import { INITIAL_EXPEDIENTES } from './data/mockExpedientes';
 import { DICCIONARIO } from './utils/i18n';
+import { instalarTraduccionGlobal } from './utils/traduccionGlobal';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { LoginScreen } from './components/LoginScreen';
@@ -96,6 +97,9 @@ export default function App() {
 
 
   const [estadoCompartidoListo, setEstadoCompartidoListo] = useState(false);
+
+  // Traduce también los textos literales de componentes heredados y ventanas modales.
+  useEffect(() => instalarTraduccionGlobal(idioma), [idioma]);
 
   // Current case list
   const [expedientes, setExpedientes] = useState<Expediente[]>(() => {
