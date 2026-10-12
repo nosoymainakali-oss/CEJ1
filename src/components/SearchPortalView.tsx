@@ -7,7 +7,8 @@ import {
   AlertCircle, 
   FolderOpen
 } from 'lucide-react';
-import { Expediente, RolUsuario, Idioma } from '../types/judicial';
+import { Expediente, RolUsuario, Idioma, DiligenciaAgenda } from '../types/judicial';
+import { CalendarClock } from 'lucide-react';
 import { DICCIONARIO } from '../utils/i18n';
 
 interface SearchPortalViewProps {
@@ -17,6 +18,7 @@ interface SearchPortalViewProps {
   rol: RolUsuario;
   nombreUsuario: string;
   idioma: Idioma;
+  agendaMagistrados: DiligenciaAgenda[];
 }
 
 export const SearchPortalView: React.FC<SearchPortalViewProps> = ({
@@ -26,6 +28,7 @@ export const SearchPortalView: React.FC<SearchPortalViewProps> = ({
   rol,
   nombreUsuario,
   idioma,
+  agendaMagistrados,
 }) => {
   const t = DICCIONARIO[idioma];
 
@@ -124,6 +127,48 @@ export const SearchPortalView: React.FC<SearchPortalViewProps> = ({
           {t.bienvenido}, <strong className="text-white uppercase">{nombreUsuario}</strong>. {t.subtituloBusqueda}
         </p>
       </div>
+
+      {/* Agenda Judicial: agenda compartida de magistrados visible desde Inicio */}
+      <section className="bg-white rounded-2xl border-2 border-rose-200 shadow-md overflow-hidden">
+        <div className="bg-gradient-to-r from-[#881337] to-[#9f1239] text-white px-5 py-4 flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="bg-white/15 rounded-lg p-2"><CalendarClock className="w-5 h-5" /></div>
+            <div>
+              <h2 className="text-base sm:text-lg font-black uppercase tracking-wide">Agenda Judicial</h2>
+              <p className="text-xs text-rose-100">Programación de audiencias y diligencias por magistrado</p>
+            </div>
+          </div>
+          <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-bold">
+            {agendaMagistrados.filter((d) => d.fecha >= new Date().toLocaleDateString('en-CA')).length} próximas
+          </span>
+        </div>
+        <div className="p-4 sm:p-5">
+          {agendaMagistrados.filter((d) => d.fecha >= new Date().toLocaleDateString('en-CA')).length === 0 ? (
+            <p className="text-sm text-slate-500">No hay audiencias o diligencias próximas registradas.</p>
+          ) : (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+              {[...agendaMagistrados]
+                .filter((d) => d.fecha >= new Date().toLocaleDateString('en-CA'))
+                .sort((a, b) => a.fecha.localeCompare(b.fecha) || a.hora.localeCompare(b.hora))
+                .map((d) => (
+                  <article key={d.id} className="rounded-xl border border-rose-100 bg-rose-50/40 p-4">
+                    <div className="flex flex-wrap items-start justify-between gap-2">
+                      <div>
+                        <p className="text-[10px] uppercase tracking-wider font-bold text-rose-700">{d.tipo.replace(/_/g, ' ')}</p>
+                        <h3 className="text-sm font-bold text-slate-900 mt-1">{d.magistrado}</h3>
+                      </div>
+                      <span className="bg-white border border-rose-200 rounded-lg px-2.5 py-1 text-xs font-bold text-rose-800">
+                        {d.fecha.split('-').reverse().join('/')} · {d.hora}
+                      </span>
+                    </div>
+                    <p className="text-sm text-slate-700 mt-3">{d.descripcion}</p>
+                    <p className="text-[11px] text-slate-500 mt-2">Expediente: <span className="font-mono">{d.expedienteNomenclatura || 'No consignado'}</span></p>
+                  </article>
+                ))}
+            </div>
+          )}
+        </div>
+      </section>
 
       {/* Main Search Panel with 3 Tab Buttons */}
       <div className="bg-white p-6 sm:p-8 rounded-2xl border-2 border-sky-200 shadow-md space-y-5">
