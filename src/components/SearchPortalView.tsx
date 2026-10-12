@@ -8,7 +8,6 @@ import {
   FolderOpen,
   CalendarDays,
   MessageCircle,
-  Settings2
 } from 'lucide-react';
 import { Expediente, RolUsuario, Idioma, DiligenciaAgenda } from '../types/judicial';
 import { DICCIONARIO } from '../utils/i18n';
@@ -138,12 +137,12 @@ export const SearchPortalView: React.FC<SearchPortalViewProps> = ({
       <section className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <button type="button" onClick={onAbrirJuezTeEscucha} className="flex items-center gap-4 rounded-2xl border-2 border-sky-200 bg-white p-5 text-left shadow-sm transition hover:border-sky-500 hover:shadow-md">
           <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-sky-100 text-[#0369a1]"><MessageCircle className="h-6 w-6" /></span>
-          <span className="min-w-0 flex-1"><strong className="block text-sm font-black text-slate-900">El Juez Te Escucha</strong><span className="mt-1 block text-xs leading-relaxed text-slate-600">Solicitudes de atención y citas con el magistrado.</span></span>
+          <span className="min-w-0 flex-1"><strong className="block text-sm font-black text-slate-900">{t.accesoJuez}</strong><span className="mt-1 block text-xs leading-relaxed text-slate-600">{t.accesoJuezDesc}</span></span>
           <ChevronRight className="h-5 w-5 shrink-0 text-sky-700" />
         </button>
         {rol === 'editor' && <button type="button" onClick={onAbrirAdministracionAgenda} className="flex items-center gap-4 rounded-2xl border-2 border-sky-200 bg-white p-5 text-left shadow-sm transition hover:border-sky-500 hover:shadow-md">
           <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-sky-100 text-[#0369a1]"><CalendarDays className="h-6 w-6" /></span>
-          <span className="min-w-0 flex-1"><strong className="block text-sm font-black text-slate-900">Administración de Agenda de Magistrados</strong><span className="mt-1 block text-xs leading-relaxed text-slate-600">Registrar, editar y eliminar diligencias sin ingresar al visor de expedientes.</span></span>
+          <span className="min-w-0 flex-1"><strong className="block text-sm font-black text-slate-900">{t.administrarAgenda}</strong><span className="mt-1 block text-xs leading-relaxed text-slate-600">{t.administrarAgendaDesc}</span></span>
           <ChevronRight className="h-5 w-5 shrink-0 text-sky-700" />
         </button>}
       </section>
@@ -151,13 +150,13 @@ export const SearchPortalView: React.FC<SearchPortalViewProps> = ({
       {/* Agenda Judicial en la página de inicio */}
       <section className="bg-white rounded-2xl border-2 border-sky-200 shadow-md overflow-hidden">
         <div className="bg-[#0c4a6e] text-white px-5 py-4 flex items-center justify-between gap-3">
-          <div><h2 className="text-base sm:text-lg font-black uppercase tracking-wide">Agenda Judicial</h2><p className="text-xs text-sky-100">Diligencias programadas por magistrado</p></div>
-          <span className="rounded-lg bg-white/15 px-3 py-1 text-xs font-bold">{agendaMagistrados.length} registros</span>
+          <div><h2 className="text-base sm:text-lg font-black uppercase tracking-wide">{t.agendaJudicial}</h2><p className="text-xs text-sky-100">{t.agendaProgramadas}</p></div>
+          <span className="rounded-lg bg-white/15 px-3 py-1 text-xs font-bold">{agendaMagistrados.length} {t.registros}</span>
         </div>
-        {agendaMagistrados.length === 0 ? <p className="p-5 text-sm text-slate-500">No hay diligencias programadas.</p> : <div className="divide-y divide-slate-200">
+        {agendaMagistrados.length === 0 ? <p className="p-5 text-sm text-slate-500">{t.sinDiligencias}</p> : <div className="divide-y divide-slate-200">
           {[...agendaMagistrados].sort((a,b) => a.fecha.localeCompare(b.fecha) || a.hora.localeCompare(b.hora)).map((d) => <article key={d.id} className="grid grid-cols-1 sm:grid-cols-[150px_1fr] gap-2 px-5 py-3">
             <div className="text-xs font-bold text-[#0369a1]">{d.fecha} · {d.hora}</div>
-            <div><p className="text-sm font-bold text-slate-900">{d.tipo}</p><p className="text-xs text-slate-700 mt-0.5">{d.descripcion}</p><p className="text-xs text-slate-500 mt-1">Magistrado: <strong>{d.magistrado}</strong>{d.expedienteNomenclatura ? <> · Expediente: <strong>{d.expedienteNomenclatura}</strong></> : null}</p></div>
+            <div><p className="text-sm font-bold text-slate-900">{d.tipo}</p><p className="text-xs text-slate-700 mt-0.5">{d.descripcion}</p><p className="text-xs text-slate-500 mt-1">{t.etiquetaMagistrado}: <strong>{d.magistrado}</strong>{d.expedienteNomenclatura ? <> · {t.etiquetaExpediente}: <strong>{d.expedienteNomenclatura}</strong></> : null}</p></div>
           </article>)}
         </div>}
       </section>
