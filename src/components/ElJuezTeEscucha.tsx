@@ -59,15 +59,16 @@ export const ElJuezTeEscucha: React.FC<ElJuezTeEscuchaProps> = ({
   const [errorJuez, setErrorJuez] = useState('');
 
   // Expediente judicial: número-año-cuaderno-distrito-materia-instancia/juzgado.
-  const partesExpediente = expedienteNomenclatura.match(/^(\d+)-(\d{4})-(\d+)-(\d+)-([A-Z]{2}-[A-Z]{2})-(\d+)$/);
+  const partesExpediente = expedienteNomenclatura.match(/^(\d+)-(\d{4})-(\d+)-(\d+)-([A-Z]+)-([A-Z]+)-(\d+)$/);
   const [numeroExpediente, setNumeroExpediente] = useState(partesExpediente?.[1] || '');
   const [anioExpediente, setAnioExpediente] = useState(partesExpediente?.[2] || String(new Date().getFullYear()));
   const [cuadernoExpediente, setCuadernoExpediente] = useState(partesExpediente?.[3] || '0');
   const [distritoExpediente, setDistritoExpediente] = useState(partesExpediente?.[4] || '2101');
-  const [tipoJuzgadoExpediente, setTipoJuzgadoExpediente] = useState(partesExpediente?.[5] || 'JR-CI');
-  const [numeroJuzgadoExpediente, setNumeroJuzgadoExpediente] = useState(partesExpediente?.[6] || '01');
-  const expedienteCompleto = numeroExpediente && anioExpediente && cuadernoExpediente && distritoExpediente && tipoJuzgadoExpediente && numeroJuzgadoExpediente
-    ? `${numeroExpediente}-${anioExpediente}-${cuadernoExpediente}-${distritoExpediente}-${tipoJuzgadoExpediente}-${numeroJuzgadoExpediente}`
+  const [codigoJuzgadoExpediente, setCodigoJuzgadoExpediente] = useState(partesExpediente?.[5] || 'JR');
+  const [especialidadExpediente, setEspecialidadExpediente] = useState(partesExpediente?.[6] || 'CI');
+  const [numeroJuzgadoExpediente, setNumeroJuzgadoExpediente] = useState(partesExpediente?.[7] || '01');
+  const expedienteCompleto = numeroExpediente && anioExpediente && cuadernoExpediente && distritoExpediente && codigoJuzgadoExpediente && especialidadExpediente && numeroJuzgadoExpediente
+    ? `${numeroExpediente}-${anioExpediente}-${cuadernoExpediente}-${distritoExpediente}-${codigoJuzgadoExpediente}-${especialidadExpediente}-${numeroJuzgadoExpediente}`
     : '';
 
   // Step 3: Appointment details
@@ -398,7 +399,7 @@ export const ElJuezTeEscucha: React.FC<ElJuezTeEscuchaProps> = ({
                       <label className="block text-xs font-bold text-slate-700 uppercase mb-2">
                         Expediente asociado:
                       </label>
-                      <div className="grid grid-cols-2 sm:grid-cols-6 gap-2">
+                      <div className="grid grid-cols-2 sm:grid-cols-7 gap-2">
                         <div className="col-span-2 sm:col-span-1">
                           <label className="block text-[10px] text-slate-500 mb-1">N.º expediente</label>
                           <input type="text" inputMode="numeric" pattern="[0-9]+" value={numeroExpediente} onChange={e => setNumeroExpediente(e.target.value.replace(/\D/g, '').slice(0, 5))} placeholder="00000" maxLength={5} className="w-full bg-slate-50 border border-slate-300 rounded-lg px-2 py-2 text-xs font-mono text-slate-900" aria-label="Número de expediente, solo números" />
@@ -416,16 +417,12 @@ export const ElJuezTeEscucha: React.FC<ElJuezTeEscuchaProps> = ({
                           <input type="text" inputMode="numeric" pattern="[0-9]+" value={distritoExpediente} onChange={e => setDistritoExpediente(e.target.value.replace(/\D/g, '').slice(0, 4))} placeholder="2101" maxLength={4} className="w-full bg-slate-50 border border-slate-300 rounded-lg px-2 py-2 text-xs font-mono text-slate-900" aria-label="Código del distrito judicial, solo números" />
                         </div>
                         <div>
-                          <label className="block text-[10px] text-slate-500 mb-1">Juzgado / especialidad</label>
-                          <select value={tipoJuzgadoExpediente} onChange={e => setTipoJuzgadoExpediente(e.target.value)} className="w-full bg-slate-50 border border-slate-300 rounded-lg px-2 py-2 text-xs font-mono text-slate-900" aria-label="Código del juzgado y especialidad">
-                            <option value="JR-CI">JR-CI</option>
-                            <option value="JR-CA">JR-CA</option>
-                            <option value="JR-PE">JR-PE</option>
-                            <option value="JR-FC">JR-FC</option>
-                            <option value="JR-LA">JR-LA</option>
-                            <option value="JPL-CA">JPL-CA</option>
-                            <option value="JPL-CI">JPL-CI</option>
-                          </select>
+                          <label className="block text-[10px] text-slate-500 mb-1">Juzgado</label>
+                          <input type="text" value={codigoJuzgadoExpediente} onChange={e => setCodigoJuzgadoExpediente(e.target.value.toUpperCase().replace(/[^A-Z]/g, '').slice(0, 5))} placeholder="" maxLength={5} className="w-full bg-slate-50 border border-slate-300 rounded-lg px-2 py-2 text-xs font-mono text-slate-900" aria-label="Código del juzgado" />
+                        </div>
+                        <div>
+                          <label className="block text-[10px] text-slate-500 mb-1">Especialidad</label>
+                          <input type="text" value={especialidadExpediente} onChange={e => setEspecialidadExpediente(e.target.value.toUpperCase().replace(/[^A-Z]/g, '').slice(0, 5))} placeholder="" maxLength={5} className="w-full bg-slate-50 border border-slate-300 rounded-lg px-2 py-2 text-xs font-mono text-slate-900" aria-label="Código de especialidad" />
                         </div>
                         <div>
                           <label className="block text-[10px] text-slate-500 mb-1">N.º juzgado</label>

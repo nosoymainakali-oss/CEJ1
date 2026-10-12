@@ -237,21 +237,6 @@ export const Header: React.FC<HeaderProps> = ({
               </button>
             )}
 
-
-            {/* Pestaña morada: AGENDA JUDICIAL */}
-            <button
-              onClick={() => onChangeVista('agenda_judicial')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer border ${
-                vistaActual === 'agenda_judicial'
-                  ? 'bg-rose-800 text-white shadow border-rose-300 font-black'
-                  : 'bg-rose-800/80 hover:bg-rose-800 text-rose-100 border-rose-400/50'
-              }`}
-              title="Agenda de audiencias y diligencias por magistrado"
-            >
-              <CalendarDays className="w-3.5 h-3.5 text-rose-200" />
-              <span className="uppercase tracking-wider text-[10px] sm:text-xs">{t.agendaJudicial}</span>
-            </button>
-
           </nav></div>
 
           {/* Logo de la Facultad (esquina superior derecha) */}
