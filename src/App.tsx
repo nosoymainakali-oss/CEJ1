@@ -94,6 +94,8 @@ export default function App() {
   });
 
 
+  const [estadoCompartidoListo, setEstadoCompartidoListo] = useState(false);
+
   // Current case list
   const [expedientes, setExpedientes] = useState<Expediente[]>(() => {
     if (typeof window !== 'undefined') {
@@ -172,6 +174,85 @@ export default function App() {
       console.warn(e);
     }
   }, [agendaMagistrados]);
+
+  // Sincronizar expedientes y agenda con Supabase para compartirlos entre dispositivos.
+  // El almacenamiento local se conserva como respaldo si la API no está disponible.
+  useEffect(() => {
+    let cancelado = false;
+
+    const cargarEstadoCompartido = async () => {
+      try {
+        const respuesta = await fetch('/api/estado');
+        if (!respuesta.ok) throw new Error('No se pudo consultar el estado compartido');
+        const resultado = await respuesta.json();
+
+        if (cancelado) return;
+
+        if (resultado.contenido && Array.isArray(resultado.contenido.expedientes) &&
+            Array.isArray(resultado.contenido.agendaMagistrados)) {
+          setExpedientes(resultado.contenido.expedientes);
+          setAgendaMagistrados(resultado.contenido.agendaMagistrados);
+        } else {
+          // Primera apertura: conservar y registrar los datos locales existentes.
+          const localesExpedientes = (() => {
+            try {
+              const guardados = localStorage.getItem('sjd_expediente_00140_v3');
+              return guardados ? JSON.parse(guardados) : INITIAL_EXPEDIENTES;
+            } catch {
+              return INITIAL_EXPEDIENTES;
+            }
+          })();
+          const localesAgenda = (() => {
+            try {
+              const guardados = localStorage.getItem('sjd_agenda_magistrados_v1');
+              if (guardados) return JSON.parse(guardados);
+            } catch {}
+            return agendaMagistrados;
+          })();
+
+          setExpedientes(localesExpedientes);
+          setAgendaMagistrados(localesAgenda);
+          const inicializar = await fetch('/api/estado', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              expedientes: localesExpedientes,
+              agendaMagistrados: localesAgenda,
+            }),
+          });
+          if (!inicializar.ok) throw new Error('No se pudo inicializar el estado compartido');
+        }
+      } catch (error) {
+        console.error('No se pudo cargar la información compartida; se conserva el respaldo local.', error);
+      } finally {
+        if (!cancelado) setEstadoCompartidoListo(true);
+      }
+    };
+
+    void cargarEstadoCompartido();
+    return () => { cancelado = true; };
+  // Se ejecuta únicamente al montar la aplicación.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (!estadoCompartidoListo) return;
+    const guardarEstadoCompartido = async () => {
+      try {
+        const respuesta = await fetch('/api/estado', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ expedientes, agendaMagistrados }),
+        });
+        if (!respuesta.ok) {
+          console.error('No se pudieron guardar los cambios en Supabase.');
+        }
+      } catch (error) {
+        console.error('Error al sincronizar con Supabase:', error);
+      }
+    };
+    void guardarEstadoCompartido();
+  }, [estadoCompartidoListo, expedientes, agendaMagistrados]);
 
   // Accessibility State (High Contrast)
   const [altoContraste, setAltoContraste] = useState(false);
