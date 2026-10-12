@@ -70,6 +70,7 @@ export interface Resolucion {
   contenidoCompleto: string;
   codigoBarras: string;
   codigoQRData?: string;
+  ccv?: string;
   archivosAdjuntos: ArchivoAdjunto[];
   resumenSencillo: ResumenSencillo;
   calculoPlazo?: CalculoPlazo;
