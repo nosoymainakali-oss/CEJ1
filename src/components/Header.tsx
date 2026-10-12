@@ -234,6 +234,13 @@ export const Header: React.FC<HeaderProps> = ({
             )}
 
           </nav>
+
+          {/* Logo de la Facultad (esquina superior derecha) */}
+          <img
+            src="/logo-una-puno.png"
+            alt="Logo de la Facultad de Ciencias Jurídicas y Políticas, UNA Puno"
+            className="w-14 h-14 rounded-full bg-white p-0.5 border-2 border-sky-200 shadow-md shrink-0 object-contain"
+          />
         </div>
       </div>
     </header>
