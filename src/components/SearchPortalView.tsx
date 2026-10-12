@@ -5,7 +5,10 @@ import {
   User, 
   ChevronRight, 
   AlertCircle, 
-  FolderOpen
+  FolderOpen,
+  CalendarDays,
+  MessageCircle,
+  Settings2
 } from 'lucide-react';
 import { Expediente, RolUsuario, Idioma, DiligenciaAgenda } from '../types/judicial';
 import { DICCIONARIO } from '../utils/i18n';
@@ -18,6 +21,8 @@ interface SearchPortalViewProps {
   nombreUsuario: string;
   idioma: Idioma;
   agendaMagistrados: DiligenciaAgenda[];
+  onAbrirAdministracionAgenda: () => void;
+  onAbrirJuezTeEscucha: () => void;
 }
 
 export const SearchPortalView: React.FC<SearchPortalViewProps> = ({
@@ -28,6 +33,8 @@ export const SearchPortalView: React.FC<SearchPortalViewProps> = ({
   nombreUsuario,
   idioma,
   agendaMagistrados,
+  onAbrirAdministracionAgenda,
+  onAbrirJuezTeEscucha,
 }) => {
   const t = DICCIONARIO[idioma];
 
@@ -126,6 +133,20 @@ export const SearchPortalView: React.FC<SearchPortalViewProps> = ({
           {t.bienvenido}, <strong className="text-white uppercase">{nombreUsuario}</strong>. {t.subtituloBusqueda}
         </p>
       </div>
+
+      {/* Accesos independientes de atención ciudadana y administración de agenda */}
+      <section className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <button type="button" onClick={onAbrirJuezTeEscucha} className="flex items-center gap-4 rounded-2xl border-2 border-sky-200 bg-white p-5 text-left shadow-sm transition hover:border-sky-500 hover:shadow-md">
+          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-sky-100 text-[#0369a1]"><MessageCircle className="h-6 w-6" /></span>
+          <span className="min-w-0 flex-1"><strong className="block text-sm font-black text-slate-900">El Juez Te Escucha</strong><span className="mt-1 block text-xs leading-relaxed text-slate-600">Solicitudes de atención y citas con el magistrado.</span></span>
+          <ChevronRight className="h-5 w-5 shrink-0 text-sky-700" />
+        </button>
+        {rol === 'editor' && <button type="button" onClick={onAbrirAdministracionAgenda} className="flex items-center gap-4 rounded-2xl border-2 border-sky-200 bg-white p-5 text-left shadow-sm transition hover:border-sky-500 hover:shadow-md">
+          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-sky-100 text-[#0369a1]"><CalendarDays className="h-6 w-6" /></span>
+          <span className="min-w-0 flex-1"><strong className="block text-sm font-black text-slate-900">Administración de Agenda de Magistrados</strong><span className="mt-1 block text-xs leading-relaxed text-slate-600">Registrar, editar y eliminar diligencias sin ingresar al visor de expedientes.</span></span>
+          <ChevronRight className="h-5 w-5 shrink-0 text-sky-700" />
+        </button>}
+      </section>
 
       {/* Agenda Judicial en la página de inicio */}
       <section className="bg-white rounded-2xl border-2 border-sky-200 shadow-md overflow-hidden">
