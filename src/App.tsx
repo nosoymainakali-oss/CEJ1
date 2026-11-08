@@ -51,6 +51,7 @@ import { EditResolucionModal } from './components/EditResolucionModal';
 import { NewActuadoModal } from './components/NewActuadoModal';
 import { LiveExpedienteEditorModal } from './components/LiveExpedienteEditorModal';
 import { ElJuezTeEscucha } from './components/ElJuezTeEscucha';
+import { LuimiChatbot } from './components/LuimiChatbot';
 import { generarExplicacionIA } from './services/aiExplainer';
 
 const NOMBRE_EDITOR = 'Eduardo Luismario Medina Humpiri';
@@ -863,6 +864,7 @@ export default function App() {
         onLoginExitoso={handleLoginExitoso}
         onAbrirJuezTeEscucha={() => setVistaActual('juez_te_escucha')}
         onAbrirAgendaJudicial={() => setVistaActual('agenda_judicial')}
+        onAccesoVip={() => handleLoginExitoso({ rol: 'editor', nombreUsuario: 'INVITADO VIP · DEMOSTRACIÓN', dniUsuario: 'VIP-DEMO' })}
       />
     );
   }
@@ -1202,6 +1204,8 @@ export default function App() {
       />
 
       {/* Footer with Academic Disclaimer & Attribution with i18n */}
+      <LuimiChatbot />
+
       <Footer idioma={idioma} />
     </div>
   );
