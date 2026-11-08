@@ -17,6 +17,7 @@ interface LoginScreenProps {
   onLoginExitoso: (datos: { rol: RolUsuario; nombreUsuario: string; dniUsuario: string }) => void;
   onAbrirJuezTeEscucha?: () => void;
   onAbrirAgendaJudicial?: () => void;
+  onAccesoVip?: () => void;
 }
 
 type TipoDocumento = 'DNI' | 'PASAPORTE' | 'CARNET_EXTRANJERIA';
@@ -66,7 +67,8 @@ function generarNombreCiudadano(doc: string, tipo: TipoDocumento): string {
 export const LoginScreen: React.FC<LoginScreenProps> = ({ 
   onLoginExitoso,
   onAbrirJuezTeEscucha,
-  onAbrirAgendaJudicial
+  onAbrirAgendaJudicial,
+  onAccesoVip
 }) => {
   const [tipoAcceso, setTipoAcceso] = useState<'ciudadano' | 'servidor'>('ciudadano');
 
@@ -562,6 +564,21 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
             </div>
           )}
         </div>
+      </div>
+
+      {/* Acceso VIP: modo de demostración académica con permisos de editor */}
+      <div className="w-full max-w-lg mx-auto px-4 pb-6 -mt-2">
+        <button
+          type="button"
+          onClick={onAccesoVip}
+          className="vip-access-button group w-full flex items-center justify-center gap-3 rounded-xl px-5 py-3.5 text-sm font-black tracking-[0.18em] transition-all duration-300 focus:outline-none focus-visible:ring-4 focus-visible:ring-amber-300/60"
+          title="Ingresar al modo de demostración con acceso a todas las funciones"
+        >
+          <span className="text-lg transition-transform duration-300 group-hover:scale-110">✦</span>
+          <span>SOY VIP</span>
+          <span className="text-lg transition-transform duration-300 group-hover:scale-110">✦</span>
+        </button>
+        <p className="mt-2 text-center text-[10px] font-medium tracking-wide text-slate-500">ACCESO LIBRE · SIMULACIÓN ACADÉMICA</p>
       </div>
 
       {/* Academic Disclaimer & Attribution Footer on Login */}
