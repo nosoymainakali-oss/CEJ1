@@ -122,3 +122,122 @@ body, button, input, select, textarea {
 .high-contrast .shadow-xl {
   box-shadow: 0 0 0 2px #ffffff !important;
 }
+
+
+/* CEJ · Renovación visual LegalTech */
+:root {
+  color-scheme: light;
+  --cej-ink: #10243a;
+  --cej-navy: #102b46;
+  --cej-blue: #176b87;
+  --cej-gold: #c99a3b;
+  --cej-gold-light: #f4dfaa;
+}
+body {
+  background: #f4f7fb;
+  color: var(--cej-ink);
+  -webkit-font-smoothing: antialiased;
+}
+button, input, select, textarea {
+  transition-timing-function: cubic-bezier(.2,.75,.25,1);
+}
+.vip-access-button {
+  color: #3b2a0b;
+  background: linear-gradient(115deg, #f8e7b7 0%, #d7ad58 34%, #f6df9f 68%, #bd8b2d 100%);
+  border: 1px solid #b88a36;
+  box-shadow: 0 8px 24px rgba(157, 112, 31, .22), inset 0 1px 0 rgba(255,255,255,.8);
+}
+.vip-access-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 13px 30px rgba(157, 112, 31, .3), inset 0 1px 0 rgba(255,255,255,.9);
+  filter: saturate(1.08);
+}
+.vip-access-button:active { transform: translateY(0) scale(.99); }
+::selection { background: rgba(201,154,59,.25); color: #10243a; }
+
+
+/* Acabado premium del acceso y navegación */
+.cej-login-shell {
+  background:
+    radial-gradient(ellipse at 12% 8%, rgba(212, 177, 105, .14), transparent 34%),
+    radial-gradient(ellipse at 88% 78%, rgba(36, 113, 139, .10), transparent 36%),
+    linear-gradient(145deg, #f7f8fa 0%, #eef3f7 52%, #f8f7f3 100%) !important;
+}
+.cej-top-banner {
+  background: linear-gradient(100deg, #0d263e 0%, #173d58 58%, #20596b 100%) !important;
+  border-bottom: 1px solid rgba(213, 177, 105, .55) !important;
+}
+.cej-login-card {
+  border: 1px solid rgba(191, 204, 216, .85) !important;
+  border-radius: 1.4rem !important;
+  box-shadow: 0 28px 80px rgba(16, 43, 70, .13), 0 4px 12px rgba(16, 43, 70, .05) !important;
+}
+.cej-login-card-header {
+  background: linear-gradient(128deg, #102b46 0%, #174b68 58%, #277386 100%) !important;
+  border-bottom: 2px solid #c99a3b;
+}
+.cej-app-header {
+  background: linear-gradient(105deg, #102b46 0%, #17435e 58%, #1e687b 100%) !important;
+  border-bottom: 2px solid #c99a3b !important;
+  box-shadow: 0 10px 28px rgba(16, 43, 70, .16) !important;
+}
+.cej-app-header > div:first-child {
+  background: rgba(7, 24, 40, .34) !important;
+  border-color: rgba(201, 154, 59, .25) !important;
+}
+.cej-app-header nav {
+  border-color: rgba(255,255,255,.16) !important;
+  box-shadow: 0 8px 22px rgba(4, 19, 34, .16) !important;
+}
+.cej-app-header nav button {
+  border-radius: .65rem;
+  transition: background .2s ease, transform .2s ease;
+}
+.cej-app-header nav button:hover { transform: translateY(-1px); }
+.cej-app-header nav button[class*="bg-[#0284c7]"] {
+  background: linear-gradient(135deg, #c99a3b, #f0d99e) !important;
+  color: #172c3d !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
+
+
+/* Acabado premium del acceso y navegación */
+.cej-login-shell {
+  background:
+    radial-gradient(ellipse at 12% 8%, rgba(212, 177, 105, .14), transparent 34%),
+    radial-gradient(ellipse at 88% 78%, rgba(36, 113, 139, .10), transparent 36%),
+    linear-gradient(145deg, #f7f8fa 0%, #eef3f7 52%, #f8f7f3 100%) !important;
+}
+.cej-top-banner {
+  background: linear-gradient(100deg, #0d263e 0%, #173d58 58%, #20596b 100%) !important;
+  border-bottom: 1px solid rgba(213, 177, 105, .55) !important;
+}
+.cej-login-card {
+  border: 1px solid rgba(191, 204, 216, .85) !important;
+  border-radius: 1.4rem !important;
+  box-shadow: 0 28px 80px rgba(16, 43, 70, .13), 0 4px 12px rgba(16, 43, 70, .05) !important;
+}
+.cej-login-card-header {
+  background: linear-gradient(128deg, #102b46 0%, #174b68 58%, #277386 100%) !important;
+  border-bottom: 2px solid #c99a3b;
+}
+.cej-app-header {
+  background: linear-gradient(105deg, #102b46 0%, #17435e 58%, #1e687b 100%) !important;
+  border-bottom: 2px solid #c99a3b !important;
+  box-shadow: 0 10px 28px rgba(16, 43, 70, .16) !important;
+}
+.cej-app-header > div:first-child {
+  background: rgba(7, 24, 40, .34) !important;
+  border-color: rgba(201, 154, 59, .25) !important;
+}
+.cej-app-header nav {
+  border-color: rgba(255,255,255,.16) !important;
+  box-shadow: 0 8px 22px rgba(4, 19, 34, .16) !important;
+}
+.cej-app-header nav button {
+  border-radius: .65rem;
+  transition: background .2s ease, transform .2s ease;
+}
+.cej-app-header nav button:hover { transform: translateY(-1px); }
