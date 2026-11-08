@@ -839,7 +839,7 @@ export default function App() {
 
     if (vistaActual === 'agenda_judicial') {
       return (
-        <div className="min-h-screen bg-slate-50 flex flex-col font-arial" style={{ fontFamily: 'Arial, sans-serif' }}>
+        <div className="cej-public-shell min-h-screen bg-slate-50 flex flex-col font-arial" style={{ fontFamily: 'Arial, sans-serif' }}>
           <div className="bg-purple-800 text-white py-2.5 px-4 border-b border-purple-400/40">
             <div className="max-w-6xl mx-auto flex items-center justify-between text-xs">
               <span className="font-bold uppercase tracking-wide">{DICCIONARIO[idioma].agendaJudicial}</span>
@@ -851,7 +851,7 @@ export default function App() {
               </button>
             </div>
           </div>
-          <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-6">
+          <main className="cej-main-content flex-1 max-w-7xl w-full mx-auto px-4 py-6">
             <AgendaJudicialCalendario agenda={agendaMagistrados} idioma={idioma} />
           </main>
           <Footer idioma={idioma} />
@@ -902,7 +902,7 @@ export default function App() {
   
       )}
       {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-6">
+      <main className="cej-main-content flex-1 max-w-7xl w-full mx-auto px-4 py-6">
         {/* VISTA 1: BÚSQUEDA EXCLUSIVA (Displayed directly after login) */}
         {vistaActual === 'busqueda' && (
           <SearchPortalView
