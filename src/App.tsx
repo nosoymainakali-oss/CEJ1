@@ -810,7 +810,7 @@ export default function App() {
   if (!sesionIniciada) {
     if (vistaActual === 'juez_te_escucha') {
       return (
-        <div className="min-h-screen bg-slate-50 flex flex-col font-arial" style={{ fontFamily: 'Arial, sans-serif' }}>
+        <div className="cej-public-shell min-h-screen bg-slate-50 flex flex-col font-arial" style={{ fontFamily: 'Arial, sans-serif' }}>
           <div className="bg-[#0c4a6e] text-white py-2.5 px-4 border-b border-sky-400/40">
             <div className="max-w-6xl mx-auto flex items-center justify-between text-xs">
               <span className="font-bold">Poder Judicial del Perú &bull; Plataforma Oficial de Consulta Judicial &bull; Perú</span>
@@ -822,7 +822,7 @@ export default function App() {
               </button>
             </div>
           </div>
-          <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-6">
+          <main className="cej-main-content flex-1 max-w-7xl w-full mx-auto px-4 py-6">
             <ElJuezTeEscucha
               onVolver={() => setVistaActual('busqueda')}
               dniInicial=""
@@ -878,7 +878,7 @@ export default function App() {
 
   return (
     <div
-      className={`min-h-screen flex flex-col font-arial transition-colors ${
+      className={`cej-workspace min-h-screen flex flex-col font-arial transition-colors ${
         altoContraste ? 'high-contrast' : 'bg-slate-50 text-slate-900'
       }`}
       style={{ fontFamily: 'Arial, sans-serif' }}
@@ -1204,7 +1204,7 @@ export default function App() {
       />
 
       {/* Footer with Academic Disclaimer & Attribution with i18n */}
-      <LuimiChatbot />
+      <LuimiChatbot onNavigate={(vista) => { setAdministracionAgendaAbierta(false); setVistaActual(vista); }} />
 
       <Footer idioma={idioma} />
     </div>
