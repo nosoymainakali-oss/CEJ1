@@ -83,6 +83,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
   const [usuarioServidor, setUsuarioServidor] = useState('');
   const [passwordServidor, setPasswordServidor] = useState('');
   const [errorServidor, setErrorServidor] = useState('');
+  const [validandoServidor, setValidandoServidor] = useState(false);
 
   // Random 5-char judicial captcha
   const regenerarCaptcha = () => {
@@ -202,10 +203,41 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
     }, 600);
   };
 
-  // Este prototipo no autentica personal del Poder Judicial.
-  const handleLoginServidor = (e: React.FormEvent) => {
+  // Valida las credenciales del perfil de personal en el servidor, nunca en el navegador.
+  const handleLoginServidor = async (e: React.FormEvent) => {
     e.preventDefault();
-    setErrorServidor('La autenticación institucional no está implementada. Utiliza SOY VIP únicamente para explorar el rol de editor de demostración.');
+    setErrorServidor('');
+    setValidandoServidor(true);
+
+    try {
+      const respuesta = await fetch('/api/auth/editor', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          usuario: usuarioServidor.trim(),
+          clave: passwordServidor,
+        }),
+      });
+
+      const resultado = await respuesta.json().catch(() => ({}));
+      if (!respuesta.ok) {
+        throw new Error(resultado.error || 'No se pudo validar el acceso.');
+      }
+
+      onLoginExitoso({
+        rol: 'editor',
+        nombreUsuario: 'EDUARDO LUISMARIO MEDINA HUMPIRI',
+        dniUsuario: usuarioServidor.trim(),
+      });
+    } catch (error) {
+      setErrorServidor(
+        error instanceof Error
+          ? error.message
+          : 'No se pudo validar el acceso. Inténtalo nuevamente.'
+      );
+    } finally {
+      setValidandoServidor(false);
+    }
   };
 
   return (
@@ -482,35 +514,37 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
               <div className="bg-sky-50 border border-sky-200 rounded-xl p-3.5 flex items-start gap-3">
                 <ShieldCheck className="w-5 h-5 text-[#0369a1] shrink-0 mt-0.5" />
                 <div className="text-xs text-sky-950 leading-relaxed">
-                  <strong>Acceso de personal:</strong> utilice el acceso avanzado habilitado para la exposición. Las credenciales institucionales no se validan en este entorno.
+                  <strong>Acceso de personal:</strong> ingrese con las credenciales del perfil de servidor configuradas para este entorno académico. La validación se realiza en el servidor; no existe conexión con el directorio institucional del Poder Judicial.
                 </div>
               </div>
 
               <form onSubmit={handleLoginServidor} className="space-y-4">
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                    Identificador de prueba (no es una cuenta institucional):
+                    Usuario de acceso:
                   </label>
                   <input
                     type="text"
                     value={usuarioServidor}
                     onChange={(e) => setUsuarioServidor(e.target.value)}
-                    placeholder=""
-                    className="w-full bg-white border-2 border-sky-200 focus:border-[#0284c7] rounded-lg px-4 py-2.5 text-base font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-400/20 shadow-2xs font-mono"
+                    placeholder="Ingrese su usuario"
                     autoFocus
+                    autoComplete="username"
+                    className="w-full bg-white border-2 border-sky-200 focus:border-[#0284c7] rounded-lg px-4 py-2.5 text-base font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-400/20 shadow-2xs font-mono"
                     required
                   />
                 </div>
 
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                    Clave ficticia (no se valida):
+                    Contraseña:
                   </label>
                   <input
                     type="password"
                     value={passwordServidor}
                     onChange={(e) => setPasswordServidor(e.target.value)}
-                    placeholder=""
+                    placeholder="Ingrese su contraseña"
+                    autoComplete="current-password"
                     className="w-full bg-white border-2 border-sky-200 focus:border-[#0284c7] rounded-lg px-4 py-2.5 text-base font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-400/20 shadow-2xs"
                     required
                   />
@@ -525,10 +559,11 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
 
                 <button
                   type="submit"
-                  className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-[#0c4a6e] hover:bg-[#0369a1] text-white font-bold text-sm rounded-lg shadow-md hover:shadow-lg transition cursor-pointer"
+                  disabled={validandoServidor}
+                  className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-[#0c4a6e] hover:bg-[#0369a1] text-white font-bold text-sm rounded-lg shadow-md hover:shadow-lg transition cursor-pointer disabled:opacity-60 disabled:cursor-wait"
                 >
                   <Lock className="w-4 h-4 text-sky-300" />
-                  <span>Validar acceso de demostración</span>
+                  <span>{validandoServidor ? 'Verificando credenciales...' : 'Ingresar al sistema'}</span>
                 </button>
               </form>
             </div>
