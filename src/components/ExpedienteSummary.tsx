@@ -14,7 +14,8 @@ const fechaLegible = (valor: string) => {
 
 export const ExpedienteSummary: React.FC<Props> = ({ expediente }) => {
   const hitos = [...expediente.lineaTiempo].sort((a, b) => a.fecha.localeCompare(b.fecha) || a.orden - b.orden);
-  const ultimaActuacion = hitos.filter(h => h.estado === 'completado' || h.estado === 'en_proceso').at(-1);
+  const actuacionesRegistradas = hitos.filter(h => h.estado === 'completado' || h.estado === 'en_proceso');
+  const ultimaActuacion = actuacionesRegistradas[actuacionesRegistradas.length - 1];
   const siguienteActuacion = hitos.find(h => h.estado === 'pendiente');
   const escritos = expediente.resoluciones.filter(r => r.tipo === 'ESCRITO').length;
   const resoluciones = expediente.resoluciones.filter(r => r.tipo !== 'ESCRITO').length;
