@@ -92,7 +92,7 @@ export default function App() {
   // Current case list
   const [expedientes, setExpedientes] = useState<Expediente[]>(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('sjd_expediente_00140_v3');
+      const saved = localStorage.getItem('sjd_expediente_00140_v4');
       if (saved) {
         try {
           return JSON.parse(saved);
@@ -263,7 +263,7 @@ export default function App() {
           // Primera apertura: conservar y registrar los datos locales existentes.
           const localesExpedientes = (() => {
             try {
-              const guardados = localStorage.getItem('sjd_expediente_00140_v3');
+              const guardados = localStorage.getItem('sjd_expediente_00140_v4');
               return guardados ? JSON.parse(guardados) : INITIAL_EXPEDIENTES;
             } catch {
               return INITIAL_EXPEDIENTES;
@@ -342,7 +342,7 @@ export default function App() {
   useEffect(() => {
     if (!estadoCompartidoListo) return;
     try {
-      localStorage.setItem('sjd_expediente_00140_v3', JSON.stringify(expedientes));
+      localStorage.setItem('sjd_expediente_00140_v4', JSON.stringify(expedientes));
     } catch (e) {
       console.warn('Could not save to localStorage:', e);
     }
