@@ -48,11 +48,12 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="cej-app-header border-b border-sky-300 bg-[#0c4a6e] text-white shadow-md sticky top-0 z-40 transition-colors font-arial" style={{ fontFamily: 'Arial, sans-serif' }}>
+      <a href="#contenido-principal" className="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3 focus:z-[90] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-slate-900">Saltar al contenido principal</a>
       {/* Top Utility Bar */}
       <div className="bg-[#07334e] text-sky-100 text-xs px-4 py-1.5 border-b border-sky-900/60">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-2 font-bold tracking-wide">
-            <span className="w-2.5 h-2.5 rounded-full bg-sky-400 animate-pulse"></span>
+            <span className="w-2.5 h-2.5 rounded-full bg-amber-300"></span>
             <span>{t.cabeceraInstitucional}</span>
           </div>
 
@@ -145,26 +146,19 @@ export const Header: React.FC<HeaderProps> = ({
       {/* Main Bar */}
       <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-3">
         <div className="flex items-center gap-3">
-          <div className="w-14 h-14 shrink-0 overflow-hidden rounded-lg flex items-center justify-center" aria-label="Logotipo oficial del Poder Judicial del Perú">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/5/58/Poder_Judicial_del_Peru.png"
-              alt="Logotipo del Poder Judicial del Perú"
-              className="h-14 w-14 object-cover object-top"
-              referrerPolicy="no-referrer"
-            />
-          </div>
+          <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-amber-300/50 bg-white/10" aria-label="Identidad visual propia de CEJ"><Scale className="h-8 w-8 text-amber-200" /></div>
 
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-base sm:text-xl font-bold tracking-tight text-white uppercase">
-                {t.institucion}
+                CEJ · SIMULADOR ACADÉMICO
               </h1>
               <span className="bg-[#38bdf8] text-slate-950 text-[10px] font-black px-1.5 py-0.5 rounded uppercase">
                 {t.distintivoDigital}
               </span>
             </div>
             <p className="text-xs text-sky-100 font-medium">
-              {t.subtitulo} &bull; {t.institucion}
+              Entorno independiente de demostración &bull; Datos ficticios
             </p>
           </div>
         </div>

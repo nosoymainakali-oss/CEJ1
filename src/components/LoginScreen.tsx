@@ -12,6 +12,7 @@ import {
   CalendarDays
 } from 'lucide-react';
 import { RolUsuario } from '../types/judicial';
+import { LegalTransparencyPanel } from './LegalTransparencyPanel';
 
 interface LoginScreenProps {
   onLoginExitoso: (datos: { rol: RolUsuario; nombreUsuario: string; dniUsuario: string }) => void;
@@ -24,14 +25,9 @@ type TipoDocumento = 'DNI' | 'PASAPORTE' | 'CARNET_EXTRANJERIA';
 
 // Simulated directory of verified citizen identities
 const REGISTRO_CIUDADANOS: Record<string, string> = {
-  '75412933': 'EDUARDO LUISMARIO MEDINA HUMPIRI',
-  '45892147': 'JUAN CARLOS MAMANI QUISPE',
-  '70241589': 'MARIA ELENA ROJAS APAZA',
-  '41258963': 'CARLOS ALBERTO CONDORI FLORES',
-  '73521489': 'ANA PATRICIA TICONACONDORI',
-  '72819230': 'YENI LUZMILA MAMANI HUANCA',
-  '40192837': 'VICTOR RAUL CHURA CHOQUE',
-  '71829304': 'GLADYS SONIA QUISPE MAMANI',
+  '00000000': 'CIUDADANO DE PRUEBA',
+  '11111111': 'USUARIO DE DEMOSTRACIÓN',
+  '22222222': 'PERSONA FICTICIA',
 };
 
 function generarNombreCiudadano(doc: string, tipo: TipoDocumento): string {
@@ -83,11 +79,10 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
   const [ciudadanoConfirmado, setCiudadanoConfirmado] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-  // Servidor Judicial states
+  // Editor de demostración states
   const [usuarioServidor, setUsuarioServidor] = useState('');
   const [passwordServidor, setPasswordServidor] = useState('');
   const [errorServidor, setErrorServidor] = useState('');
-  const [accesoAgendaPendiente, setAccesoAgendaPendiente] = useState(false);
 
   // Random 5-char judicial captcha
   const regenerarCaptcha = () => {
@@ -207,24 +202,10 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
     }, 600);
   };
 
-  // Servidor Judicial login
+  // Este prototipo no autentica personal del Poder Judicial.
   const handleLoginServidor = (e: React.FormEvent) => {
     e.preventDefault();
-    setErrorServidor('');
-
-    if (usuarioServidor.trim() === '75412933' && passwordServidor.trim() === '120403') {
-      onLoginExitoso({
-        rol: 'editor',
-        nombreUsuario: 'EDUARDO LUISMARIO MEDINA HUMPIRI',
-        dniUsuario: '75412933',
-      });
-      if (accesoAgendaPendiente) {
-        onAbrirAgendaJudicial?.();
-        setAccesoAgendaPendiente(false);
-      }
-    } else {
-      setErrorServidor('Credenciales incorrectas. Verifique el usuario y la contraseña del servidor judicial.');
-    }
+    setErrorServidor('La autenticación institucional no está implementada. Utiliza SOY VIP únicamente para explorar el rol de editor de demostración.');
   };
 
   return (
@@ -237,10 +218,10 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
         <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-between text-xs gap-2">
           <div className="flex items-center gap-2 font-bold tracking-wide">
             <span className="w-2.5 h-2.5 rounded-full bg-sky-400 animate-pulse"></span>
-            <span>PODER JUDICIAL DEL PERÚ &bull; SISTEMA JUDICIAL DIGITAL</span>
+            <span>CEJ &bull; SIMULADOR ACADÉMICO INDEPENDIENTE</span>
           </div>
           <div className="text-sky-200">
-            <span>CONSULTA DE EXPEDIENTES JUDICIALES</span>
+            <span>ENTORNO DE DEMOSTRACIÓN &bull; DATOS FICTICIOS</span>
           </div>
         </div>
       </div>
@@ -250,23 +231,18 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
         <div className="cej-login-card bg-white rounded-2xl shadow-xl border-2 border-sky-200 overflow-hidden">
           {/* Header */}
           <div className="cej-login-card-header bg-gradient-to-r from-[#0369a1] via-[#0284c7] to-[#0c4a6e] text-white p-6 text-center">
-            <div className="inline-flex p-1 bg-white rounded-xl border-2 border-sky-200 mb-3 shadow-inner">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/5/58/Poder_Judicial_del_Peru.png"
-                alt="Logotipo del Poder Judicial del Perú"
-                className="w-20 h-20 object-contain"
-                referrerPolicy="no-referrer"
-              />
-            </div>
+            <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-2xl border border-amber-200/50 bg-white/10"><Scale className="h-9 w-9 text-amber-200" /></div>
             <h1 className="text-xl sm:text-2xl font-bold tracking-tight uppercase">
-              PORTAL JUDICIAL CIUDADANO
+              CONSULTA DE EXPEDIENTES &bull; CEJ
             </h1>
             <p className="text-xs sm:text-sm text-sky-100 mt-1 font-medium">
-              PODER JUDICIAL DEL PERÚ &bull; ACCESO OFICIAL
+              SIMULADOR ACADÉMICO &bull; SIN VINCULACIÓN INSTITUCIONAL
             </p>
           </div>
 
-          {/* Accesos de autenticación: solo ciudadano y servidor judicial */}
+          <div role="note" className="border-b border-amber-200 bg-amber-50 px-5 py-3 text-center text-xs font-semibold leading-5 text-amber-950">Usa únicamente identificadores ficticios, por ejemplo 00000000. No introduzcas tu DNI, pasaporte, nombre real ni información de expedientes auténticos.</div>
+
+          {/* Roles de demostración; no existe autenticación institucional */}
           <div className="grid grid-cols-2 border-b border-sky-200 bg-sky-50/70 p-1.5 gap-1.5">
             <button
               type="button"
@@ -281,7 +257,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
               }`}
             >
               <User className="w-4 h-4 text-[#0284c7]" />
-              <span>Acceso Ciudadano</span>
+              <span>Usuario de prueba</span>
             </button>
 
             <button
@@ -297,7 +273,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
               }`}
             >
               <Lock className="w-4 h-4 text-sky-700" />
-              <span>Servidor Judicial</span>
+              <span>Editor de demostración</span>
             </button>
           </div>
 
@@ -311,27 +287,23 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
                 title="Sacar cita con el Juez - Módulo El Juez Te Escucha"
               >
                 <Scale className="w-4 h-4 text-rose-200" />
-                <span className="uppercase tracking-wider font-black">EL JUEZ TE ESCUCHA</span>
+                <span className="uppercase tracking-wider font-black">EL JUEZ TE ESCUCHA · DEMO</span>
               </button>
             )}
             {onAbrirAgendaJudicial && (
               <button
                 type="button"
-                onClick={() => {
-                  setAccesoAgendaPendiente(true);
-                  setTipoAcceso('servidor');
-                  setErrorServidor('');
-                }}
+                onClick={() => onAbrirAgendaJudicial?.()}
                 className="flex-1 min-w-[180px] py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition cursor-pointer bg-rose-800 hover:bg-rose-900 text-white shadow-sm border border-rose-300"
                 title="Consultar la agenda de audiencias y diligencias de cada magistrado"
               >
                 <CalendarDays className="w-4 h-4 text-rose-200" />
-                <span className="uppercase tracking-wider font-black">{accesoAgendaPendiente ? 'VALIDAR ACCESO A AGENDA' : 'AGENDA JUDICIAL'}</span>
+                <span className="uppercase tracking-wider font-black">AGENDA DE PRUEBA</span>
               </button>
             )}
           </div>
 
-          {/* Tab 1: Ciudadano with Document Type Selector and CAPTCHA */}
+          {/* Acceso ciudadano simulado: utilizar exclusivamente identificadores ficticios. */}
           {tipoAcceso === 'ciudadano' ? (
             <div className="p-6 sm:p-8 space-y-5">
               <form onSubmit={handleAccesoCiudadano} className="space-y-4">
@@ -395,10 +367,10 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
                     {tipoDocumento === 'DNI'
-                      ? 'Número de DNI:'
+                      ? 'Identificador ficticio de prueba (no uses un DNI real):'
                       : tipoDocumento === 'PASAPORTE'
-                      ? 'Número de Pasaporte:'
-                      : 'Número de Carnet de Extranjería:'}
+                      ? 'Identificador ficticio de prueba (no uses un pasaporte real):'
+                      : 'Identificador ficticio de prueba (no uses un documento real):'}
                   </label>
                   <input
                     type="text"
@@ -411,7 +383,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
                         setNumeroDocumento(e.target.value.toUpperCase());
                       }
                     }}
-                    placeholder=""
+                    placeholder="00000000"
                     className="w-full bg-white border-2 border-sky-200 focus:border-[#0284c7] rounded-lg px-4 py-2.5 text-base font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-400/20 shadow-2xs font-mono"
                     autoFocus
                     required
@@ -428,7 +400,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
                       type="text"
                       value={nombreTitular}
                       onChange={(e) => setNombreTitular(e.target.value)}
-                      placeholder=""
+                      placeholder="00000000"
                       className="w-full bg-white border-2 border-sky-200 focus:border-[#0284c7] rounded-lg px-3.5 py-2 text-sm font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-400/20 shadow-2xs"
                       required
                     />
@@ -512,14 +484,14 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
               <div className="bg-sky-50 border border-sky-200 rounded-xl p-3.5 flex items-start gap-3">
                 <ShieldCheck className="w-5 h-5 text-[#0369a1] shrink-0 mt-0.5" />
                 <div className="text-xs text-sky-950 leading-relaxed">
-                  <strong>Acceso de Servidor Judicial:</strong> Ingrese sus credenciales de usuario y contraseña autorizadas para funciones de administración, edición de expedientes y carga de actuados.
+                  <strong>Acceso de editor simulado:</strong> este prototipo no autentica servidores públicos ni valida credenciales institucionales. Para explorar las funciones de edición utiliza el botón «SOY VIP».
                 </div>
               </div>
 
               <form onSubmit={handleLoginServidor} className="space-y-4">
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                    Usuario:
+                    Identificador de prueba (no es una cuenta institucional):
                   </label>
                   <input
                     type="text"
@@ -534,7 +506,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
 
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                    Contraseña:
+                    Clave ficticia (no se valida):
                   </label>
                   <input
                     type="password"
@@ -558,7 +530,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
                   className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-[#0c4a6e] hover:bg-[#0369a1] text-white font-bold text-sm rounded-lg shadow-md hover:shadow-lg transition cursor-pointer"
                 >
                   <Lock className="w-4 h-4 text-sky-300" />
-                  <span>{accesoAgendaPendiente ? 'Ingresar a Agenda Judicial' : 'Iniciar Sesión como Servidor Judicial'}</span>
+                  <span>Validar acceso de demostración</span>
                 </button>
               </form>
             </div>
@@ -585,15 +557,16 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
       <footer className="bg-[#0c4a6e] text-white py-6 px-4 border-t-2 border-sky-400 text-xs text-center space-y-2">
         <div className="max-w-4xl mx-auto space-y-1.5">
           <p className="font-medium text-sky-100">
-            «Esta página web, fue creada con fines estrictamente académicos, las partes que aparecen en el presente expediente son nombres ficticios, y cualquier parecido con la realidad es puro coincidencia.»
+            «Prototipo académico independiente. Los expedientes, personas, documentos y actuaciones son ficticios. No es un servicio oficial ni está conectado con los sistemas del Estado. No introduzcas datos reales.»
           </p>
           <p className="font-bold text-white pt-1">
-            Trabajo académico perteneciente a: <span className="underline decoration-sky-400 underline-offset-4 text-sky-200">Eduardo Luismario Medina Humpiri</span>, estudiante de la <span className="text-white">Facultad de Ciencias Jurídicas y Políticas de la Universidad Nacional del Altiplano de Puno</span>.
+            Proyecto académico desarrollado por: <span className="underline decoration-sky-400 underline-offset-4 text-sky-200">Eduardo Luismario Medina Humpiri</span>, estudiante de la <span className="text-white">Facultad de Ciencias Jurídicas y Políticas de la Universidad Nacional del Altiplano de Puno</span>.
           </p>
           <p className="text-[11px] text-sky-300 font-bold uppercase tracking-wider pt-0.5">
-            GOBIERNO DIGITAL Y DERECHO INFORMÁTICO &bull; PODER JUDICIAL DEL PERÚ
+            GOBIERNO DIGITAL Y DERECHO INFORMÁTICO &bull; PROYECTO ACADÉMICO INDEPENDIENTE
           </p>
         </div>
+        <div className="mx-auto mt-3 max-w-4xl px-4"><LegalTransparencyPanel /></div>
       </footer>
     </div>
   );

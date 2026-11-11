@@ -241,3 +241,145 @@ button, input, select, textarea {
   transition: background .2s ease, transform .2s ease;
 }
 .cej-app-header nav button:hover { transform: translateY(-1px); }
+
+
+/* =========================================================
+   CEJ · Sistema visual institucional unificado
+   Alcance: vistas autenticadas, agenda y atención ciudadana.
+   Se conservan los componentes y sus clases funcionales.
+   ========================================================= */
+:root {
+  --cej-institutional-navy: #172b45;
+  --cej-institutional-blue: #294866;
+  --cej-institutional-burgundy: #812b3b;
+  --cej-institutional-gold: #b89a61;
+  --cej-canvas: #f3f5f7;
+  --cej-surface: #ffffff;
+  --cej-border: #dce2e8;
+  --cej-muted: #647184;
+}
+.cej-workspace,
+.cej-public-shell {
+  min-height: 100vh;
+  background: var(--cej-canvas);
+  color: #243247;
+}
+.cej-main-content {
+  width: min(100%, 1440px);
+  padding: 2rem clamp(1rem, 2.8vw, 2.5rem) 3rem;
+}
+.cej-workspace .cej-app-header {
+  background: var(--cej-institutional-navy) !important;
+  border-bottom: 3px solid var(--cej-institutional-gold) !important;
+  box-shadow: 0 8px 24px rgba(23,43,69,.13) !important;
+}
+.cej-workspace .cej-app-header > div:first-child {
+  background: #102238 !important;
+  border-color: rgba(184,154,97,.35) !important;
+}
+.cej-workspace .cej-app-header nav {
+  box-shadow: none !important;
+}
+.cej-workspace .cej-app-header nav button[class*="bg-[#0284c7]"] {
+  background: var(--cej-institutional-gold) !important;
+  color: #182b42 !important;
+}
+.cej-workspace main [class*="bg-gradient-to-r"],
+.cej-public-shell main [class*="bg-gradient-to-r"] {
+  background: linear-gradient(112deg, #172b45 0%, #294866 72%, #812b3b 145%) !important;
+}
+.cej-workspace main [class*="from-rose-"],
+.cej-workspace main [class*="from-purple-"],
+.cej-public-shell main [class*="from-rose-"],
+.cej-public-shell main [class*="from-purple-"] {
+  background: linear-gradient(112deg, #172b45 0%, #294866 72%, #812b3b 145%) !important;
+}
+.cej-workspace main [class*="border-rose-"],
+.cej-workspace main [class*="border-purple-"],
+.cej-public-shell main [class*="border-rose-"],
+.cej-public-shell main [class*="border-purple-"] {
+  border-color: var(--cej-border) !important;
+}
+.cej-workspace main [class*="text-rose-"],
+.cej-workspace main [class*="text-purple-"],
+.cej-public-shell main [class*="text-rose-"],
+.cej-public-shell main [class*="text-purple-"] {
+  color: var(--cej-institutional-burgundy) !important;
+}
+.cej-workspace main button[class*="bg-rose-"],
+.cej-workspace main button[class*="bg-purple-"],
+.cej-public-shell main button[class*="bg-rose-"],
+.cej-public-shell main button[class*="bg-purple-"] {
+  background: var(--cej-institutional-burgundy) !important;
+  color: #fff !important;
+  border-color: var(--cej-institutional-burgundy) !important;
+}
+.cej-workspace main button[class*="bg-rose-"]:hover,
+.cej-workspace main button[class*="bg-purple-"]:hover,
+.cej-public-shell main button[class*="bg-rose-"]:hover,
+.cej-public-shell main button[class*="bg-purple-"]:hover {
+  background: #68202e !important;
+}
+.cej-workspace main [class*="bg-rose-50"],
+.cej-workspace main [class*="bg-purple-50"],
+.cej-public-shell main [class*="bg-rose-50"],
+.cej-public-shell main [class*="bg-purple-50"] {
+  background-color: #f7f8fa !important;
+}
+.cej-workspace main article,
+.cej-workspace main section,
+.cej-public-shell main article,
+.cej-public-shell main section {
+  border-radius: 1rem;
+}
+.cej-workspace main input:not([type="checkbox"]),
+.cej-workspace main select,
+.cej-workspace main textarea,
+.cej-public-shell main input:not([type="checkbox"]),
+.cej-public-shell main select,
+.cej-public-shell main textarea {
+  border-color: #cbd4de;
+}
+.cej-workspace main input:focus,
+.cej-workspace main select:focus,
+.cej-workspace main textarea:focus,
+.cej-public-shell main input:focus,
+.cej-public-shell main select:focus,
+.cej-public-shell main textarea:focus {
+  outline: none;
+  border-color: var(--cej-institutional-burgundy);
+  box-shadow: 0 0 0 3px rgba(129,43,59,.10);
+}
+.cej-workspace main button,
+.cej-public-shell main button {
+  transition: background-color .18s ease, border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+.cej-workspace main button:focus-visible,
+.cej-public-shell main button:focus-visible,
+.cej-luimi button:focus-visible,
+.cej-luimi input:focus-visible {
+  outline: 3px solid rgba(184,154,97,.8);
+  outline-offset: 2px;
+}
+.cej-public-shell > div:first-child {
+  background: var(--cej-institutional-navy) !important;
+  border-color: var(--cej-institutional-gold) !important;
+}
+.cej-public-shell footer,
+.cej-workspace footer {
+  border-top-color: var(--cej-institutional-gold) !important;
+}
+.cej-luimi { font-family: Arial, Helvetica, sans-serif; }
+.cej-luimi section { border-color: #d8dfe7; }
+@media (max-width: 640px) {
+  .cej-main-content { padding: 1.15rem .85rem 2rem; }
+  .cej-luimi { right: .75rem; bottom: .75rem; }
+  .cej-luimi > div > button { padding-right: .9rem; gap: .55rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cej-workspace *, .cej-public-shell *, .cej-luimi * {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+  }
+}

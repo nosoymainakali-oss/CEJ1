@@ -38,7 +38,7 @@ const UI: TraduccionesUI = {
     'Por Número de Expediente y Año':'By case number and year','Ingrese el número de expediente':'Enter the case number',
     'Ingrese el año':'Enter the year','Ingrese la nomenclatura del expediente':'Enter the case file number',
     'Ingrese apellido paterno':'Enter last name','Ingrese apellido materno':'Enter second last name','Ingrese nombres':'Enter first name(s)',
-    'Resultados de la Búsqueda':'Search results','No se encontraron expedientes con los datos ingresados.':'No case files found for the entered details.',
+    'Resultados de la Búsqueda':'Search results',
     'Crear Nuevo Expediente':'Create new case file','Editar Expediente':'Edit case file','Añadir Actuado':'Add court record',
     'Línea de tiempo del proceso':'Procedural timeline','Actuaciones procesales':'Procedural actions',
     'Ver documento':'View document','Descargar documento':'Download document','Cargando...':'Loading...',

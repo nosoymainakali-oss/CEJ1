@@ -2,6 +2,7 @@ import React from 'react';
 import { Scale, GraduationCap, Award, ShieldAlert } from 'lucide-react';
 import { Idioma } from '../types/judicial';
 import { DICCIONARIO } from '../utils/i18n';
+import { LegalTransparencyPanel } from './LegalTransparencyPanel';
 
 interface FooterProps {
   idioma?: Idioma;
@@ -65,6 +66,8 @@ export const Footer: React.FC<FooterProps> = ({ idioma = 'es' }) => {
             {t.identificacionInstitucional}
           </p>
         </div>
+
+        <LegalTransparencyPanel />
 
         {/* Bottom Credits */}
         <div className="pt-4 border-t border-sky-800 text-[11px] text-sky-300 flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
