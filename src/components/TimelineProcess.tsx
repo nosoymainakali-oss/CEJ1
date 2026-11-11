@@ -10,8 +10,6 @@ import {
   Save, 
   X, 
   ShieldCheck,
-  ChevronDown,
-  ChevronUp
 } from 'lucide-react';
 import { HitoLineaTiempo, RolUsuario } from '../types/judicial';
 
@@ -30,6 +28,7 @@ export const TimelineProcess: React.FC<TimelineProcessProps> = ({
 }) => {
   const [modalNuevoHito, setModalNuevoHito] = useState(false);
   const [hitoEnEdicion, setHitoEnEdicion] = useState<HitoLineaTiempo | null>(null);
+  const hitosOrdenados = [...hitos].sort((a, b) => a.fecha.localeCompare(b.fecha) || a.orden - b.orden);
 
   // Form states for new milestone
   const [nuevoTitulo, setNuevoTitulo] = useState('');
@@ -77,19 +76,7 @@ export const TimelineProcess: React.FC<TimelineProcessProps> = ({
     );
   };
 
-  const handleMoverHito = (index: number, direccion: 'arriba' | 'abajo') => {
-    const nuevos = [...hitos];
-    const targetIdx = direccion === 'arriba' ? index - 1 : index + 1;
-    if (targetIdx < 0 || targetIdx >= nuevos.length) return;
 
-    const temp = nuevos[index];
-    nuevos[index] = nuevos[targetIdx];
-    nuevos[targetIdx] = temp;
-
-    // reindex orden
-    nuevos.forEach((h, i) => (h.orden = i + 1));
-    onActualizarHitos(nuevos);
-  };
 
   return (
     <div className="bg-white rounded-xl border border-slate-300 shadow-sm overflow-hidden mb-6">
@@ -129,7 +116,7 @@ export const TimelineProcess: React.FC<TimelineProcessProps> = ({
           </div>
         ) : (
           <div className="relative border-l-2 border-amber-600/40 ml-4 sm:ml-6 space-y-6">
-            {hitos.map((hito, idx) => {
+            {hitosOrdenados.map((hito, idx) => {
               const esCompletado = hito.estado === 'completado';
               const esEnProceso = hito.estado === 'en_proceso';
 
@@ -188,24 +175,6 @@ export const TimelineProcess: React.FC<TimelineProcessProps> = ({
                         {/* Editor Controls for this Milestone */}
                         {rol === 'editor' && (
                           <div className="flex items-center gap-1 pl-2 border-l border-slate-200">
-                            {/* Reorder */}
-                            <button
-                              onClick={() => handleMoverHito(idx, 'arriba')}
-                              disabled={idx === 0}
-                              className="p-1 hover:bg-slate-100 text-slate-500 disabled:opacity-30"
-                              title="Subir"
-                            >
-                              <ChevronUp className="w-3.5 h-3.5" />
-                            </button>
-                            <button
-                              onClick={() => handleMoverHito(idx, 'abajo')}
-                              disabled={idx === hitos.length - 1}
-                              className="p-1 hover:bg-slate-100 text-slate-500 disabled:opacity-30"
-                              title="Bajar"
-                            >
-                              <ChevronDown className="w-3.5 h-3.5" />
-                            </button>
-
                             {/* Edit */}
                             <button
                               onClick={() => setHitoEnEdicion(hito)}
