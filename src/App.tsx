@@ -257,7 +257,14 @@ export default function App() {
 
         if (resultado.contenido && Array.isArray(resultado.contenido.expedientes) &&
             Array.isArray(resultado.contenido.agendaMagistrados)) {
-          setExpedientes(resultado.contenido.expedientes);
+          // Normalizar registros compartidos de versiones anteriores para que la demo use exclusivamente identidades sintéticas.
+          const expedientesNormalizados = JSON.parse(
+            JSON.stringify(resultado.contenido.expedientes)
+              .replaceAll('EDUARDO LUISMARIO MEDINA HUMPIRI', 'MARIO ANDRÉS QUISPE APAZA')
+              .replaceAll('Eduardo Luismario Medina Humpiri', 'Mario Andrés Quispe Apaza')
+              .replaceAll('75412933', '00000000')
+          ) as Expediente[];
+          setExpedientes(expedientesNormalizados);
           setAgendaMagistrados(resultado.contenido.agendaMagistrados);
         } else {
           // Primera apertura: conservar y registrar los datos locales existentes.
