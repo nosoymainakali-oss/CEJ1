@@ -83,6 +83,12 @@ export default function App() {
   // Traduce también los textos literales de componentes heredados y ventanas modales.
   useEffect(() => instalarTraduccionGlobal(idioma), [idioma]);
 
+  // Elimina credenciales y datos de identidad heredados de versiones anteriores del simulador.
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    ['sjd_sesion_activa', 'sjd_rol', 'sjd_nombre_usuario', 'sjd_dni_usuario'].forEach((key) => localStorage.removeItem(key));
+  }, []);
+
   // Current case list
   const [expedientes, setExpedientes] = useState<Expediente[]>(() => {
     if (typeof window !== 'undefined') {
