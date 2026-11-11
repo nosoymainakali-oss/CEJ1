@@ -75,11 +75,11 @@ export interface Traducciones {
 
 const DICCIONARIO_BASE = {
   es: {
-    institucion: 'CEJ · SIMULADOR ACADÉMICO',
-    subtitulo: 'SISTEMA JUDICIAL DIGITAL',
+    institucion: 'CEJ · CENTRO DE EXPEDIENTES JUDICIALES',
+    subtitulo: 'CONSULTA Y SEGUIMIENTO DE EXPEDIENTES',
     altoContraste: 'Alto Contraste',
     usuarioLabel: 'Usuario: ',
-    servidorJudicialLabel: 'Editor de demostración: ',
+    servidorJudicialLabel: 'Personal: ',
     salir: 'Salir',
     pestanaBusqueda: 'Búsqueda de Expediente',
     pestanaExpediente: 'Ver Expediente',
@@ -109,7 +109,7 @@ const DICCIONARIO_BASE = {
     btnIngresarExpediente: 'Ingresar al Expediente y Ver Actuados Judiciales',
     volverBusqueda: 'Volver a la Búsqueda de Expedientes',
     expedienteConsultadoPor: 'Expediente consultado por',
-    expedienteElectronico: 'EXPEDIENTE ELECTRÓNICO • CEJ · SIMULADOR ACADÉMICO',
+    expedienteElectronico: 'EXPEDIENTE ELECTRÓNICO • CEJ',
     estadoPrefijo: 'Estado: ',
     juzgadoSede: 'Juzgado / Sede',
     distritoJudicial: 'Distrito Judicial',
@@ -139,7 +139,7 @@ const DICCIONARIO_BASE = {
     disclaimer: '«Esta página web, fue creada con fines estrictamente académicos, las partes que aparecen en el presente expediente son nombres ficticios, y cualquier parecido con la realidad es puro coincidencia.»',
     trabajoPerteneciente: 'Trabajo académico perteneciente a: ',
     estudianteDe: ', estudiante de la Facultad de Ciencias Jurídicas y Políticas de la Universidad Nacional del Altiplano de Puno.',
-    agendaJudicial: 'Agenda Judicial', agendaProgramadas: 'Diligencias programadas por magistrado', registros: 'registros', sinDiligencias: 'No hay diligencias programadas.', etiquetaMagistrado: 'Magistrado', etiquetaExpediente: 'Expediente', accesoJuez: 'El Juez Te Escucha', accesoJuezDesc: 'Solicitudes de atención y citas con el magistrado.', administrarAgenda: 'Administración de Agenda de Magistrados', administrarAgendaDesc: 'Registrar, editar y eliminar diligencias sin ingresar al visor de expedientes.', distintivoDigital: 'DIGITAL', cabeceraInstitucional: 'CEJ • Simulador académico independiente • Datos ficticios', descargoTitulo: 'Cláusula de descargo y naturaleza académica', descripcionProyecto: 'Proyecto académico para demostrar expedientes electrónicos, lectura accesible, cálculo de plazos y códigos de validación.', identificacionInstitucional: 'Proyecto académico independiente • Universidad Nacional del Altiplano de Puno • Puno, Perú', creditosAcademicos: 'Fines estrictamente académicos • Puno, Perú',    btnCrearExpediente: 'Crear Nuevo Expediente',
+    agendaJudicial: 'Agenda Judicial', agendaProgramadas: 'Diligencias programadas por magistrado', registros: 'registros', sinDiligencias: 'No hay diligencias programadas.', etiquetaMagistrado: 'Magistrado', etiquetaExpediente: 'Expediente', accesoJuez: 'El Juez Te Escucha', accesoJuezDesc: 'Solicitudes de atención y citas con el magistrado.', administrarAgenda: 'Administración de Agenda de Magistrados', administrarAgendaDesc: 'Registrar, editar y eliminar diligencias sin ingresar al visor de expedientes.', distintivoDigital: 'DIGITAL', cabeceraInstitucional: 'CEJ • Plataforma de consulta y seguimiento', descargoTitulo: 'Cláusula de descargo y naturaleza académica', descripcionProyecto: 'Proyecto académico para demostrar expedientes electrónicos, lectura accesible, cálculo de plazos y códigos de validación.', identificacionInstitucional: 'Proyecto académico independiente • Universidad Nacional del Altiplano de Puno • Puno, Perú', creditosAcademicos: 'Fines estrictamente académicos • Puno, Perú',    btnCrearExpediente: 'Crear Nuevo Expediente',
     btnEditarExpediente: 'Editar Expediente',
   },
   qu: {
