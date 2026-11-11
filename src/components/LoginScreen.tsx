@@ -83,7 +83,6 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
   const [usuarioServidor, setUsuarioServidor] = useState('');
   const [passwordServidor, setPasswordServidor] = useState('');
   const [errorServidor, setErrorServidor] = useState('');
-  const [accesoAgendaPendiente, setAccesoAgendaPendiente] = useState(false);
 
   // Random 5-char judicial captcha
   const regenerarCaptcha = () => {
@@ -294,16 +293,12 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
             {onAbrirAgendaJudicial && (
               <button
                 type="button"
-                onClick={() => {
-                  setAccesoAgendaPendiente(true);
-                  setTipoAcceso('servidor');
-                  setErrorServidor('');
-                }}
+                onClick={() => onAbrirAgendaJudicial?.()}
                 className="flex-1 min-w-[180px] py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition cursor-pointer bg-rose-800 hover:bg-rose-900 text-white shadow-sm border border-rose-300"
                 title="Consultar la agenda de audiencias y diligencias de cada magistrado"
               >
                 <CalendarDays className="w-4 h-4 text-rose-200" />
-                <span className="uppercase tracking-wider font-black">{accesoAgendaPendiente ? 'VALIDAR ACCESO A AGENDA' : 'AGENDA JUDICIAL'}</span>
+                <span className="uppercase tracking-wider font-black">AGENDA DE PRUEBA</span>
               </button>
             )}
           </div>
@@ -535,7 +530,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
                   className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-[#0c4a6e] hover:bg-[#0369a1] text-white font-bold text-sm rounded-lg shadow-md hover:shadow-lg transition cursor-pointer"
                 >
                   <Lock className="w-4 h-4 text-sky-300" />
-                  <span>{accesoAgendaPendiente ? 'Continuar en demostración' : 'Validar acceso de demostración'}</span>
+                  <span>Validar acceso de demostración</span>
                 </button>
               </form>
             </div>
