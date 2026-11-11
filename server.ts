@@ -262,12 +262,17 @@ app.get('/api/documentos', async (req: Request, res: Response) => {
         .from('documentos-cej')
         .getPublicUrl(doc.ruta_storage);
 
+      // Evita que el navegador o la CDN reutilicen una versión anterior
+      // cuando el archivo se reemplaza directamente en Supabase Storage.
+      const separador = urlPublica.publicUrl.includes('?') ? '&' : '?';
+      const urlActualizada = `${urlPublica.publicUrl}${separador}v=${Date.now()}`;
+
       return {
         id: doc.id,
         nombre: doc.nombre,
         tipo: doc.tipo,
         tamano: doc.tamano,
-        dataUrl: urlPublica.publicUrl,
+        dataUrl: urlActualizada,
         fechaSubida: doc.fecha_subida,
         subidoPor: doc.subido_por || '',
       };
