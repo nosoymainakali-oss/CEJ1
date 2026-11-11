@@ -151,14 +151,14 @@ export const Header: React.FC<HeaderProps> = ({
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-base sm:text-xl font-bold tracking-tight text-white uppercase">
-                CEJ · SIMULADOR ACADÉMICO
+                CEJ · CENTRO DE EXPEDIENTES JUDICIALES
               </h1>
               <span className="bg-[#38bdf8] text-slate-950 text-[10px] font-black px-1.5 py-0.5 rounded uppercase">
                 {t.distintivoDigital}
               </span>
             </div>
             <p className="text-xs text-sky-100 font-medium">
-              Entorno independiente de demostración &bull; Datos ficticios
+              Consulta y seguimiento de expedientes
             </p>
           </div>
         </div>
