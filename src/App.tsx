@@ -54,6 +54,7 @@ import { ElJuezTeEscucha } from './components/ElJuezTeEscucha';
 import { LuimiChatbot } from './components/LuimiChatbot';
 import { generarExplicacionIA } from './services/aiExplainer';
 import { ReniecDemoPanel } from './components/ReniecDemoPanel';
+import { ExpedienteSummary } from './components/ExpedienteSummary';
 
 const NOMBRE_EDITOR = 'Eduardo Luismario Medina Humpiri';
 
@@ -1019,63 +1020,8 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Case metadata details */}
-              <div className="p-5 sm:p-6 bg-sky-50/40 border-b border-sky-100">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
-                  <div className="bg-white p-3.5 rounded-xl border border-sky-200 shadow-2xs">
-                    <span className="text-[#0369a1] font-bold uppercase text-[10px] block">{t.juzgadoSede}:</span>
-                    <strong className="text-slate-900 font-bold text-xs sm:text-sm block mt-0.5">
-                      {expActual.instancia}
-                    </strong>
-                    <span className="text-slate-500 text-[11px] block mt-1">
-                      {t.distritoJudicial}: <strong>{expActual.distritoJudicial}</strong>
-                    </span>
-                  </div>
-
-                  <div className="bg-white p-3.5 rounded-xl border border-sky-200 shadow-2xs">
-                    <span className="text-[#0369a1] font-bold uppercase text-[10px] block">{t.materiaDemandada}:</span>
-                    <strong className="text-slate-900 font-bold text-xs block mt-0.5 leading-snug">
-                      {expActual.materia}
-                    </strong>
-                    <span className="text-slate-500 text-[11px] block mt-1">
-                      {t.especialidad}: <strong>{expActual.especialidad}</strong>
-                    </span>
-                  </div>
-
-                  <div className="bg-white p-3.5 rounded-xl border border-sky-200 shadow-2xs">
-                    <span className="text-[#0369a1] font-bold uppercase text-[10px] block">{t.magistrados}:</span>
-                    <strong className="text-slate-900 block mt-0.5">
-                      {t.juez}: {expActual.juez}
-                    </strong>
-                    <span className="text-slate-700 text-xs block mt-0.5">
-                      {t.especialista}: <strong>{expActual.secretario}</strong>
-                    </span>
-                    <span className="text-slate-500 text-[11px] block mt-1">
-                      {t.fechaInicio}: <strong>{expActual.fechaInicio}</strong>
-                    </span>
-                  </div>
-
-                  <div className="bg-white p-3.5 rounded-xl border border-sky-200 shadow-2xs">
-                    <span className="text-[#0369a1] font-bold uppercase text-[10px] block">{t.partesProcesales}:</span>
-                    <div className="mt-0.5 space-y-1">
-                      <div>
-                        <span className="text-[10px] text-[#0284c7] font-bold uppercase">{t.demandante}:</span>
-                        <strong className="text-slate-900 block text-xs">
-                          {expActual.demandante}
-                        </strong>
-                        <span className="text-[11px] text-slate-600 block">
-                          DNI: <strong>{expActual.dniDemandante}</strong>
-                        </span>
-                      </div>
-                      <div className="pt-1 border-t border-slate-100">
-                        <span className="text-[10px] text-slate-500 font-bold uppercase">{t.demandado}:</span>
-                        <strong className="text-slate-800 block text-xs leading-tight">
-                          {expActual.demandado}
-                        </strong>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <div className="p-5 sm:p-6">
+                <ExpedienteSummary expediente={expActual} />
               </div>
             </div>
 
@@ -1122,7 +1068,7 @@ export default function App() {
 
             {/* Separate lists for procedural actions and submitted briefs */}
             <div className="space-y-4">
-              {[...expActual.resoluciones].filter(res => seccionDocumentos === 'escritos' ? res.tipo === 'ESCRITO' : res.tipo !== 'ESCRITO').reverse().map((res) => (
+              {[...expActual.resoluciones].filter(res => seccionDocumentos === 'escritos' ? res.tipo === 'ESCRITO' : res.tipo !== 'ESCRITO').sort((a, b) => b.fechaResolucion.localeCompare(a.fechaResolucion) || b.numero - a.numero).map((res) => (
                 <ResolutionCard
                   key={res.id}
                   resolucion={res}
