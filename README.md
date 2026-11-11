@@ -8,7 +8,8 @@ CEJ es un prototipo académico independiente para explorar, con datos ficticios,
 
 - Utilizar exclusivamente expedientes, nombres, identificadores y documentos ficticios.
 - No introducir DNI, datos personales, datos sensibles, información reservada, escritos reales ni documentos judiciales auténticos.
-- Los datos de demostración pueden guardarse en el almacenamiento del navegador y sincronizarse con Supabase.
+- Los datos de demostración pueden guardarse en el almacenamiento del navegador y sincronizarse con Supabase; los PDF de prueba se alojan en Supabase Storage y se visualizan mediante enlaces generados por la aplicación.
+- Las rutas de demostración no implementan autenticación institucional ni controles de acceso de producción. El rol VIP solo modifica la interfaz y el comportamiento local.
 - La función de explicación mediante IA puede transmitir el texto suministrado al proveedor de IA configurado (Google Gemini).
 - El acceso «SOY VIP» simula un rol de editor; no autentica ni acredita a un servidor público.
 
