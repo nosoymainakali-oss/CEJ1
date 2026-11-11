@@ -64,7 +64,7 @@ export const LegalTransparencyPanel: React.FC = () => {
                 {seccion === 'normativa' && (
                   <div className="space-y-4">
                     <h3 className="text-base font-bold text-slate-900">Referencias normativas de diseño</h3>
-                    <p>El proyecto toma como referencia académica los principios y materias regulados por las siguientes disposiciones. Su mención no significa que el prototipo sea un servicio digital estatal ni que haya obtenido una certificación de cumplimiento.</p>
+                    <p>El proyecto toma estas disposiciones como referencias académicas de diseño. El Decreto Legislativo N.° 1412 y su Reglamento establecen el marco de gobierno digital para las entidades de la Administración Pública. CEJ no es una entidad pública ni un servicio estatal. Su mención no significa que el prototipo haya obtenido una certificación de cumplimiento.</p>
                     <ul className="list-disc space-y-2 pl-5">
                       <li><a className="font-semibold text-[#812b3b] underline" href="https://www.leyes.congreso.gob.pe/DetLeyNume_1p.aspx?xNorma=3&xNumero=1412&xTipoNorma=3" target="_blank" rel="noreferrer">Decreto Legislativo N.° 1412</a>, Ley de Gobierno Digital: identidad digital, servicios digitales, interoperabilidad, arquitectura digital, seguridad digital y datos.</li>
                       <li><a className="font-semibold text-[#812b3b] underline" href="https://www.gob.pe/institucion/pcm/normas-legales/1705101-029-2021-pcm" target="_blank" rel="noreferrer">Decreto Supremo N.° 029-2021-PCM</a>, Reglamento de la Ley de Gobierno Digital.</li>
