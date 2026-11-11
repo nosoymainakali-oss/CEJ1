@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import { GoogleGenAI } from '@google/genai';
 import multer from 'multer';
 import { createClient } from '@supabase/supabase-js';
+import { timingSafeEqual } from 'node:crypto';
 
 dotenv.config();
 
@@ -25,6 +26,37 @@ const supabase =
   supabaseUrl && supabaseKey
     ? createClient(supabaseUrl, supabaseKey)
     : null;
+
+// Autenticación del perfil de personal para el entorno académico.
+// Las credenciales se leen exclusivamente de variables de entorno del servidor.
+const compararEnTiempoConstante = (valor: string, esperado: string): boolean => {
+  const a = Buffer.from(valor, 'utf8');
+  const b = Buffer.from(esperado, 'utf8');
+  return a.length === b.length && timingSafeEqual(a, b);
+};
+
+app.post('/api/auth/editor', (req: Request, res: Response) => {
+  const usuarioConfigurado = process.env.CEJ_EDITOR_USER;
+  const claveConfigurada = process.env.CEJ_EDITOR_PASSWORD;
+
+  if (!usuarioConfigurado || !claveConfigurada) {
+    return res.status(503).json({
+      error: 'El acceso de personal aún no está configurado en el servidor.',
+    });
+  }
+
+  const usuario = typeof req.body?.usuario === 'string' ? req.body.usuario.trim() : '';
+  const clave = typeof req.body?.clave === 'string' ? req.body.clave : '';
+
+  const usuarioValido = compararEnTiempoConstante(usuario, usuarioConfigurado);
+  const claveValida = compararEnTiempoConstante(clave, claveConfigurada);
+
+  if (!usuarioValido || !claveValida) {
+    return res.status(401).json({ error: 'Usuario o contraseña incorrectos.' });
+  }
+
+  return res.json({ autenticado: true, perfil: 'editor' });
+});
 
 // Estado compartido de la aplicación (expedientes y agenda).
 // Estas rutas usan la clave de servicio exclusivamente en el servidor.
