@@ -31,20 +31,6 @@ interface ResolutionCardProps {
   onVerArchivo?: (archivo: ArchivoAdjunto) => void;
 }
 
-const generarCvdDemo = (identificador: string) => {
-  // Código estable por resolución para que no cambie entre renderizados.
-  let a = 0x811c9dc5;
-  let b = 0x9e3779b9;
-  for (let i = 0; i < identificador.length; i++) {
-    const code = identificador.charCodeAt(i);
-    a = Math.imul(a ^ code, 0x01000193);
-    b = Math.imul(b ^ (code + i), 0x85ebca6b);
-  }
-  const parteA = (a >>> 0).toString(16).toUpperCase().padStart(8, '0');
-  const parteB = (b >>> 0).toString(16).toUpperCase().padStart(8, '0');
-  return `CVD-DEMO-${parteA}-${parteB}`;
-};
-
 export const ResolutionCard: React.FC<ResolutionCardProps> = ({
   resolucion,
   expedienteNumero,
@@ -151,7 +137,7 @@ export const ResolutionCard: React.FC<ResolutionCardProps> = ({
           }
           tituloActuado={resolucion.titulo}
         />
-        {<p className="mt-2 text-xs text-slate-700"><strong>CVD:</strong> <span className="font-mono">{resolucion.ccv || generarCvdDemo(`${expedienteNumero}-${resolucion.id}-${resolucion.numero}`)}</span></p>}
+        {resolucion.ccv && <p className="mt-2 text-xs text-slate-700"><strong>CCV:</strong> <span className="font-mono">{resolucion.ccv}</span></p>}
       </div>
 
       {/* Navigation Tabs */}
@@ -327,11 +313,6 @@ export const ResolutionCard: React.FC<ResolutionCardProps> = ({
             </div>
             <div className="font-mono text-xs sm:text-sm text-slate-800 whitespace-pre-wrap leading-relaxed bg-white p-4 rounded-lg border border-slate-200 shadow-inner max-h-96 overflow-y-auto">
               {resolucion.contenidoCompleto}
-            </div>
-            <div className="border-t-2 border-slate-300 pt-3 mt-4 text-center">
-              <p className="text-[10px] font-bold uppercase tracking-wider text-slate-600">Código de Verificación Digital (CVD)</p>
-              <p className="mt-1 font-mono text-sm font-bold tracking-widest text-slate-900">{resolucion.ccv || generarCvdDemo(`${expedienteNumero}-${resolucion.id}-${resolucion.numero}`)}</p>
-              <p className="mt-1 text-[9px] text-slate-500">Código generado para demostración académica. No permite validar documentos en sistemas oficiales.</p>
             </div>
           </div>
         )}
