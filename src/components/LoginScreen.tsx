@@ -218,10 +218,10 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
         <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-between text-xs gap-2">
           <div className="flex items-center gap-2 font-bold tracking-wide">
             <span className="w-2.5 h-2.5 rounded-full bg-sky-400 animate-pulse"></span>
-            <span>CEJ &bull; SIMULADOR ACADÉMICO INDEPENDIENTE</span>
+            <span>CEJ &bull; CENTRO DE EXPEDIENTES JUDICIALES</span>
           </div>
           <div className="text-sky-200">
-            <span>ENTORNO DE DEMOSTRACIÓN &bull; DATOS FICTICIOS</span>
+            <span>PLATAFORMA DE CONSULTA Y SEGUIMIENTO</span>
           </div>
         </div>
       </div>
@@ -233,14 +233,12 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
           <div className="cej-login-card-header bg-gradient-to-r from-[#0369a1] via-[#0284c7] to-[#0c4a6e] text-white p-6 text-center">
             <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-2xl border border-amber-200/50 bg-white/10"><Scale className="h-9 w-9 text-amber-200" /></div>
             <h1 className="text-xl sm:text-2xl font-bold tracking-tight uppercase">
-              CONSULTA DE EXPEDIENTES &bull; CEJ
+              CONSULTA DE EXPEDIENTES JUDICIALES
             </h1>
             <p className="text-xs sm:text-sm text-sky-100 mt-1 font-medium">
-              SIMULADOR ACADÉMICO &bull; SIN VINCULACIÓN INSTITUCIONAL
+              Acceso a información procesal, actuaciones y documentos
             </p>
           </div>
-
-          <div role="note" className="border-b border-amber-200 bg-amber-50 px-5 py-3 text-center text-xs font-semibold leading-5 text-amber-950">Usa únicamente identificadores ficticios, por ejemplo 00000000. No introduzcas tu DNI, pasaporte, nombre real ni información de expedientes auténticos.</div>
 
           {/* Roles de demostración; no existe autenticación institucional */}
           <div className="grid grid-cols-2 border-b border-sky-200 bg-sky-50/70 p-1.5 gap-1.5">
@@ -257,7 +255,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
               }`}
             >
               <User className="w-4 h-4 text-[#0284c7]" />
-              <span>Usuario de prueba</span>
+              <span>Acceso ciudadano</span>
             </button>
 
             <button
@@ -273,7 +271,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
               }`}
             >
               <Lock className="w-4 h-4 text-sky-700" />
-              <span>Editor de demostración</span>
+              <span>Acceso de personal</span>
             </button>
           </div>
 
@@ -287,7 +285,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
                 title="Sacar cita con el Juez - Módulo El Juez Te Escucha"
               >
                 <Scale className="w-4 h-4 text-rose-200" />
-                <span className="uppercase tracking-wider font-black">EL JUEZ TE ESCUCHA · DEMO</span>
+                <span className="uppercase tracking-wider font-black">EL JUEZ TE ESCUCHA</span>
               </button>
             )}
             {onAbrirAgendaJudicial && (
@@ -298,7 +296,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
                 title="Consultar la agenda de audiencias y diligencias de cada magistrado"
               >
                 <CalendarDays className="w-4 h-4 text-rose-200" />
-                <span className="uppercase tracking-wider font-black">AGENDA DE PRUEBA</span>
+                <span className="uppercase tracking-wider font-black">AGENDA JUDICIAL</span>
               </button>
             )}
           </div>
@@ -367,10 +365,10 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
                     {tipoDocumento === 'DNI'
-                      ? 'Identificador ficticio de prueba (no uses un DNI real):'
+                      ? 'Número de documento de identidad:'
                       : tipoDocumento === 'PASAPORTE'
-                      ? 'Identificador ficticio de prueba (no uses un pasaporte real):'
-                      : 'Identificador ficticio de prueba (no uses un documento real):'}
+                      ? 'Número de pasaporte:'
+                      : 'Número de Carnet de Extranjería:'}
                   </label>
                   <input
                     type="text"
@@ -484,7 +482,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
               <div className="bg-sky-50 border border-sky-200 rounded-xl p-3.5 flex items-start gap-3">
                 <ShieldCheck className="w-5 h-5 text-[#0369a1] shrink-0 mt-0.5" />
                 <div className="text-xs text-sky-950 leading-relaxed">
-                  <strong>Acceso de editor simulado:</strong> este prototipo no autentica servidores públicos ni valida credenciales institucionales. Para explorar las funciones de edición utiliza el botón «SOY VIP».
+                  <strong>Acceso de personal:</strong> utilice el acceso avanzado habilitado para la exposición. Las credenciales institucionales no se validan en este entorno.
                 </div>
               </div>
 
@@ -550,14 +548,14 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
           <span>SOY VIP</span>
           <span className="text-lg transition-transform duration-300 group-hover:scale-110">✦</span>
         </button>
-        <p className="mt-2 text-center text-[10px] font-medium tracking-wide text-slate-500">ACCESO LIBRE · SIMULACIÓN ACADÉMICA</p>
+        <p className="mt-2 text-center text-[10px] font-medium tracking-wide text-slate-500">MÓDULO DE ACCESO AVANZADO</p>
       </div>
 
       {/* Academic Disclaimer & Attribution Footer on Login */}
       <footer className="bg-[#0c4a6e] text-white py-6 px-4 border-t-2 border-sky-400 text-xs text-center space-y-2">
         <div className="max-w-4xl mx-auto space-y-1.5">
           <p className="font-medium text-sky-100">
-            «Prototipo académico independiente. Los expedientes, personas, documentos y actuaciones son ficticios. No es un servicio oficial ni está conectado con los sistemas del Estado. No introduzcas datos reales.»
+            «Entorno académico independiente. Los registros y documentos corresponden a casos de prueba y no producen efectos jurídicos.»
           </p>
           <p className="font-bold text-white pt-1">
             Proyecto académico desarrollado por: <span className="underline decoration-sky-400 underline-offset-4 text-sky-200">Eduardo Luismario Medina Humpiri</span>, estudiante de la <span className="text-white">Facultad de Ciencias Jurídicas y Políticas de la Universidad Nacional del Altiplano de Puno</span>.
