@@ -25,14 +25,9 @@ type TipoDocumento = 'DNI' | 'PASAPORTE' | 'CARNET_EXTRANJERIA';
 
 // Simulated directory of verified citizen identities
 const REGISTRO_CIUDADANOS: Record<string, string> = {
-  '75412933': 'EDUARDO LUISMARIO MEDINA HUMPIRI',
-  '45892147': 'JUAN CARLOS MAMANI QUISPE',
-  '70241589': 'MARIA ELENA ROJAS APAZA',
-  '41258963': 'CARLOS ALBERTO CONDORI FLORES',
-  '73521489': 'ANA PATRICIA TICONACONDORI',
-  '72819230': 'YENI LUZMILA MAMANI HUANCA',
-  '40192837': 'VICTOR RAUL CHURA CHOQUE',
-  '71829304': 'GLADYS SONIA QUISPE MAMANI',
+  '00000000': 'CIUDADANO DE PRUEBA',
+  '11111111': 'USUARIO DE DEMOSTRACIÓN',
+  '22222222': 'PERSONA FICTICIA',
 };
 
 function generarNombreCiudadano(doc: string, tipo: TipoDocumento): string {
@@ -208,24 +203,10 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
     }, 600);
   };
 
-  // Servidor Judicial login
+  // Este prototipo no autentica personal del Poder Judicial.
   const handleLoginServidor = (e: React.FormEvent) => {
     e.preventDefault();
-    setErrorServidor('');
-
-    if (usuarioServidor.trim() === '75412933' && passwordServidor.trim() === '120403') {
-      onLoginExitoso({
-        rol: 'editor',
-        nombreUsuario: 'EDUARDO LUISMARIO MEDINA HUMPIRI',
-        dniUsuario: '75412933',
-      });
-      if (accesoAgendaPendiente) {
-        onAbrirAgendaJudicial?.();
-        setAccesoAgendaPendiente(false);
-      }
-    } else {
-      setErrorServidor('Credenciales incorrectas. Verifique el usuario y la contraseña del servidor judicial.');
-    }
+    setErrorServidor('La autenticación institucional no está implementada. Utiliza SOY VIP únicamente para explorar el rol de editor de demostración.');
   };
 
   return (
@@ -251,7 +232,8 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
         <div className="cej-login-card bg-white rounded-2xl shadow-xl border-2 border-sky-200 overflow-hidden">
           {/* Header */}
           <div className="cej-login-card-header bg-gradient-to-r from-[#0369a1] via-[#0284c7] to-[#0c4a6e] text-white p-6 text-center">
-            <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-2xl border border-amber-200/50 bg-white/10"><Scale className="h-9 w-9 text-amber-200" /></div>\n            <h1 className="text-xl sm:text-2xl font-bold tracking-tight uppercase">
+            <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-2xl border border-amber-200/50 bg-white/10"><Scale className="h-9 w-9 text-amber-200" /></div>
+            <h1 className="text-xl sm:text-2xl font-bold tracking-tight uppercase">
               CONSULTA DE EXPEDIENTES &bull; CEJ
             </h1>
             <p className="text-xs sm:text-sm text-sky-100 mt-1 font-medium">
@@ -421,7 +403,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
                       type="text"
                       value={nombreTitular}
                       onChange={(e) => setNombreTitular(e.target.value)}
-                      placeholder=""
+                      placeholder="00000000"
                       className="w-full bg-white border-2 border-sky-200 focus:border-[#0284c7] rounded-lg px-3.5 py-2 text-sm font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-400/20 shadow-2xs"
                       required
                     />
