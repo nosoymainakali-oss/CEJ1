@@ -145,14 +145,7 @@ export const Header: React.FC<HeaderProps> = ({
       {/* Main Bar */}
       <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-3">
         <div className="flex items-center gap-3">
-          <div className="w-14 h-14 shrink-0 overflow-hidden rounded-lg flex items-center justify-center" aria-label="Logotipo oficial del Poder Judicial del Perú">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/5/58/Poder_Judicial_del_Peru.png"
-              alt="Logotipo del Poder Judicial del Perú"
-              className="h-14 w-14 object-cover object-top"
-              referrerPolicy="no-referrer"
-            />
-          </div>
+          <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-amber-300/50 bg-white/10" aria-label="Identidad visual propia de CEJ"><Scale className="h-8 w-8 text-amber-200" /></div>
 
           <div>
             <div className="flex items-center gap-2">
@@ -164,7 +157,7 @@ export const Header: React.FC<HeaderProps> = ({
               </span>
             </div>
             <p className="text-xs text-sky-100 font-medium">
-              {t.subtitulo} &bull; {t.institucion}
+              Entorno independiente de demostración &bull; Datos ficticios
             </p>
           </div>
         </div>
