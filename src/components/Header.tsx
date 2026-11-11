@@ -52,7 +52,7 @@ export const Header: React.FC<HeaderProps> = ({
       <div className="bg-[#07334e] text-sky-100 text-xs px-4 py-1.5 border-b border-sky-900/60">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-2 font-bold tracking-wide">
-            <span className="w-2.5 h-2.5 rounded-full bg-sky-400 animate-pulse"></span>
+            <span className="w-2.5 h-2.5 rounded-full bg-amber-300"></span>
             <span>{t.cabeceraInstitucional}</span>
           </div>
 
@@ -157,7 +157,7 @@ export const Header: React.FC<HeaderProps> = ({
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-base sm:text-xl font-bold tracking-tight text-white uppercase">
-                {t.institucion}
+                CEJ · SIMULADOR ACADÉMICO
               </h1>
               <span className="bg-[#38bdf8] text-slate-950 text-[10px] font-black px-1.5 py-0.5 rounded uppercase">
                 {t.distintivoDigital}
