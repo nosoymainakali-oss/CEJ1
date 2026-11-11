@@ -58,33 +58,14 @@ const NOMBRE_EDITOR = 'Eduardo Luismario Medina Humpiri';
 
 export default function App() {
   // Session states: Must log in first! Case is NOT shown initially
-  const [sesionIniciada, setSesionIniciada] = useState<boolean>(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('sjd_sesion_activa') === 'true';
-    }
-    return false;
-  });
+  // La sesión es exclusivamente local y temporal: no representa autenticación institucional.
+  const [sesionIniciada, setSesionIniciada] = useState<boolean>(false);
 
-  const [rol, setRol] = useState<RolUsuario>(() => {
-    if (typeof window !== 'undefined') {
-      return (localStorage.getItem('sjd_rol') as RolUsuario) || 'consultor';
-    }
-    return 'consultor';
-  });
+  const [rol, setRol] = useState<RolUsuario>('consultor');
 
-  const [nombreUsuario, setNombreUsuario] = useState<string>(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('sjd_nombre_usuario') || 'Ciudadano';
-    }
-    return 'Ciudadano';
-  });
+  const [nombreUsuario, setNombreUsuario] = useState<string>('Usuario de prueba');
 
-  const [dniUsuario, setDniUsuario] = useState<string>(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('sjd_dni_usuario') || '75412933';
-    }
-    return '75412933';
-  });
+  const [dniUsuario, setDniUsuario] = useState<string>('');
 
   
   // Global Language State: Español ('es'), Quechua ('qu'), Aimara ('ay')
@@ -494,14 +475,7 @@ export default function App() {
     setVistaActual('busqueda'); // Must be strictly search screen upon login!
     setExpedienteSeleccionado(null); // Case is hidden until searched
 
-    try {
-      localStorage.setItem('sjd_sesion_activa', 'true');
-      localStorage.setItem('sjd_rol', datos.rol);
-      localStorage.setItem('sjd_nombre_usuario', datos.nombreUsuario);
-      localStorage.setItem('sjd_dni_usuario', datos.dniUsuario);
-    } catch (e) {
-      console.warn('Error saving session:', e);
-    }
+    // No se persisten DNI, nombre ni rol de demostración en el navegador.
   };
 
   // Logout
@@ -813,7 +787,7 @@ export default function App() {
         <div className="cej-public-shell min-h-screen bg-slate-50 flex flex-col font-arial" style={{ fontFamily: 'Arial, sans-serif' }}>
           <div className="bg-[#0c4a6e] text-white py-2.5 px-4 border-b border-sky-400/40">
             <div className="max-w-6xl mx-auto flex items-center justify-between text-xs">
-              <span className="font-bold">Poder Judicial del Perú &bull; Plataforma Oficial de Consulta Judicial &bull; Perú</span>
+              <span className="font-bold">CEJ &bull; SIMULADOR ACADÉMICO INDEPENDIENTE &bull; DATOS FICTICIOS</span>
               <button
                 onClick={() => setVistaActual('busqueda')}
                 className="underline text-sky-200 hover:text-white"
@@ -822,7 +796,7 @@ export default function App() {
               </button>
             </div>
           </div>
-          <main className="cej-main-content flex-1 max-w-7xl w-full mx-auto px-4 py-6">
+          <main id="contenido-principal" tabIndex={-1} className="cej-main-content flex-1 max-w-7xl w-full mx-auto px-4 py-6">
             <ElJuezTeEscucha
               onVolver={() => setVistaActual('busqueda')}
               dniInicial=""
@@ -851,7 +825,7 @@ export default function App() {
               </button>
             </div>
           </div>
-          <main className="cej-main-content flex-1 max-w-7xl w-full mx-auto px-4 py-6">
+          <main id="contenido-principal" tabIndex={-1} className="cej-main-content flex-1 max-w-7xl w-full mx-auto px-4 py-6">
             <AgendaJudicialCalendario agenda={agendaMagistrados} idioma={idioma} />
           </main>
           <Footer idioma={idioma} />
