@@ -48,6 +48,7 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="cej-app-header border-b border-sky-300 bg-[#0c4a6e] text-white shadow-md sticky top-0 z-40 transition-colors font-arial" style={{ fontFamily: 'Arial, sans-serif' }}>
+      <a href="#contenido-principal" className="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3 focus:z-[90] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-slate-900">Saltar al contenido principal</a>
       {/* Top Utility Bar */}
       <div className="bg-[#07334e] text-sky-100 text-xs px-4 py-1.5 border-b border-sky-900/60">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
