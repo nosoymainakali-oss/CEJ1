@@ -303,7 +303,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
                 title="Sacar cita con el Juez - Módulo El Juez Te Escucha"
               >
                 <Scale className="w-4 h-4 text-rose-200" />
-                <span className="uppercase tracking-wider font-black">EL JUEZ TE ESCUCHA</span>
+                <span className="uppercase tracking-wider font-black">EL JUEZ TE ESCUCHA · DEMO</span>
               </button>
             )}
             {onAbrirAgendaJudicial && (
@@ -323,7 +323,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
             )}
           </div>
 
-          {/* Tab 1: Ciudadano with Document Type Selector and CAPTCHA */}
+          {/* Acceso ciudadano simulado: utilizar exclusivamente identificadores ficticios. */}
           {tipoAcceso === 'ciudadano' ? (
             <div className="p-6 sm:p-8 space-y-5">
               <form onSubmit={handleAccesoCiudadano} className="space-y-4">
@@ -387,10 +387,10 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
                     {tipoDocumento === 'DNI'
-                      ? 'Número de DNI:'
+                      ? 'Identificador ficticio de prueba (no uses un DNI real):'
                       : tipoDocumento === 'PASAPORTE'
-                      ? 'Número de Pasaporte:'
-                      : 'Número de Carnet de Extranjería:'}
+                      ? 'Identificador ficticio de prueba (no uses un pasaporte real):'
+                      : 'Identificador ficticio de prueba (no uses un documento real):'}
                   </label>
                   <input
                     type="text"
@@ -403,7 +403,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
                         setNumeroDocumento(e.target.value.toUpperCase());
                       }
                     }}
-                    placeholder=""
+                    placeholder="00000000"
                     className="w-full bg-white border-2 border-sky-200 focus:border-[#0284c7] rounded-lg px-4 py-2.5 text-base font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-400/20 shadow-2xs font-mono"
                     autoFocus
                     required
