@@ -241,7 +241,9 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
             </p>
           </div>
 
-          <div role="note" className="border-b border-amber-200 bg-amber-50 px-5 py-3 text-center text-xs font-semibold leading-5 text-amber-950">Usa únicamente identificadores ficticios, por ejemplo 00000000. No introduzcas tu DNI, pasaporte, nombre real ni información de expedientes auténticos.</div>\n\n          {/* Roles de demostración; no existe autenticación institucional */}
+          <div role="note" className="border-b border-amber-200 bg-amber-50 px-5 py-3 text-center text-xs font-semibold leading-5 text-amber-950">Usa únicamente identificadores ficticios, por ejemplo 00000000. No introduzcas tu DNI, pasaporte, nombre real ni información de expedientes auténticos.</div>
+
+          {/* Roles de demostración; no existe autenticación institucional */}
           <div className="grid grid-cols-2 border-b border-sky-200 bg-sky-50/70 p-1.5 gap-1.5">
             <button
               type="button"
@@ -494,7 +496,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
               <form onSubmit={handleLoginServidor} className="space-y-4">
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                    Usuario:
+                    Identificador de prueba (no es una cuenta institucional):
                   </label>
                   <input
                     type="text"
@@ -509,7 +511,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
 
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                    Contraseña:
+                    Clave ficticia (no se valida):
                   </label>
                   <input
                     type="password"
