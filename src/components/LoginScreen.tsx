@@ -241,7 +241,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
             </p>
           </div>
 
-          {/* Accesos de autenticación: solo ciudadano y servidor judicial */}
+          <div role="note" className="border-b border-amber-200 bg-amber-50 px-5 py-3 text-center text-xs font-semibold leading-5 text-amber-950">Usa únicamente identificadores ficticios, por ejemplo 00000000. No introduzcas tu DNI, pasaporte, nombre real ni información de expedientes auténticos.</div>\n\n          {/* Roles de demostración; no existe autenticación institucional */}
           <div className="grid grid-cols-2 border-b border-sky-200 bg-sky-50/70 p-1.5 gap-1.5">
             <button
               type="button"
@@ -272,7 +272,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
               }`}
             >
               <Lock className="w-4 h-4 text-sky-700" />
-              <span>Servidor Judicial</span>
+              <span>Editor de demostración</span>
             </button>
           </div>
 
