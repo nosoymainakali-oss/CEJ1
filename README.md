@@ -1,20 +1,27 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# CEJ — Simulador académico de consulta de expedientes
 
-# Run and deploy your AI Studio app
+CEJ es un prototipo académico independiente para explorar, con datos ficticios, conceptos de consulta de expedientes, actuaciones, documentos, agenda judicial y cómputo de plazos.
 
-This contains everything you need to run your app locally.
+**No es una plataforma oficial del Poder Judicial ni de la Universidad Nacional del Altiplano.** No tiene conexión con SIJ, EJE, CEJ oficial, RENIEC, PIDE, ID GOB.PE, casillas electrónicas ni servicios estatales. No permite presentar escritos, consultar expedientes reales, practicar notificaciones ni emitir documentos con efectos jurídicos.
 
-View your app in AI Studio: https://ai.studio/apps/0e690343-94b1-4e5e-b82d-a25dca3151ab
+## Uso seguro
 
-## Run Locally
+- Utilizar exclusivamente expedientes, nombres, identificadores y documentos ficticios.
+- No introducir DNI, datos personales, datos sensibles, información reservada, escritos reales ni documentos judiciales auténticos.
+- Los datos de demostración pueden guardarse en el almacenamiento del navegador y sincronizarse con Supabase.
+- La función de explicación mediante IA puede transmitir el texto suministrado al proveedor de IA configurado (Google Gemini).
+- El acceso «SOY VIP» simula un rol de editor; no autentica ni acredita a un servidor público.
 
-**Prerequisites:**  Node.js
+## Referencias normativas de diseño
 
+El proyecto incorpora una capa informativa y toma como referencias académicas el Decreto Legislativo N.° 1412, el Reglamento aprobado por Decreto Supremo N.° 029-2021-PCM y sus modificatorias (D.S. N.° 075-2023-PCM y D.S. N.° 098-2025-PCM), así como la Ley N.° 29733 y su Reglamento.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+La presencia de estas referencias y de medidas de accesibilidad, transparencia y minimización de datos **no equivale a una certificación de cumplimiento normativo**. La implementación de un servicio digital estatal real exige, entre otros aspectos, titularidad y competencia institucional, gobernanza de datos, evaluación de riesgos, seguridad, gestión documental, interoperabilidad autorizada, identidad digital, mecanismos de atención de derechos y auditorías técnicas.
+
+## Accesibilidad
+
+El prototipo incorpora navegación por teclado, foco visible, alto contraste, diseño adaptable y respeto por la preferencia de movimiento reducido. Estas medidas no constituyen una certificación WCAG ni sustituyen una auditoría con usuarios y tecnologías de asistencia.
+
+## Desarrollo
+
+Aplicación React + TypeScript + Vite, con servidor Express y almacenamiento de demostración en Supabase. Consultar `.env.example` para las variables de entorno.
