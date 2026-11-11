@@ -109,7 +109,7 @@ const DICCIONARIO_BASE = {
     btnIngresarExpediente: 'Ingresar al Expediente y Ver Actuados Judiciales',
     volverBusqueda: 'Volver a la Búsqueda de Expedientes',
     expedienteConsultadoPor: 'Expediente consultado por',
-    expedienteElectronico: 'EXPEDIENTE ELECTRÓNICO • PODER JUDICIAL DEL PERÚ',
+    expedienteElectronico: 'EXPEDIENTE ELECTRÓNICO • CEJ · SIMULADOR ACADÉMICO',
     estadoPrefijo: 'Estado: ',
     juzgadoSede: 'Juzgado / Sede',
     distritoJudicial: 'Distrito Judicial',
