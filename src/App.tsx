@@ -816,7 +816,7 @@ export default function App() {
         <div className="cej-public-shell min-h-screen bg-slate-50 flex flex-col font-arial" style={{ fontFamily: 'Arial, sans-serif' }}>
           <div className="bg-purple-800 text-white py-2.5 px-4 border-b border-purple-400/40">
             <div className="max-w-6xl mx-auto flex items-center justify-between text-xs">
-              <span className="font-bold uppercase tracking-wide">{DICCIONARIO[idioma].agendaJudicial}</span>
+              <span className="font-bold uppercase tracking-wide">CEJ &bull; AGENDA DE PRUEBA &bull; DATOS FICTICIOS</span>
               <button
                 onClick={() => setVistaActual('busqueda')}
                 className="underline text-purple-200 hover:text-white"
