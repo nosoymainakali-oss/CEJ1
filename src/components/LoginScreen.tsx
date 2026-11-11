@@ -12,6 +12,7 @@ import {
   CalendarDays
 } from 'lucide-react';
 import { RolUsuario } from '../types/judicial';
+import { LegalTransparencyPanel } from './LegalTransparencyPanel';
 
 interface LoginScreenProps {
   onLoginExitoso: (datos: { rol: RolUsuario; nombreUsuario: string; dniUsuario: string }) => void;
@@ -586,6 +587,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
             GOBIERNO DIGITAL Y DERECHO INFORMÁTICO &bull; PROYECTO ACADÉMICO INDEPENDIENTE
           </p>
         </div>
+        <div className="mx-auto mt-3 max-w-4xl px-4"><LegalTransparencyPanel /></div>
       </footer>
     </div>
   );
