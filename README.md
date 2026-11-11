@@ -9,9 +9,15 @@ CEJ es un prototipo académico independiente para explorar, con datos ficticios,
 - Utilizar exclusivamente expedientes, nombres, identificadores y documentos ficticios.
 - No introducir DNI, datos personales, datos sensibles, información reservada, escritos reales ni documentos judiciales auténticos.
 - Los datos de demostración pueden guardarse en el almacenamiento del navegador y sincronizarse con Supabase; los PDF de prueba se alojan en Supabase Storage y se visualizan mediante enlaces generados por la aplicación.
-- Las rutas de demostración no implementan autenticación institucional ni controles de acceso de producción. El rol VIP solo modifica la interfaz y el comportamiento local.
+- El acceso de personal valida las credenciales de demostración en el servidor mediante variables de entorno. No integra el directorio institucional, SSO ni los servicios de identidad del Poder Judicial; las API de datos tampoco constituyen controles de acceso de producción. El botón «SOY VIP» conserva un acceso independiente al rol de editor para la exposición.
 - La función de explicación mediante IA puede transmitir el texto suministrado al proveedor de IA configurado (Google Gemini).
 - El acceso «SOY VIP» simula un rol de editor; no autentica ni acredita a un servidor público.
+
+## Acceso de personal en el entorno académico
+
+La pantalla de acceso de personal utiliza el endpoint `/api/auth/editor`. Configura las variables `CEJ_EDITOR_USER` y `CEJ_EDITOR_PASSWORD` en el entorno del servidor (en Render: **Environment**). En desarrollo local, copia `.env.example` a `.env` y completa los valores. No introduzcas credenciales reales ni las guardes en el repositorio.
+
+La validación de estas credenciales habilita el perfil de editor de este simulador; no autentica ni acredita a personal del Poder Judicial.
 
 ## Referencias normativas de diseño
 
