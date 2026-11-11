@@ -53,6 +53,7 @@ import { LiveExpedienteEditorModal } from './components/LiveExpedienteEditorModa
 import { ElJuezTeEscucha } from './components/ElJuezTeEscucha';
 import { LuimiChatbot } from './components/LuimiChatbot';
 import { generarExplicacionIA } from './services/aiExplainer';
+import { ReniecDemoPanel } from './components/ReniecDemoPanel';
 
 const NOMBRE_EDITOR = 'Eduardo Luismario Medina Humpiri';
 
@@ -330,6 +331,7 @@ export default function App() {
 
   // Accessibility State (High Contrast)
   const [altoContraste, setAltoContraste] = useState(false);
+  const [mostrarReniecDemo, setMostrarReniecDemo] = useState(false);
 
   // Modals
   const [uploadModalAbierto, setUploadModalAbierto] = useState(false);
@@ -810,6 +812,11 @@ export default function App() {
             </div>
           </div>
           <main id="contenido-principal" tabIndex={-1} className="cej-main-content flex-1 max-w-7xl w-full mx-auto px-4 py-6">
+        <div className="mb-5 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-sky-200 bg-white p-4 shadow-sm">
+          <div><p className="text-xs font-bold uppercase tracking-wider text-slate-500">Herramienta académica</p><p className="text-sm font-semibold text-slate-800">Consulta de identidad con datos completamente sintéticos</p></div>
+          <button type="button" onClick={() => setMostrarReniecDemo((actual) => !actual)} className="rounded-lg bg-[#0c4a6e] px-4 py-2.5 text-xs font-bold text-white hover:bg-sky-900">{mostrarReniecDemo ? 'Cerrar módulo RENIEC' : 'Interoperabilidad simulada · RENIEC'}</button>
+        </div>
+        {mostrarReniecDemo && <div className="mb-6"><ReniecDemoPanel onVolver={() => setMostrarReniecDemo(false)} /></div>}
             <ElJuezTeEscucha
               onVolver={() => setVistaActual('busqueda')}
               dniInicial=""
