@@ -72,7 +72,8 @@ export const ReniecDemoPanel: React.FC<Props> = ({ onVolver }) => {
           <div className="grid gap-4 p-5 sm:grid-cols-2">
             <div><p className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Documento consultado</p><p className="font-mono text-lg font-bold text-slate-900">{consultado}</p></div>
             <div><p className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Nombres</p><p className="font-bold text-slate-900">{ficha.nombres}</p></div>
-            <div><p className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Apellido paterno</p><p className="font-bold text-slate-900">{ficha.paterno}</p></div>\n            <div><p className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Apellido materno</p><p className="font-bold text-slate-900">{ficha.materno}</p></div>
+            <div><p className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Apellido paterno</p><p className="font-bold text-slate-900">{ficha.paterno}</p></div>
+            <div><p className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Apellido materno</p><p className="font-bold text-slate-900">{ficha.materno}</p></div>
             <div><p className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Fecha de nacimiento</p><p className="font-semibold text-slate-800">{ficha.nacimiento}</p></div>
             <div><p className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Sexo</p><p className="font-semibold text-slate-800">{ficha.sexo}</p></div>
             <div><p className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Estado civil</p><p className="font-semibold text-slate-800">{ficha.estadoCivil}</p></div>
